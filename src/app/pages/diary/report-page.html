@@ -1,0 +1,85 @@
+<app-page-header title="Relatório" variant="internal" backTo="/diario/evolucao" />
+<article class="page">
+  <header class="report-header">
+    <p class="app-name">Equilibra ATM</p>
+    <h1>Relatório do diário da dor</h1>
+    <p class="period">
+      Período: {{ start | date: 'dd/MM/yyyy' }} a {{ generatedAt | date: 'dd/MM/yyyy' }} (últimos
+      {{ periodDays }} dias). Gerado em {{ generatedAt | date: "dd/MM/yyyy 'às' HH:mm" }}.
+    </p>
+  </header>
+
+  <section aria-labelledby="summary-title">
+    <h2 id="summary-title">Resumo</h2>
+    <dl class="summary">
+      @for (item of summary(); track item.label) {
+        <div>
+          <dt>{{ item.label }}</dt>
+          <dd>{{ item.value }}</dd>
+        </div>
+      }
+    </dl>
+    <p class="note">
+      Escala de dor: {{ scale }}. Com mais de um registro no mesmo dia, vale a média do dia.
+    </p>
+  </section>
+
+  <section aria-labelledby="entries-title">
+    <h2 id="entries-title">Registros do diário</h2>
+    @if (entries().length) {
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Data</th>
+              <th scope="col">Dor</th>
+              <th scope="col">Exercícios</th>
+              <th scope="col">Placa</th>
+              <th scope="col">Dormiu bem</th>
+              <th scope="col">Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (entry of entries(); track entry.key) {
+              <tr>
+                <th scope="row">{{ entry.at | date: 'dd/MM HH:mm' }}</th>
+                <td>{{ entry.pain }}</td>
+                <td>{{ entry.exercises }}</td>
+                <td>{{ entry.splint }}</td>
+                <td>{{ entry.sleptWell }}</td>
+                <td class="note-cell">{{ entry.note }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <p class="empty">Nenhum registro de dor no período.</p>
+    }
+  </section>
+
+  <section aria-labelledby="sessions-title">
+    <h2 id="sessions-title">Sessões do Programa 6x6</h2>
+    @if (sessionsByDay().length) {
+      <ul class="sessions">
+        @for (day of sessionsByDay(); track day.label) {
+          <li>
+            <span>{{ day.label }}</span>
+            <strong>{{ day.count }} {{ day.count === 1 ? 'sessão' : 'sessões' }}</strong>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="empty">Nenhuma sessão registrada no período.</p>
+    }
+  </section>
+
+  <app-disclaimer />
+
+  <div class="actions no-print">
+    <button type="button" class="btn-primary" (click)="print()">Imprimir ou salvar em PDF</button>
+    <p class="privacy">
+      O relatório é montado neste aparelho e só sai dele se você imprimir ou compartilhar.
+    </p>
+  </div>
+</article>

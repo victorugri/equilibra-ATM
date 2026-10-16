@@ -1,0 +1,267 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-page);
+  padding: var(--space-sm) var(--space-page) 40px;
+}
+
+.periods {
+  display: flex;
+  gap: 6px;
+  margin-top: calc(var(--space-sm) * -1);
+}
+
+.period {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 var(--space-lg);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  font: inherit;
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+
+  &.active {
+    background: var(--color-surface-blue);
+    color: var(--color-primary);
+  }
+}
+
+.summary {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-page);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-light);
+
+  h2 {
+    color: var(--color-success-strong);
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin-top: var(--space-xs);
+    color: var(--color-text);
+    font-size: var(--text-body-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-body);
+  }
+}
+
+.summary-icon,
+.report-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.summary-icon {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.register {
+  margin-top: var(--space-xs);
+  padding: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-page);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+
+  h2 {
+    color: var(--color-text);
+    font-size: var(--text-title-sm);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-title);
+  }
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+}
+
+.round-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-surface-light-alt);
+  color: var(--color-primary);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-secondary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.key-line {
+  width: 14px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--color-primary);
+}
+
+.key-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 10px;
+}
+
+.stats {
+  display: flex;
+  gap: 6px;
+
+  p {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-light);
+  }
+
+  strong {
+    color: var(--color-primary);
+    font-size: var(--text-title-lg);
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1;
+  }
+
+  span {
+    color: var(--color-text-secondary);
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.25;
+  }
+}
+
+.table {
+  summary {
+    min-height: var(--touch-target);
+    display: flex;
+    align-items: center;
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-label);
+    font-variant-numeric: tabular-nums;
+  }
+
+  th,
+  td {
+    padding: var(--space-sm) var(--space-xs);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+  }
+
+  thead th {
+    color: var(--color-text-secondary);
+    font-size: var(--text-caption);
+  }
+
+  tbody th {
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+// Relatório para o dentista
+.report-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.report-icon {
+  background: rgb(0 96 103 / 10%);
+  color: var(--color-primary);
+}
+
+.eyebrow {
+  color: var(--color-primary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.report-text {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.report-button {
+  background: var(--color-primary);
+  box-shadow: var(--shadow-raised);
+}
+
+.privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--color-text-secondary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+
+  app-icon {
+    flex: none;
+    color: var(--color-text-tertiary);
+  }
+}

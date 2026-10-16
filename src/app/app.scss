@@ -1,0 +1,55 @@
+// Coluna central: no celular ocupa a tela toda; em telas largas fica centralizada.
+:host {
+  --sos-space: 0px;
+  --tab-space: 0px;
+  display: block;
+}
+
+:host(.with-sos) {
+  --sos-space: calc(var(--button-height) + var(--space-lg) * 2);
+}
+
+:host(.with-tab-bar) {
+  --tab-space: calc(var(--tab-bar-height) + var(--safe-area-bottom));
+}
+
+.frame {
+  max-width: var(--layout-max-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: var(--color-bg);
+}
+
+.main {
+  // Espaço para o conteúdo não ficar escondido atrás do SOS e da barra inferior
+  // (a barra já inclui a área segura do iPhone).
+  padding-bottom: calc(var(--tab-space) + var(--sos-space));
+
+  :host(:not(.with-tab-bar)) & {
+    padding-bottom: calc(var(--sos-space) + var(--safe-area-bottom));
+  }
+}
+
+.bottom {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.sos {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 var(--space-page) var(--space-lg);
+  // Sem barra inferior, o SOS precisa respeitar a área segura do iPhone.
+  :host(:not(.with-tab-bar)) & {
+    padding-bottom: calc(var(--space-lg) + var(--safe-area-bottom));
+  }
+}

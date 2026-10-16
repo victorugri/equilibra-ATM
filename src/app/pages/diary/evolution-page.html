@@ -1,0 +1,103 @@
+<app-page-header title="Diário" />
+<div class="page">
+  <h1 class="visually-hidden">Diário — evolução</h1>
+  <app-diary-tabs />
+
+  <div class="periods" role="group" aria-label="Período">
+    @for (days of periods; track days) {
+      <button
+        type="button"
+        class="period"
+        [class.active]="period() === days"
+        [attr.aria-pressed]="period() === days"
+        (click)="period.set(days)"
+      >
+        <app-icon [name]="days === 7 ? 'periodo-7' : 'periodo-30'" />
+        Últimos {{ days }} dias
+      </button>
+    }
+  </div>
+
+  <section class="summary" aria-labelledby="summary-title">
+    <span class="summary-icon"><app-icon name="resumo" /></span>
+    <div>
+      <h2 id="summary-title">Últimos 7 dias</h2>
+      @if (summary(); as summary) {
+        <p>
+          @if (summary.title) {
+            <strong>{{ summary.title }}:</strong>
+          }
+          {{ summary.text }}
+        </p>
+      } @else {
+        <p>Ainda não há registros de dor nos últimos 7 dias.</p>
+        <a class="btn-link register" routerLink="/diario">Registrar minha dor</a>
+      }
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="chart-title">
+    <div class="card-header">
+      <div>
+        <h2 id="chart-title">Histórico de dor</h2>
+        <p class="subtitle">Relação diária com sessões de exercício</p>
+      </div>
+      <span class="round-icon"><app-icon name="grafico" /></span>
+    </div>
+    <ul class="legend">
+      <li><span class="key-line" aria-hidden="true"></span>Nível de dor (0–10)</li>
+      <li><span class="key-check" aria-hidden="true">✓</span>Exercício feito</li>
+    </ul>
+    <app-pain-chart [series]="series()" />
+    <div class="stats">
+      <p>
+        <strong>{{ exerciseDays() }}/{{ period() }}</strong>
+        <span>Dias com exercícios realizados</span>
+      </p>
+      <p>
+        <strong>{{ painDays() }}/{{ period() }}</strong>
+        <span>Dias com registro de dor</span>
+      </p>
+    </div>
+    <details class="table">
+      <summary>Ver os valores em tabela</summary>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Dia</th>
+            <th scope="col">Dor (0–10)</th>
+            <th scope="col">Exercício</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of table(); track row.key) {
+            <tr>
+              <th scope="row">{{ row.date }}</th>
+              <td>{{ row.pain }}</td>
+              <td>{{ row.exercised }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </details>
+  </section>
+
+  <section class="card report" aria-labelledby="report-title">
+    <div class="report-header">
+      <span class="report-icon"><app-icon name="relatorio" /></span>
+      <div>
+        <p class="eyebrow">Apoio profissional</p>
+        <h2 id="report-title">Leve estes dados para sua próxima consulta</h2>
+      </div>
+    </div>
+    <p class="report-text">{{ reportText | content }}</p>
+    <a class="btn-primary report-button" routerLink="/diario/relatorio">
+      <app-icon name="pdf" />
+      Gerar relatório para meu dentista
+    </a>
+    <p class="privacy">
+      <app-icon name="cadeado" />
+      Você tem total controle. O documento só é gerado quando você clica aqui.
+    </p>
+  </section>
+</div>

@@ -1,0 +1,121 @@
+// Tokens de design — valores da seção 2 do contexto do projeto e das telas do Figma
+// (página 7:2; especificações em design/). Use sempre estas variáveis nos componentes;
+// não repita valores de cor ou tamanho.
+
+:root {
+  // Cores de marca e superfícies
+  --color-primary: #006067;
+  --color-primary-button: #147a82;
+  --color-on-primary: #ffffff;
+  --color-bg: #f9f9ff;
+  --color-surface: #ffffff;
+  --color-surface-light: #f0f3ff;
+  --color-surface-light-alt: #e7eeff;
+  --color-surface-blue: #dee8ff; // números dos passos, botão secundário do SOS
+  --color-border: #dee3ea; // borda do cabeçalho
+  --color-input-border: #bec8c9;
+  --color-success: #005237;
+  --color-success-strong: #0c6344; // sessão feita, selos, "Lembre-se"
+  --color-success-light: #a5f3cb;
+  --color-teal-light: #d8f1f2; // passos e etiquetas dos exercícios
+  --color-accent: #9bf0f9; // próxima sessão
+  --color-pending: #d8e3fb; // sessão pendente, trilho das barras de progresso
+  --color-exercise-label: #1e7f7c; // "Exercício N de 6" (4,8:1 no branco)
+
+  // Texto
+  --color-text: #111c2d;
+  --color-text-secondary: #3e494a;
+  // O valor do Figma (#6E797A) dá 4,28:1 sobre o fundo #F9F9FF e 4,49:1 no branco,
+  // abaixo do mínimo de 4,5:1. Este tom, um pouco mais escuro, dá 4,9:1 no fundo,
+  // 5,2:1 no branco e 4,7:1 no cartão claro.
+  --color-text-tertiary: #646f70;
+
+  // SOS
+  --color-sos: #93000a;
+  --color-sos-bg: #fff4f2;
+  --color-sos-action: #af301d; // botão flutuante e timer
+  --color-sos-light: #ffdad6; // botão fechar
+  --color-sos-badge: #ffdad4;
+  --color-on-sos-badge: #3f0300;
+  --color-on-sos: #ffffff;
+
+  // Destaques. Texto branco tem 9,2:1 sobre #005058 mas só 3,9:1 sobre #1E8F8C:
+  // texto pequeno sobre o degradê precisa de fundo escurecido ou ficar na parte escura.
+  --gradient-hero: linear-gradient(140deg, #005058 7%, #1e8f8c 79%);
+  --gradient-video: linear-gradient(140deg, #0b4f55 7%, #1e8f8c 79%);
+  --gradient-number: linear-gradient(127deg, #005058 7%, #1e8f8c 79%);
+  --color-tip-bg: #fff5d9;
+  --color-tip-title: #6b4500;
+  --color-tip-icon: #9a6400;
+  --color-tip-icon-bg: #ffe7a3;
+  --color-tip-text: #4a3a1a;
+
+  // Indicadores do Início (cor do texto/ícone · fundo)
+  --color-indicator-days: #0c6344;
+  --color-indicator-days-bg: #ddf4ea;
+  --color-indicator-pain: #b3401f;
+  --color-indicator-pain-bg: #ffe8e0;
+  --color-indicator-average: #3949a8;
+  --color-indicator-average-bg: #e6e9ff;
+  --color-indicator-reminder: #006067;
+  --color-indicator-reminder-bg: #d8f1f2;
+
+  // Tipografia — Nunito Sans; corpo entre 16 e 18 px (público com média de 47,6 anos).
+  // Nada abaixo de 14 px: rótulos de 12–13 px do Figma sobem para --text-caption.
+  --font-family:
+    'Nunito Sans Variable', 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  --text-caption: 0.875rem; // 14 px — referências, rótulos, barra inferior
+  --text-small: 0.9375rem; // 15 px — resumos, aviso do 6x6
+  --text-label: 1rem; // 16 px — rótulos e textos secundários
+  --text-body: 1.0625rem; // 17 px — corpo
+  --text-body-lg: 1.125rem; // 18 px — corpo em destaque, botões
+  --text-title-sm: 1.25rem; // 20 px — título do cabeçalho e de cartão
+  --text-title-md: 1.375rem; // 22 px — título de seção
+  --text-title: 1.625rem; // 26 px — título de cartão em destaque
+  --text-title-lg: 1.75rem; // 28 px — título de tela
+  --line-height-body: 1.35;
+  --line-height-relaxed: 1.5;
+  --line-height-title: 1.25;
+
+  // Layout — tela de referência com 390 de largura
+  --layout-max-width: 480px;
+  --space-page: 20px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-button: 14px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 4px 24px -2px rgb(20 122 130 / 8%), 0 2px 8px -1px rgb(30 41 59 / 4%);
+  --shadow-card-sm: 0 2px 4px rgb(18 28 46 / 6%);
+  --shadow-card-lg: 0 4px 16px rgb(0 51 64 / 8%);
+  --shadow-raised: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
+  --shadow-button: 0 6px 16px rgb(20 122 130 / 30%);
+  --shadow-sos: 0 16px 40px -6px rgb(224 83 60 / 45%);
+  --shadow-tab-bar: 0 -4px 20px rgb(20 122 130 / 6%);
+
+  // Acessibilidade: área de toque mínima de 44 × 44
+  --touch-target: 48px;
+  --button-height: 56px;
+  --focus-ring: 3px solid var(--color-primary);
+  --focus-ring-offset: 2px;
+
+  // Navegação
+  --header-height: 64px;
+  --tab-bar-height: 80px;
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-top: env(safe-area-inset-top, 0px);
+}

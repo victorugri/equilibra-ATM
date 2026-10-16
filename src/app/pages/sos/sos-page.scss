@@ -1,0 +1,293 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  padding: var(--space-sm) var(--space-page) 40px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: center;
+
+  h1 {
+    max-width: 340px;
+    color: var(--color-text);
+    font-size: var(--text-title-lg);
+    letter-spacing: -0.025em;
+    line-height: 36px;
+  }
+}
+
+.seal {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-pill);
+  background: var(--color-sos-badge);
+  color: var(--color-on-sos-badge);
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+
+  app-icon {
+    color: var(--color-sos-action);
+  }
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-light);
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  font-size: var(--text-label);
+  letter-spacing: 0.02em;
+}
+
+.progress-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+}
+
+.progress-name {
+  overflow: hidden;
+  color: var(--color-text-secondary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bar {
+  height: 12px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--color-pending);
+
+  span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+  }
+}
+
+.timer-banner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card-sm);
+
+  p {
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+// Cartão do passo atual
+.step-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-page);
+  margin-top: calc(var(--space-sm) * -1);
+  padding: var(--space-xl);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+}
+
+.step-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+
+  h2 {
+    color: var(--color-text);
+    font-size: var(--text-title);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.step-titles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.tag {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-button);
+  color: var(--color-on-primary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.03em;
+}
+
+.step-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-light-alt);
+  color: var(--color-primary);
+}
+
+.instruction {
+  padding: var(--space-lg);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-light);
+  color: var(--color-text);
+  font-size: var(--text-title-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.625;
+}
+
+.next {
+  min-height: var(--button-height);
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  font-size: var(--text-title-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+// Passos seguintes
+.following {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+
+  h2 {
+    padding: 0 var(--space-xs);
+    color: var(--color-text);
+    font-size: var(--text-title-sm);
+    font-weight: var(--font-weight-semibold);
+    line-height: 28px;
+  }
+}
+
+.following-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  padding: var(--space-lg);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.number {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-blue);
+  color: var(--color-primary);
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.following-texts {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.following-title {
+  color: var(--color-text);
+  font-size: var(--text-title-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: 28px;
+}
+
+.following-text {
+  color: var(--color-text-secondary);
+  font-size: var(--text-label);
+  letter-spacing: 0.01em;
+  line-height: 22px;
+}
+
+.following-time {
+  color: var(--color-sos-action);
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+// Quando procurar o dentista (SOS-07)
+.dentist {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-page);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+
+  h2 {
+    color: var(--color-text);
+    font-size: var(--text-title-sm);
+    font-weight: var(--font-weight-semibold);
+    line-height: 28px;
+  }
+
+  p {
+    margin-top: 3px;
+    color: var(--color-text-secondary);
+    font-size: var(--text-body-lg);
+    letter-spacing: 0.01em;
+    line-height: 1.625;
+  }
+}
+
+.dentist-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background: var(--color-sos-badge);
+  color: var(--color-sos-action);
+}

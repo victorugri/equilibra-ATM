@@ -1,0 +1,48 @@
+// Botões compartilhados (Figma: "Botão - próximo", "Começar sessão", botões dos passos do SOS).
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: var(--button-height);
+  padding: var(--space-md) var(--space-page);
+  border: 0;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-title);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--color-primary-button);
+  color: var(--color-on-primary);
+}
+
+.btn-secondary {
+  min-height: var(--touch-target);
+  background: var(--color-surface-light-alt);
+  color: var(--color-primary);
+}
+
+.btn-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch-target);
+  padding: 0 var(--space-md);
+  border: 0;
+  background: transparent;
+  color: var(--color-primary);
+  font-family: inherit;
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+  cursor: pointer;
+}

@@ -1,0 +1,125 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-page) var(--space-page) 40px;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--space-page);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-hero);
+  box-shadow: var(--shadow-card-lg);
+  color: var(--color-on-primary);
+
+  h1 {
+    position: relative;
+    font-size: var(--text-title-lg);
+    line-height: 1.18;
+  }
+}
+
+.ellipse {
+  position: absolute;
+  top: -60px;
+  left: 220px;
+  pointer-events: none;
+}
+
+.tag {
+  position: relative;
+  align-self: flex-start;
+  padding: 5px var(--space-md);
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 18%);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-bold);
+}
+
+.posology {
+  position: relative;
+  display: flex;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: var(--radius-button);
+    // Figma: branco a 16%. Escurecido para o rótulo de 14 px ficar acima de 4,5:1
+    // também na parte clara do degradê.
+    background: rgb(0 0 0 / 16%);
+  }
+
+  strong {
+    font-size: var(--text-title);
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1.15;
+  }
+
+  span {
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.3;
+  }
+}
+
+.safety {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: 14px var(--space-lg) 14px 14px;
+  border-radius: var(--radius-md);
+  background: var(--color-tip-bg);
+
+  h2 {
+    color: var(--color-tip-title);
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-extrabold);
+    line-height: var(--line-height-title);
+  }
+
+  p {
+    margin-top: 2px;
+    color: var(--color-tip-text);
+    font-size: var(--text-small);
+    line-height: var(--line-height-body);
+  }
+}
+
+.safety-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--color-tip-icon-bg);
+  color: var(--color-tip-icon);
+}
+
+// Âncora (#exercicio-N) não fica escondida atrás do cabeçalho fixo.
+app-exercise-card {
+  scroll-margin-top: calc(var(--header-height) + var(--space-lg));
+}
+
+.references {
+  text-align: center;
+}
+
+.start {
+  min-height: 58px;
+  border-radius: var(--radius-button);
+  box-shadow: var(--shadow-button);
+}

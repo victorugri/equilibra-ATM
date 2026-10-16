@@ -1,0 +1,1490 @@
+{
+  "$comment": "Gerado por scripts/content/build-content.mjs a partir da planilha do banco de conteúdo. Não edite à mão: altere a planilha e rode \"npm run content:build\".",
+  "source": {
+    "file": "banco_conteudo_app_DTM.xlsx",
+    "dissertationVersion": "EGQ_2026_v5.docx (15/10/2026)"
+  },
+  "entries": {
+    "APR-01": {
+      "code": "APR-01",
+      "module": "Aprender",
+      "screen": "Lição \"O que é DTM\"",
+      "type": "Lição",
+      "text": "A disfunção temporomandibular (DTM) é um conjunto de problemas que afetam a articulação da mandíbula (ATM), que fica na frente da orelha, os músculos da mastigação e as estruturas ao redor. Os sinais mais comuns são dor e dificuldade para movimentar a boca.",
+      "references": [
+        "Kapos et al. (2020)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-02": {
+      "code": "APR-02",
+      "module": "Aprender",
+      "screen": "Lição \"O que é DTM\"",
+      "type": "Lição",
+      "text": "A DTM é muito comum: cerca de 1 em cada 3 adultos tem algum sinal dela. Ela aparece mais em mulheres e em pessoas de 18 a 60 anos. Você não está sozinho.",
+      "references": [
+        "Zieliński et al. (2024)",
+        "Progiante et al. (2015)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-03": {
+      "code": "APR-03",
+      "module": "Aprender",
+      "screen": "Lição \"Por que a DTM aparece\"",
+      "type": "Lição",
+      "text": "A DTM não tem uma causa única. Ela surge da soma de vários fatores: o corpo, as emoções e o dia a dia. Os fatores mais ligados à DTM são dormir mal, ansiedade, depressão, tensão emocional e hábitos como apertar os dentes.",
+      "references": [
+        "Warzocha et al. (2024)",
+        "Kapos et al. (2020)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-04": {
+      "code": "APR-04",
+      "module": "Aprender",
+      "screen": "Lição \"Por que a DTM aparece\"",
+      "type": "Lição",
+      "text": "A ansiedade pode aumentar a tensão dos músculos do rosto e o hábito de apertar os dentes durante o dia. Por isso, cuidar do estresse também é cuidar da mandíbula.",
+      "references": [
+        "Paludo et al. (2025)",
+        "Saini et al. (2025)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-05": {
+      "code": "APR-05",
+      "module": "Aprender",
+      "screen": "Lição \"A DTM vai piorar?\"",
+      "type": "Lição",
+      "text": "Na maioria das pessoas, a DTM não piora com o tempo: cerca de 3 em cada 4 casos ficam estáveis. Em alguns casos, os sintomas melhoram sozinhos depois de alguns meses.",
+      "references": [
+        "Kapos et al. (2020)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-06": {
+      "code": "APR-06",
+      "module": "Aprender",
+      "screen": "Lição \"Bruxismo\"",
+      "type": "Lição",
+      "text": "Bruxismo é apertar ou ranger os dentes, ou travar e empurrar a mandíbula para a frente. Ele pode acontecer durante o sono ou acordado. Acordado, ele costuma aparecer como os dentes encostados ou apertados por muito tempo.",
+      "references": [
+        "Verhoeff et al. (2025)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-07": {
+      "code": "APR-07",
+      "module": "Aprender",
+      "screen": "Lição \"Bruxismo\"",
+      "type": "Lição",
+      "text": "Encostar os dentes fora da hora de engolir já é uma forma de apertar. Em repouso, o normal é os dentes ficarem separados.",
+      "references": [
+        "Beddis et al. (2018)",
+        "Verhoeff et al. (2025)",
+        "Rocabado (1983)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-08": {
+      "code": "APR-08",
+      "module": "Aprender",
+      "screen": "Lição \"Bruxismo\"",
+      "type": "Lição",
+      "text": "O bruxismo, sozinho, não é uma doença. Ele só precisa de tratamento quando causa problemas, como dor ou desgaste dos dentes. Mas quem aperta os dentes tem mais chance de desenvolver DTM, por isso vale a pena prestar atenção ao hábito.",
+      "references": [
+        "Lobbezoo et al. (2018)",
+        "Verhoeff et al. (2025)",
+        "Mortazavi et al. (2023)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-09": {
+      "code": "APR-09",
+      "module": "Aprender",
+      "screen": "Lição \"Bruxismo\"",
+      "type": "Lição",
+      "text": "Outros hábitos também sobrecarregam a mandíbula: mascar chiclete, morder objetos (como canetas) e roer unhas.",
+      "references": [
+        "Beddis et al. (2018)",
+        "Lobbezoo et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-10": {
+      "code": "APR-10",
+      "module": "Aprender",
+      "screen": "Lição \"Como é feito o diagnóstico\"",
+      "type": "Lição",
+      "text": "Só o dentista pode confirmar se a sua dor é DTM. Primeiro, ele verifica se a dor não vem de outra causa, como um dente, uma infecção ou outra doença. Depois, faz perguntas sobre seus sintomas e examina os músculos do rosto e os movimentos da sua boca.",
+      "references": [
+        "Schiffman et al. (2014)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-11": {
+      "code": "APR-11",
+      "module": "Aprender",
+      "screen": "Lição \"Como a DTM é tratada\"",
+      "type": "Lição",
+      "text": "O tratamento recomendado começa por medidas simples e reversíveis, que você pode fazer em casa com a orientação do seu dentista: entender a condição, mudar hábitos, fazer exercícios, aplicar calor e cuidar do sono e da alimentação.",
+      "references": [
+        "Kapos et al. (2020)",
+        "Pimentel et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-12": {
+      "code": "APR-12",
+      "module": "Aprender",
+      "screen": "Lição \"Como a DTM é tratada\"",
+      "type": "Lição",
+      "text": "A DTM não é causada só pela posição dos dentes ou da mordida. Por isso, o tratamento olha para o corpo, para as emoções e para os hábitos.",
+      "references": [
+        "Kapos et al. (2020)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-13": {
+      "code": "APR-13",
+      "module": "Aprender",
+      "screen": "Lição \"Seu papel no tratamento\"",
+      "type": "Lição",
+      "text": "Você tem um papel importante no seu tratamento. Os cuidados em casa só funcionam se forem feitos com regularidade, e é para isso que este aplicativo existe: lembrar, guiar e acompanhar você.",
+      "references": [
+        "Pimentel et al. (2018)",
+        "Yadav et al. (2020)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-14": {
+      "code": "APR-14",
+      "module": "Aprender",
+      "screen": "Lição \"Placa (aparelho) para dormir\"",
+      "type": "Lição",
+      "text": "A placa estabilizadora, feita pelo dentista, pode ajudar a diminuir o bruxismo e a proteger os dentes. Use conforme a orientação do seu dentista.",
+      "references": [
+        "Minakuchi et al. (2022)"
+      ],
+      "status": "revisar",
+      "approvedByAdvisor": false
+    },
+    "APR-15": {
+      "code": "APR-15",
+      "module": "Aprender",
+      "screen": "Lição \"Cuidado com informações da internet\"",
+      "type": "Lição",
+      "text": "Muitos sites sobre bruxismo e DTM são difíceis de entender ou pouco confiáveis. Tire suas dúvidas com seu dentista e use fontes com base científica, como este aplicativo.",
+      "references": [
+        "Minervini et al. (2023)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-17": {
+      "code": "APR-17",
+      "module": "Aprender",
+      "screen": "Visualizador 3D da ATM",
+      "type": "Rótulo",
+      "text": "Articulação temporomandibular (ATM) — liga a mandíbula ao crânio, na frente da orelha. Côndilo — a \"cabeça\" da mandíbula, que gira e desliza quando você abre a boca. Disco — almofada entre o côndilo e o crânio. Masseter — músculo da bochecha que fecha a boca. Temporal — músculo da lateral da cabeça (têmpora).",
+      "references": [
+        "Schiffman et al. (2014)",
+        "Michelotti et al. (2005)",
+        "Rocabado (1983)"
+      ],
+      "status": "revisar",
+      "approvedByAdvisor": false
+    },
+    "APR-18": {
+      "code": "APR-18",
+      "module": "Aprender",
+      "screen": "Aviso fixo",
+      "type": "Aviso",
+      "text": "Este aplicativo ajuda você a cuidar da DTM no dia a dia, mas não substitui a consulta. O diagnóstico e o plano de tratamento são feitos pelo seu dentista.",
+      "references": [
+        "Síntese da seção 2.5"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "LEM-01": {
+      "code": "LEM-01",
+      "module": "Lembretes e monitoramento",
+      "screen": "Notificação",
+      "type": "Pergunta",
+      "text": "Seus dentes estão se tocando agora?",
+      "references": [
+        "Poluha et al. (2024)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "LEM-02": {
+      "code": "LEM-02",
+      "module": "Lembretes e monitoramento",
+      "screen": "Tela de resposta rápida",
+      "type": "Opções",
+      "text": "Neste momento, sua mandíbula está: (1) Relaxada, com os dentes separados; (2) Com os dentes encostando; (3) Apertando os dentes; (4) Com os músculos tensos, sem encostar os dentes.",
+      "references": [
+        "Emodi-Perlman et al. (2021)",
+        "Beddis et al. (2018)",
+        "Verhoeff et al. (2025)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "LEM-03": {
+      "code": "LEM-03",
+      "module": "Lembretes e monitoramento",
+      "screen": "Tela de resposta rápida",
+      "type": "Instrução",
+      "text": "Se estiver comendo ou falando, ignore este alerta.",
+      "references": [
+        "Poluha et al. (2024)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "LEM-04": {
+      "code": "LEM-04",
+      "module": "Lembretes e monitoramento",
+      "screen": "Dica após resposta",
+      "type": "Dica",
+      "text": "Solte os dentes, mantenha os lábios juntos e apoie a ponta da língua no céu da boca, logo atrás dos dentes da frente. Respire pelo nariz.",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "LEM-05": {
+      "code": "LEM-05",
+      "module": "Lembretes e monitoramento",
+      "screen": "Tela \"Meus lembretes\"",
+      "type": "Explicação",
+      "text": "Lembretes ao longo do dia ajudam a perceber e soltar o hábito de apertar os dentes. Você escolhe quantas vezes e em que horários quer ser lembrado, e pode pausar quando quiser.",
+      "references": [
+        "Graham et al. (2026)",
+        "resultados do questionário (Apêndice B)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "LEM-06": {
+      "code": "LEM-06",
+      "module": "Lembretes e monitoramento",
+      "screen": "Modo avaliação de 7 dias",
+      "type": "Explicação",
+      "text": "Modo avaliação (opcional): durante 7 dias, o aplicativo envia mais alertas para entender com que frequência você aperta os dentes. Tente responder pelo menos 12 alertas por dia. Você pode desligar quando quiser.",
+      "references": [
+        "Emodi-Perlman et al. (2021)",
+        "Graham et al. (2026)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "LEM-07": {
+      "code": "LEM-07",
+      "module": "Lembretes e monitoramento",
+      "screen": "Os 5 passos (cartões)",
+      "type": "Lição",
+      "text": "1. Entenda o hábito e o que ele pode causar. 2. Perceba quando você aperta os dentes. 3. Evite o que piora: excesso de café, cigarro e noites mal dormidas. 4. Receba lembretes todos os dias. 5. Ao receber um lembrete, faça um exercício rápido para soltar os músculos.",
+      "references": [
+        "Graham et al. (2026)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-00": {
+      "code": "EX-00",
+      "module": "Exercícios",
+      "screen": "Topo da biblioteca",
+      "type": "Aviso",
+      "text": "Faça os exercícios devagar, sem forçar a boca além do início da dor. Siga a orientação do seu dentista sobre quais exercícios fazer.",
+      "references": [
+        "Michelotti et al. (2005)"
+      ],
+      "status": "revisar",
+      "approvedByAdvisor": false
+    },
+    "EX-01": {
+      "code": "EX-01",
+      "module": "Exercícios",
+      "screen": "Relaxamento",
+      "type": "Passo a passo",
+      "text": "Abra e feche a boca, mova a mandíbula para os lados e para a frente, fazendo uma leve resistência com o punho apoiado no queixo.",
+      "references": [
+        "Michelotti et al. (2005)",
+        "Kapos et al. (2020)",
+        "Pimentel et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-02": {
+      "code": "EX-02",
+      "module": "Exercícios",
+      "screen": "Respiração diafragmática",
+      "type": "Passo a passo",
+      "text": "Coloque uma mão no peito e outra na barriga. Solte todo o ar. Respire devagar, fazendo a mão da barriga subir mais que a do peito. Faça por 5 minutos, a cada 2 horas, e use essa respiração sempre que lembrar ao longo do dia.",
+      "references": [
+        "Michelotti et al. (2005)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-03": {
+      "code": "EX-03",
+      "module": "Exercícios",
+      "screen": "Alongamento",
+      "type": "Passo a passo",
+      "text": "Abra a boca devagar até sentir o começo da dor. Coloque o polegar nos dentes de cima e o indicador nos dentes de baixo, na altura dos dentes do meio (pré-molares), e abra só mais um pouco, com pressão leve. Segure por 1 minuto. Repita 6 vezes seguidas, a cada 2 horas.",
+      "references": [
+        "Michelotti et al. (2005)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-04": {
+      "code": "EX-04",
+      "module": "Exercícios",
+      "screen": "Coordenação",
+      "type": "Passo a passo",
+      "text": "Na frente do espelho, abra e feche a boca, mova a mandíbula para os lados, para a frente e para trás, devagar e de forma controlada. Faça 3 vezes ao dia.",
+      "references": [
+        "Michelotti et al. (2005)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-05": {
+      "code": "EX-05",
+      "module": "Exercícios",
+      "screen": "Mobilização",
+      "type": "Passo a passo",
+      "text": "Mova a mandíbula para os lados. Depois, segurando um objeto pequeno entre os dentes, faça movimentos suaves para a frente e para trás.",
+      "references": [
+        "Michelotti et al. (2005)"
+      ],
+      "status": "revisar",
+      "approvedByAdvisor": false,
+      "note": "SOMENTE COM INDICAÇÃO DO DENTISTA"
+    },
+    "EX-06": {
+      "code": "EX-06",
+      "module": "Exercícios",
+      "screen": "Programa 6x6 – apresentação",
+      "type": "Lição",
+      "text": "O programa 6x6 tem 6 exercícios. Faça cada um 6 vezes, 6 vezes ao dia. Ele trabalha juntos a postura da cabeça e do pescoço, a posição da língua e o movimento da mandíbula.",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-07": {
+      "code": "EX-07",
+      "module": "Exercícios",
+      "screen": "6x6 – 1. Língua em repouso",
+      "type": "Passo a passo",
+      "text": "Faça um estalo com a língua e deixe a ponta apoiada no céu da boca, logo atrás dos dentes da frente, com pressão leve. Mantenha os dentes separados, os lábios fechados e respire pelo nariz.",
+      "references": [
+        "Rocabado (1983)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-08": {
+      "code": "EX-08",
+      "module": "Exercícios",
+      "screen": "6x6 – 2. Ombros",
+      "type": "Passo a passo",
+      "text": "Leve as escápulas (os ossos das costas) uma em direção à outra e para baixo, sem levantar os ombros e sem jogar a cabeça para a frente.",
+      "references": [
+        "Rocabado (1983)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-09": {
+      "code": "EX-09",
+      "module": "Exercícios",
+      "screen": "6x6 – 3. Aceno estabilizado",
+      "type": "Passo a passo",
+      "text": "Entrelace as mãos atrás do pescoço e faça um leve \"sim\" com a cabeça, movendo só a parte de cima do pescoço.",
+      "references": [
+        "Rocabado (1983)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-10": {
+      "code": "EX-10",
+      "module": "Exercícios",
+      "screen": "6x6 – 4. Pescoço alongado",
+      "type": "Passo a passo",
+      "text": "Ao mesmo tempo, faça um leve \"sim\" com a cabeça, leve o pescoço para trás e \"cresça\" para cima, como se um fio puxasse o topo da cabeça. O queixo fica um pouco mais perto do pescoço.",
+      "references": [
+        "Rocabado (1983)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-11": {
+      "code": "EX-11",
+      "module": "Exercícios",
+      "screen": "6x6 – 5. Abertura controlada",
+      "type": "Passo a passo",
+      "text": "Com a língua no céu da boca, apoie os dedos indicadores na frente das orelhas, sobre a articulação. Abra e feche a boca só até sentir a articulação começar a deslizar para a frente.",
+      "references": [
+        "Rocabado (1983)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-12": {
+      "code": "EX-12",
+      "module": "Exercícios",
+      "screen": "6x6 – 6. Estabilização",
+      "type": "Passo a passo",
+      "text": "Com a língua no céu da boca, apoie os indicadores no queixo e os polegares embaixo dele. Empurre de leve para a direita, para a esquerda, para abrir e para fechar, sem deixar a mandíbula se mexer.",
+      "references": [
+        "Rocabado (1983)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-13": {
+      "code": "EX-13",
+      "module": "Exercícios",
+      "screen": "Registro de adesão",
+      "type": "Mensagem",
+      "text": "Sessão registrada! Hoje você fez {n} de 6 sessões.",
+      "references": [
+        "Mulet et al. (2007)",
+        "Sallam et al. (2025)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-15": {
+      "code": "EX-15",
+      "module": "Exercícios",
+      "screen": "Relaxamento muscular progressivo (áudio)",
+      "type": "Lição",
+      "text": "O relaxamento muscular progressivo ajuda a soltar a tensão do corpo e da mandíbula e a lidar melhor com o estresse.",
+      "references": [
+        "Amorim et al. (2018)",
+        "Miotto et al. (2022)"
+      ],
+      "status": "revisar",
+      "approvedByAdvisor": false
+    },
+    "SOS-01": {
+      "code": "SOS-01",
+      "module": "SOS",
+      "screen": "Tela inicial",
+      "type": "Instrução",
+      "text": "Respire. Vamos fazer juntos, um passo de cada vez.",
+      "references": [],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "SOS-02": {
+      "code": "SOS-02",
+      "module": "SOS",
+      "screen": "Passo 1",
+      "type": "Passo a passo",
+      "text": "Solte os dentes. Deixe os lábios juntos e a língua apoiada no céu da boca.",
+      "references": [
+        "Rocabado (1983)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "SOS-03": {
+      "code": "SOS-03",
+      "module": "SOS",
+      "screen": "Passo 2",
+      "type": "Passo a passo",
+      "text": "Respire devagar, levando o ar para a barriga. Continue por alguns minutos.",
+      "references": [
+        "Michelotti et al. (2005)"
+      ],
+      "status": "revisar",
+      "approvedByAdvisor": false
+    },
+    "SOS-04": {
+      "code": "SOS-04",
+      "module": "SOS",
+      "screen": "Passo 3 / Dica de calor",
+      "type": "Passo a passo",
+      "text": "Coloque uma compressa morna e úmida no rosto, sobre a região dolorida, por 20 minutos. O calor ajuda a aliviar a dor e relaxar os músculos.",
+      "references": [
+        "Furlan et al. (2015)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "SOS-05": {
+      "code": "SOS-05",
+      "module": "SOS",
+      "screen": "Passo 4",
+      "type": "Passo a passo",
+      "text": "Hoje, prefira alimentos macios e em pedaços pequenos, e evite abrir muito a boca.",
+      "references": [
+        "Yadav et al. (2020)",
+        "Shu et al. (2023)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "SOS-07": {
+      "code": "SOS-07",
+      "module": "SOS",
+      "screen": "Faixa de alerta",
+      "type": "Aviso",
+      "text": "Se a dor não melhorar, procure seu dentista. Ele precisa confirmar que a dor não vem de outra causa, como um dente ou uma infecção.",
+      "references": [
+        "Schiffman et al. (2014)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "SON-01": {
+      "code": "SON-01",
+      "module": "Sono",
+      "screen": "Microlição \"Sono e dor\"",
+      "type": "Lição",
+      "text": "Dormir mal é um dos fatores mais ligados à DTM. Cuidar do sono faz parte do tratamento.",
+      "references": [
+        "Warzocha et al. (2024)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "SON-02": {
+      "code": "SON-02",
+      "module": "Sono",
+      "screen": "Microlições \"Higiene do sono\"",
+      "type": "Dicas",
+      "text": "Hábitos que ajudam a dormir melhor: (1) Deite e acorde nos mesmos horários. (2) Evite café e álcool, principalmente à noite. (3) Pratique atividade física. (4) Tenha uma rotina para relaxar antes de dormir. (5) Cuide do ambiente do quarto. (6) Cuide da alimentação.",
+      "references": [
+        "De Pasquale et al. (2024)"
+      ],
+      "status": "revisar",
+      "approvedByAdvisor": false
+    },
+    "SON-03": {
+      "code": "SON-03",
+      "module": "Sono",
+      "screen": "Microlição \"Dor na hora de dormir\"",
+      "type": "Lição",
+      "text": "Se a dor atrapalha na hora de deitar, não precisa ficar no escuro pensando nela. Escolha uma atividade calma que distraia, como ouvir um áudio de relaxamento, sem nada que agite demais.",
+      "references": [
+        "Gupta et al. (2023)",
+        "De Pasquale et al. (2024)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "SON-04": {
+      "code": "SON-04",
+      "module": "Sono",
+      "screen": "Biblioteca de áudios",
+      "type": "Lição",
+      "text": "Cuidar do sono junto com meditação pode diminuir o bruxismo.",
+      "references": [
+        "Amaral et al. (2025)",
+        "Tuncer et al. (2023)"
+      ],
+      "status": "revisar",
+      "approvedByAdvisor": false
+    },
+    "SON-05": {
+      "code": "SON-05",
+      "module": "Sono",
+      "screen": "Registro da manhã",
+      "type": "Perguntas",
+      "text": "Como você dormiu? / Acordou com a mandíbula cansada ou dolorida? / Usou a placa esta noite?",
+      "references": [
+        "Lobbezoo et al. (2018)",
+        "Verhoeff et al. (2025)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "ALI-01": {
+      "code": "ALI-01",
+      "module": "Alimentação",
+      "screen": "Cabeçalho",
+      "type": "Lição",
+      "text": "Nos dias de dor, alimentos macios e em pedaços pequenos poupam a articulação. Alimentos grandes e duros fazem a mandíbula trabalhar mais.",
+      "references": [
+        "Shu et al. (2023)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "ALI-02": {
+      "code": "ALI-02",
+      "module": "Alimentação",
+      "screen": "Dicas de preparo",
+      "type": "Dicas",
+      "text": "Corte os alimentos em pedaços pequenos. Descasque e cozinhe bem os legumes até ficarem macios. Use molhos para deixar a comida mais úmida. Evite chiclete.",
+      "references": [
+        "Nasri-Heir et al. (2016)",
+        "Beddis et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "ALI-03": {
+      "code": "ALI-03",
+      "module": "Alimentação",
+      "screen": "Por grupo",
+      "type": "Dicas",
+      "text": "Frutas: em purês e vitaminas. Legumes e verduras: cozidos e picados. Proteínas: carnes macias, ovos ou tofu. Grãos e massas: bem cozidos.",
+      "references": [
+        "Nasri-Heir et al. (2016)"
+      ],
+      "status": "revisar",
+      "approvedByAdvisor": false
+    },
+    "ALI-04": {
+      "code": "ALI-04",
+      "module": "Alimentação",
+      "screen": "Aviso",
+      "type": "Lição",
+      "text": "Comer só alimentos macios por muito tempo pode deixar a alimentação pobre em fibras e nutrientes. Por isso, modifique a textura, mas continue variando os alimentos.",
+      "references": [
+        "Nasri-Heir et al. (2016)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "MIN-01": {
+      "code": "MIN-01",
+      "module": "Relaxamento / Mindfulness",
+      "screen": "Apresentação",
+      "type": "Lição",
+      "text": "Atenção plena (mindfulness) é prestar atenção ao momento presente, percebendo o corpo, os pensamentos e as emoções sem julgar. Praticar ajuda a perceber e interromper o hábito automático de apertar os dentes.",
+      "references": [
+        "Matoso-Filho et al. (2026)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "DIA-01": {
+      "code": "DIA-01",
+      "module": "Diário da dor",
+      "screen": "Registro",
+      "type": "Pergunta",
+      "text": "Quanto está doendo agora? (0 = nenhuma dor; 10 = a pior dor possível)",
+      "references": [],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "DIA-02": {
+      "code": "DIA-02",
+      "module": "Diário da dor",
+      "screen": "Mapa do rosto",
+      "type": "Opções",
+      "text": "Onde dói? Têmpora / Frente da orelha (articulação) / Bochecha (músculo masseter) / Pescoço / Cabeça.",
+      "references": [
+        "Schiffman et al. (2014)",
+        "Silveira et al. (2025)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "DIA-03": {
+      "code": "DIA-03",
+      "module": "Diário da dor",
+      "screen": "Gatilhos",
+      "type": "Opções",
+      "text": "O que pode ter piorado hoje? Estresse ou ansiedade / Dormi mal / Comi algo duro / Usei muito a boca (falar, mastigar muito) / Café ou álcool / Apertei os dentes.",
+      "references": [
+        "Warzocha et al. (2024)",
+        "Yadav et al. (2020)",
+        "Shu et al. (2023)",
+        "De Pasquale et al. (2024)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "DIA-04": {
+      "code": "DIA-04",
+      "module": "Diário da dor",
+      "screen": "Evolução",
+      "type": "Mensagem",
+      "text": "Sua dor média nos últimos 7 dias: {x}/10. Nos dias em que você fez os exercícios, a dor média foi {y}/10.",
+      "references": [],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "PER-01": {
+      "code": "PER-01",
+      "module": "Boas-vindas / Perfil",
+      "screen": "Privacidade",
+      "type": "Texto legal",
+      "text": "Seus dados de saúde (dor, exercícios e sono) ficam protegidos e só são compartilhados com o seu dentista se você autorizar. Você pode ver, baixar ou apagar seus dados quando quiser, conforme a Lei Geral de Proteção de Dados (LGPD).",
+      "references": [
+        "Brasil (2018)"
+      ],
+      "status": "revisar",
+      "approvedByAdvisor": false
+    },
+    "PER-02": {
+      "code": "PER-02",
+      "module": "Boas-vindas / Perfil",
+      "screen": "Compartilhar com meu dentista",
+      "type": "Explicação",
+      "text": "Se quiser, você pode gerar um relatório com sua dor, exercícios e lembretes respondidos para levar ao seu dentista. Isso é opcional.",
+      "references": [
+        "Resultados do questionário (Apêndice B)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "PER-03": {
+      "code": "PER-03",
+      "module": "Início",
+      "screen": "Conquistas",
+      "type": "Mensagem",
+      "text": "{n} dias seguidos cuidando de você!",
+      "references": [
+        "Lim et al. (2023)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-M1.0": {
+      "code": "APR-M1.0",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 1 – Entendendo a DTM e o bruxismo",
+      "type": "Introdução",
+      "text": "Conhecer a sua condição é o primeiro passo do cuidado.",
+      "references": [
+        "Pimentel et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-M1.1": {
+      "code": "APR-M1.1",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 1 – Entendendo a DTM e o bruxismo",
+      "type": "Bloco",
+      "text": "O que é a DTM — É um conjunto de problemas na articulação da mandíbula, que fica na frente da orelha, e nos músculos da mastigação. Os sinais mais comuns são dor e dificuldade para movimentar a boca.",
+      "references": [
+        "Kapos et al. (2020)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "O que é a DTM",
+      "body": "É um conjunto de problemas na articulação da mandíbula, que fica na frente da orelha, e nos músculos da mastigação. Os sinais mais comuns são dor e dificuldade para movimentar a boca."
+    },
+    "APR-M1.2": {
+      "code": "APR-M1.2",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 1 – Entendendo a DTM e o bruxismo",
+      "type": "Bloco",
+      "text": "É comum — Cerca de 1 em cada 3 adultos tem algum sinal de DTM. Ela aparece mais em mulheres. Você não está sozinho.",
+      "references": [
+        "Zieliński et al. (2024)",
+        "Progiante et al. (2015)"
+      ],
+      "status": "sem-status",
+      "approvedByAdvisor": false,
+      "title": "É comum",
+      "body": "Cerca de 1 em cada 3 adultos tem algum sinal de DTM. Ela aparece mais em mulheres. Você não está sozinho."
+    },
+    "APR-M1.3": {
+      "code": "APR-M1.3",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 1 – Entendendo a DTM e o bruxismo",
+      "type": "Bloco",
+      "text": "Por que aparece — Não há uma causa única. Dormir mal, ansiedade, tensão emocional e hábitos como apertar os dentes estão entre os fatores mais ligados à DTM.",
+      "references": [
+        "Warzocha et al. (2024)",
+        "Kapos et al. (2020)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Por que aparece",
+      "body": "Não há uma causa única. Dormir mal, ansiedade, tensão emocional e hábitos como apertar os dentes estão entre os fatores mais ligados à DTM."
+    },
+    "APR-M1.4": {
+      "code": "APR-M1.4",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 1 – Entendendo a DTM e o bruxismo",
+      "type": "Bloco",
+      "text": "O que é bruxismo — É apertar ou ranger os dentes, dormindo ou acordado. Em repouso, o normal é os dentes ficarem separados.",
+      "references": [
+        "Verhoeff et al. (2025)"
+      ],
+      "status": "sem-status",
+      "approvedByAdvisor": false,
+      "title": "O que é bruxismo",
+      "body": "É apertar ou ranger os dentes, dormindo ou acordado. Em repouso, o normal é os dentes ficarem separados."
+    },
+    "APR-M1.5": {
+      "code": "APR-M1.5",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 1 – Entendendo a DTM e o bruxismo",
+      "type": "Dica",
+      "text": "A DTM vai piorar? — Na maioria das pessoas, não: cerca de 3 em cada 4 casos ficam estáveis com o tempo.",
+      "references": [
+        "Kapos et al. (2020)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "A DTM vai piorar?",
+      "body": "Na maioria das pessoas, não: cerca de 3 em cada 4 casos ficam estáveis com o tempo."
+    },
+    "APR-M2.0": {
+      "code": "APR-M2.0",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 2 – Como é o tratamento",
+      "type": "Introdução",
+      "text": "O cuidado começa com coisas simples, que você faz em casa.",
+      "references": [
+        "Kapos et al. (2020)",
+        "Pimentel et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-M2.1": {
+      "code": "APR-M2.1",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 2 – Como é o tratamento",
+      "type": "Bloco",
+      "text": "Quem confirma é o dentista — Só o dentista pode confirmar que a sua dor é DTM. Primeiro ele verifica se a dor não vem de outra causa, como um dente ou uma infecção.",
+      "references": [
+        "Schiffman et al. (2014)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Quem confirma é o dentista",
+      "body": "Só o dentista pode confirmar que a sua dor é DTM. Primeiro ele verifica se a dor não vem de outra causa, como um dente ou uma infecção."
+    },
+    "APR-M2.2": {
+      "code": "APR-M2.2",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 2 – Como é o tratamento",
+      "type": "Bloco",
+      "text": "Começa pelo simples — O tratamento recomendado começa por medidas simples e reversíveis: entender a condição, mudar hábitos, fazer exercícios, aplicar calor e cuidar do sono e da alimentação.",
+      "references": [
+        "Kapos et al. (2020)",
+        "Pimentel et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Começa pelo simples",
+      "body": "O tratamento recomendado começa por medidas simples e reversíveis: entender a condição, mudar hábitos, fazer exercícios, aplicar calor e cuidar do sono e da alimentação."
+    },
+    "APR-M2.3": {
+      "code": "APR-M2.3",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 2 – Como é o tratamento",
+      "type": "Bloco",
+      "text": "Não é só a mordida — A DTM não é causada só pela posição dos dentes. Por isso, o cuidado envolve o corpo, as emoções e os hábitos.",
+      "references": [
+        "Kapos et al. (2020)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Não é só a mordida",
+      "body": "A DTM não é causada só pela posição dos dentes. Por isso, o cuidado envolve o corpo, as emoções e os hábitos."
+    },
+    "APR-M2.4": {
+      "code": "APR-M2.4",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 2 – Como é o tratamento",
+      "type": "Bloco",
+      "text": "Seu papel é importante — Os cuidados em casa funcionam quando feitos com regularidade. Este aplicativo ajuda você a lembrar, fazer e acompanhar.",
+      "references": [
+        "Pimentel et al. (2018)",
+        "Yadav et al. (2020)"
+      ],
+      "status": "sem-status",
+      "approvedByAdvisor": false,
+      "title": "Seu papel é importante",
+      "body": "Os cuidados em casa funcionam quando feitos com regularidade. Este aplicativo ajuda você a lembrar, fazer e acompanhar."
+    },
+    "APR-M2.5": {
+      "code": "APR-M2.5",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 2 – Como é o tratamento",
+      "type": "Dica",
+      "text": "Importante — Este aplicativo não substitui a consulta. O diagnóstico e o plano de tratamento são definidos pelo seu dentista.",
+      "references": [
+        "Síntese da seção 2.5"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Importante",
+      "body": "Este aplicativo não substitui a consulta. O diagnóstico e o plano de tratamento são definidos pelo seu dentista."
+    },
+    "APR-M3.0": {
+      "code": "APR-M3.0",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 3 – Hábitos que pioram a dor",
+      "type": "Introdução",
+      "text": "Alguns hábitos do dia a dia sobrecarregam a mandíbula.",
+      "references": [
+        "Beddis et al. (2018)",
+        "Lobbezoo et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-M3.1": {
+      "code": "APR-M3.1",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 3 – Hábitos que pioram a dor",
+      "type": "Bloco",
+      "text": "Dentes encostados — Encostar ou apertar os dentes fora da hora de engolir sobrecarrega os músculos e a articulação.",
+      "references": [
+        "Beddis et al. (2018)",
+        "Verhoeff et al. (2025)",
+        "Rocabado (1983)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Dentes encostados",
+      "body": "Encostar ou apertar os dentes fora da hora de engolir sobrecarrega os músculos e a articulação."
+    },
+    "APR-M3.2": {
+      "code": "APR-M3.2",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 3 – Hábitos que pioram a dor",
+      "type": "Bloco",
+      "text": "Manias da boca — Mascar chiclete, morder objetos (como canetas) e roer unhas também sobrecarregam a mandíbula.",
+      "references": [
+        "Beddis et al. (2018)",
+        "Lobbezoo et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Manias da boca",
+      "body": "Mascar chiclete, morder objetos (como canetas) e roer unhas também sobrecarregam a mandíbula."
+    },
+    "APR-M3.3": {
+      "code": "APR-M3.3",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 3 – Hábitos que pioram a dor",
+      "type": "Bloco",
+      "text": "Estresse e ansiedade — A ansiedade aumenta a tensão dos músculos do rosto e o hábito de apertar os dentes. Cuidar do estresse também é cuidar da mandíbula.",
+      "references": [
+        "Paludo et al. (2025)",
+        "Saini et al. (2025)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Estresse e ansiedade",
+      "body": "A ansiedade aumenta a tensão dos músculos do rosto e o hábito de apertar os dentes. Cuidar do estresse também é cuidar da mandíbula."
+    },
+    "APR-M3.4": {
+      "code": "APR-M3.4",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 3 – Hábitos que pioram a dor",
+      "type": "Bloco",
+      "text": "O que evitar — Excesso de café, cigarro e noites mal dormidas.",
+      "references": [
+        "Graham et al. (2026)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "O que evitar",
+      "body": "Excesso de café, cigarro e noites mal dormidas."
+    },
+    "APR-M3.5": {
+      "code": "APR-M3.5",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 3 – Hábitos que pioram a dor",
+      "type": "Bloco",
+      "text": "Atenção plena — Prestar atenção ao corpo, sem julgar, ajuda a perceber e soltar o hábito automático de apertar os dentes.",
+      "references": [
+        "Matoso-Filho et al. (2026)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Atenção plena",
+      "body": "Prestar atenção ao corpo, sem julgar, ajuda a perceber e soltar o hábito automático de apertar os dentes."
+    },
+    "APR-M3.6": {
+      "code": "APR-M3.6",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 3 – Hábitos que pioram a dor",
+      "type": "Dica",
+      "text": "Faça agora — Solte os dentes, mantenha os lábios juntos e a ponta da língua no céu da boca, logo atrás dos dentes da frente.",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Faça agora",
+      "body": "Solte os dentes, mantenha os lábios juntos e a ponta da língua no céu da boca, logo atrás dos dentes da frente."
+    },
+    "APR-M4.0": {
+      "code": "APR-M4.0",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 4 – O que comer nos dias de dor",
+      "type": "Introdução",
+      "text": "Mudar a textura dos alimentos poupa a articulação.",
+      "references": [
+        "Shu et al. (2023)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-M4.1": {
+      "code": "APR-M4.1",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 4 – O que comer nos dias de dor",
+      "type": "Bloco",
+      "text": "Macio e pequeno — Nos dias de dor, prefira alimentos macios e em pedaços pequenos. Alimentos grandes e duros fazem a mandíbula trabalhar mais.",
+      "references": [
+        "Shu et al. (2023)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Macio e pequeno",
+      "body": "Nos dias de dor, prefira alimentos macios e em pedaços pequenos. Alimentos grandes e duros fazem a mandíbula trabalhar mais."
+    },
+    "APR-M4.2": {
+      "code": "APR-M4.2",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 4 – O que comer nos dias de dor",
+      "type": "Bloco",
+      "text": "Como preparar — Corte em pedaços pequenos, descasque e cozinhe bem os legumes até ficarem macios e use molhos para deixar a comida mais úmida.",
+      "references": [
+        "Nasri-Heir et al. (2016)",
+        "Beddis et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Como preparar",
+      "body": "Corte em pedaços pequenos, descasque e cozinhe bem os legumes até ficarem macios e use molhos para deixar a comida mais úmida."
+    },
+    "APR-M4.3": {
+      "code": "APR-M4.3",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 4 – O que comer nos dias de dor",
+      "type": "Bloco",
+      "text": "Por grupo — Frutas em purês e vitaminas; legumes cozidos e picados; carnes macias ou tofu; grãos.",
+      "references": [
+        "Nasri-Heir et al. (2016)"
+      ],
+      "status": "sem-status",
+      "approvedByAdvisor": false,
+      "title": "Por grupo",
+      "body": "Frutas em purês e vitaminas; legumes cozidos e picados; carnes macias ou tofu; grãos."
+    },
+    "APR-M4.4": {
+      "code": "APR-M4.4",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 4 – O que comer nos dias de dor",
+      "type": "Bloco",
+      "text": "Evite — Chiclete e alimentos duros.",
+      "references": [
+        "Nasri-Heir et al. (2016)",
+        "Beddis et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Evite",
+      "body": "Chiclete e alimentos duros."
+    },
+    "APR-M4.5": {
+      "code": "APR-M4.5",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 4 – O que comer nos dias de dor",
+      "type": "Dica",
+      "text": "Continue variando — Comer só alimentos macios por muito tempo pode deixar a alimentação pobre em fibras e nutrientes. Mude a textura, mas mantenha a variedade.",
+      "references": [
+        "Nasri-Heir et al. (2016)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Continue variando",
+      "body": "Comer só alimentos macios por muito tempo pode deixar a alimentação pobre em fibras e nutrientes. Mude a textura, mas mantenha a variedade."
+    },
+    "APR-M5.0": {
+      "code": "APR-M5.0",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 5 – Dormir melhor",
+      "type": "Introdução",
+      "text": "Dormir mal é um dos fatores mais ligados à DTM.",
+      "references": [
+        "Warzocha et al. (2024)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-M5.1": {
+      "code": "APR-M5.1",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 5 – Dormir melhor",
+      "type": "Bloco",
+      "text": "Hábitos que ajudam — Deite e acorde nos mesmos horários, evite café e álcool à noite, pratique atividade física e tenha uma rotina para relaxar antes de dormir.",
+      "references": [
+        "De Pasquale et al. (2024)"
+      ],
+      "status": "revisar",
+      "approvedByAdvisor": false,
+      "title": "Hábitos que ajudam",
+      "body": "Deite e acorde nos mesmos horários, evite café e álcool à noite, pratique atividade física e tenha uma rotina para relaxar antes de dormir."
+    },
+    "APR-M5.2": {
+      "code": "APR-M5.2",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 5 – Dormir melhor",
+      "type": "Bloco",
+      "text": "Se a dor atrapalhar — Não precisa ficar no escuro pensando na dor. Escolha uma atividade calma que distraia, como um áudio de relaxamento.",
+      "references": [
+        "Gupta et al. (2023)",
+        "De Pasquale et al. (2024)"
+      ],
+      "status": "sem-status",
+      "approvedByAdvisor": false,
+      "title": "Se a dor atrapalhar",
+      "body": "Não precisa ficar no escuro pensando na dor. Escolha uma atividade calma que distraia, como um áudio de relaxamento."
+    },
+    "APR-M5.3": {
+      "code": "APR-M5.3",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 5 – Dormir melhor",
+      "type": "Bloco",
+      "text": "Placa para dormir — A placa feita pelo dentista pode ajudar a diminuir o bruxismo e proteger os dentes. Use conforme a orientação dele.",
+      "references": [
+        "Minakuchi et al. (2022)"
+      ],
+      "status": "sem-status",
+      "approvedByAdvisor": false,
+      "title": "Placa para dormir",
+      "body": "A placa feita pelo dentista pode ajudar a diminuir o bruxismo e proteger os dentes. Use conforme a orientação dele."
+    },
+    "APR-M5.4": {
+      "code": "APR-M5.4",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 5 – Dormir melhor",
+      "type": "Dica",
+      "text": "Fique atento — Acordar com a mandíbula cansada ou dolorida pode ser um sinal de bruxismo do sono. Conte ao seu dentista.",
+      "references": [
+        "Lobbezoo et al. (2018)",
+        "Verhoeff et al. (2025)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Fique atento",
+      "body": "Acordar com a mandíbula cansada ou dolorida pode ser um sinal de bruxismo do sono. Conte ao seu dentista."
+    },
+    "APR-M6.0": {
+      "code": "APR-M6.0",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 6 – Alívio em casa",
+      "type": "Introdução",
+      "text": "Cuidados simples para aliviar a dor e relaxar os músculos.",
+      "references": [
+        "Furlan et al. (2015)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "APR-M6.1": {
+      "code": "APR-M6.1",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 6 – Alívio em casa",
+      "type": "Bloco",
+      "text": "Compressa morna — Coloque uma compressa morna e úmida no rosto por 20 minutos, pelo menos 1 vez ao dia. O calor alivia a dor e relaxa os músculos.",
+      "references": [
+        "Furlan et al. (2015)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Compressa morna",
+      "body": "Coloque uma compressa morna e úmida no rosto por 20 minutos, pelo menos 1 vez ao dia. O calor alivia a dor e relaxa os músculos."
+    },
+    "APR-M6.2": {
+      "code": "APR-M6.2",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 6 – Alívio em casa",
+      "type": "Bloco",
+      "text": "Respiração — Coloque uma mão no peito e outra na barriga e respire levando o ar para a barriga. Faça por 5 minutos, a cada 2 horas.",
+      "references": [
+        "Michelotti et al. (2005)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Respiração",
+      "body": "Coloque uma mão no peito e outra na barriga e respire levando o ar para a barriga. Faça por 5 minutos, a cada 2 horas."
+    },
+    "APR-M6.3": {
+      "code": "APR-M6.3",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 6 – Alívio em casa",
+      "type": "Bloco",
+      "text": "Exercícios e massagem — Exercícios da mandíbula, junto com a massagem dos músculos da mastigação, ajudam na dor e na abertura da boca. O programa 6x6 está na aba Exercícios.",
+      "references": [
+        "Medlicott, Harris (2006)",
+        "Miotto et al. (2022)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Exercícios e massagem",
+      "body": "Exercícios da mandíbula, junto com a massagem dos músculos da mastigação, ajudam na dor e na abertura da boca. O programa 6x6 está na aba Exercícios."
+    },
+    "APR-M6.4": {
+      "code": "APR-M6.4",
+      "module": "Aprender",
+      "screen": "Aprender · Módulo 6 – Alívio em casa",
+      "type": "Dica",
+      "text": "Com cuidado — Faça os exercícios devagar, sem forçar a boca além do início da dor, e siga a orientação do seu dentista.",
+      "references": [
+        "Michelotti et al. (2005)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Com cuidado",
+      "body": "Faça os exercícios devagar, sem forçar a boca além do início da dor, e siga a orientação do seu dentista."
+    },
+    "EX-R0": {
+      "code": "EX-R0",
+      "module": "Exercícios",
+      "screen": "Exercícios · Programa 6x6 de Rocabado",
+      "type": "Destaque",
+      "text": "Programa 6x6 de Rocabado — Seis exercícios para a postura da cabeça e do pescoço, a língua e a mandíbula. 6 exercícios · 6 repetições · 6× ao dia.",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Programa 6x6 de Rocabado",
+      "body": "Seis exercícios para a postura da cabeça e do pescoço, a língua e a mandíbula. 6 exercícios · 6 repetições · 6× ao dia."
+    },
+    "EX-R1": {
+      "code": "EX-R1",
+      "module": "Exercícios",
+      "screen": "Exercícios · Programa 6x6 de Rocabado / Exercício 1",
+      "type": "Passo a passo",
+      "text": "Posição de repouso da língua — 1. Faça um estalo com a língua. 2. Deixe a parte da frente dela apoiada no céu da boca, logo atrás dos dentes de cima, com pressão leve. 3. Dentes separados, lábios fechados; respire pelo nariz, levando o ar para a barriga. (6 repetições)",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Posição de repouso da língua",
+      "body": "1. Faça um estalo com a língua. 2. Deixe a parte da frente dela apoiada no céu da boca, logo atrás dos dentes de cima, com pressão leve. 3. Dentes separados, lábios fechados; respire pelo nariz, levando o ar para a barriga. (6 repetições)"
+    },
+    "EX-R2": {
+      "code": "EX-R2",
+      "module": "Exercícios",
+      "screen": "Exercícios · Programa 6x6 de Rocabado / Exercício 2",
+      "type": "Passo a passo",
+      "text": "Postura dos ombros — 1. Aproxime as escápulas (os ossos das costas) uma da outra. 2. Ao mesmo tempo, leve-as para baixo. 3. Não suba os ombros nem leve a cabeça para a frente. (6 repetições)",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Postura dos ombros",
+      "body": "1. Aproxime as escápulas (os ossos das costas) uma da outra. 2. Ao mesmo tempo, leve-as para baixo. 3. Não suba os ombros nem leve a cabeça para a frente. (6 repetições)"
+    },
+    "EX-R3": {
+      "code": "EX-R3",
+      "module": "Exercícios",
+      "screen": "Exercícios · Programa 6x6 de Rocabado / Exercício 3",
+      "type": "Passo a passo",
+      "text": "Aceno de cabeça com apoio — 1. Entrelace as mãos atrás do pescoço para deixá-lo firme. 2. Faça um leve movimento de \"sim\" com a cabeça. 3. Mexa só a parte de cima do pescoço. (6 repetições)",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Aceno de cabeça com apoio",
+      "body": "1. Entrelace as mãos atrás do pescoço para deixá-lo firme. 2. Faça um leve movimento de \"sim\" com a cabeça. 3. Mexa só a parte de cima do pescoço. (6 repetições)"
+    },
+    "EX-R4": {
+      "code": "EX-R4",
+      "module": "Exercícios",
+      "screen": "Exercícios · Programa 6x6 de Rocabado / Exercício 4",
+      "type": "Passo a passo",
+      "text": "Alongamento do pescoço — 1. Faça um leve \"sim\" com a cabeça. 2. Ao mesmo tempo, leve o pescoço para trás e estique o alto da cabeça para cima. 3. O queixo fica, de forma confortável, mais perto do pescoço. (6 repetições)",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Alongamento do pescoço",
+      "body": "1. Faça um leve \"sim\" com a cabeça. 2. Ao mesmo tempo, leve o pescoço para trás e estique o alto da cabeça para cima. 3. O queixo fica, de forma confortável, mais perto do pescoço. (6 repetições)"
+    },
+    "EX-R5": {
+      "code": "EX-R5",
+      "module": "Exercícios",
+      "screen": "Exercícios · Programa 6x6 de Rocabado / Exercício 5",
+      "type": "Passo a passo",
+      "text": "Abertura controlada da boca — 1. Língua no céu da boca. 2. Apoie os indicadores na frente das orelhas, sobre a articulação. 3. Abra e feche devagar, só até sentir a articulação começar a deslizar para a frente. (6 repetições)",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Abertura controlada da boca",
+      "body": "1. Língua no céu da boca. 2. Apoie os indicadores na frente das orelhas, sobre a articulação. 3. Abra e feche devagar, só até sentir a articulação começar a deslizar para a frente. (6 repetições)"
+    },
+    "EX-R6": {
+      "code": "EX-R6",
+      "module": "Exercícios",
+      "screen": "Exercícios · Programa 6x6 de Rocabado / Exercício 6",
+      "type": "Passo a passo",
+      "text": "Estabilização da mandíbula — 1. Língua no céu da boca. 2. Indicadores no queixo e polegares logo abaixo dele. 3. Faça força suave para a direita, a esquerda, para abrir e para fechar, sem deixar a mandíbula se mexer. (6 repetições)",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Estabilização da mandíbula",
+      "body": "1. Língua no céu da boca. 2. Indicadores no queixo e polegares logo abaixo dele. 3. Faça força suave para a direita, a esquerda, para abrir e para fechar, sem deixar a mandíbula se mexer. (6 repetições)"
+    },
+    "EX-R7": {
+      "code": "EX-R7",
+      "module": "Exercícios",
+      "screen": "Exercícios (lista do 6x6)",
+      "type": "Resumos",
+      "text": "Resumos de uma linha dos 6 exercícios na lista da aba Exercícios (ex.: \"Língua no céu da boca, dentes separados, lábios fechados\").",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "EX-R8": {
+      "code": "EX-R8",
+      "module": "Exercícios",
+      "screen": "Exercícios · Programa 6x6 de Rocabado",
+      "type": "Vídeo",
+      "text": "Espaço para vídeo curto de cada exercício (a gravar), com demonstração da execução correta e dos erros mais frequentes.",
+      "references": [
+        "Rocabado (1983)",
+        "Rocabado, Iglarsh (1991)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "INI-01": {
+      "code": "INI-01",
+      "module": "Início",
+      "screen": "Início (painel)",
+      "type": "Indicador",
+      "text": "Dias se cuidando — {n} dias, desde que você começou.",
+      "references": [
+        "Mulet et al. (2007)",
+        "Sallam et al. (2025)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Dias se cuidando",
+      "body": "{n} dias, desde que você começou."
+    },
+    "INI-02": {
+      "code": "INI-02",
+      "module": "Início",
+      "screen": "Início (painel)",
+      "type": "Indicador",
+      "text": "Última dor — {x}/10 · {intensidade} · {data e hora}.",
+      "references": [],
+      "status": "revisar",
+      "approvedByAdvisor": false,
+      "title": "Última dor",
+      "body": "{x}/10 · {intensidade} · {data e hora}."
+    },
+    "INI-03": {
+      "code": "INI-03",
+      "module": "Início",
+      "screen": "Início (painel)",
+      "type": "Indicador",
+      "text": "Média da semana — {x}/10, últimos 7 dias.",
+      "references": [],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Média da semana",
+      "body": "{x}/10, últimos 7 dias."
+    },
+    "INI-04": {
+      "code": "INI-04",
+      "module": "Início",
+      "screen": "Início (painel)",
+      "type": "Indicador",
+      "text": "Próximo lembrete — {hh:mm} · Relaxar a mandíbula.",
+      "references": [
+        "Graham et al. (2026)",
+        "resultados do questionário (Apêndice B)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Próximo lembrete",
+      "body": "{hh:mm} · Relaxar a mandíbula."
+    },
+    "INI-05": {
+      "code": "INI-05",
+      "module": "Início",
+      "screen": "Início (painel)",
+      "type": "Botão",
+      "text": "Registrar minha dor de hoje.",
+      "references": [],
+      "status": "embasado",
+      "approvedByAdvisor": false
+    },
+    "INI-06": {
+      "code": "INI-06",
+      "module": "Início",
+      "screen": "Início (painel)",
+      "type": "Dica",
+      "text": "Dica do dia — Evite mascar chiclete, morder objetos e roer unhas: esses hábitos sobrecarregam a mandíbula.",
+      "references": [
+        "Beddis et al. (2018)",
+        "Lobbezoo et al. (2018)"
+      ],
+      "status": "embasado",
+      "approvedByAdvisor": false,
+      "title": "Dica do dia",
+      "body": "Evite mascar chiclete, morder objetos e roer unhas: esses hábitos sobrecarregam a mandíbula."
+    }
+  },
+  "blocked": {
+    "APR-16": "Lacuna – sem embasamento na dissertação",
+    "EX-14": "Lacuna – sem embasamento na dissertação",
+    "SOS-06": "Lacuna – sem embasamento na dissertação",
+    "ALI-05": "Lacuna – sem embasamento na dissertação",
+    "MIN-02": "Lacuna – sem embasamento na dissertação"
+  }
+}

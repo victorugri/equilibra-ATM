@@ -1,0 +1,55 @@
+.tab-bar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  height: calc(var(--tab-bar-height) + var(--safe-area-bottom));
+  padding: 0 6px var(--safe-area-bottom);
+  background: rgb(249 249 255 / 95%);
+  box-shadow: var(--shadow-tab-bar);
+  backdrop-filter: blur(12px);
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  min-width: 56px;
+  min-height: 64px;
+  color: var(--color-text-secondary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+
+  // O Figma não define o estado ativo: cor primária e pílula clara atrás do ícone.
+  &.active {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+
+    .icon-pill {
+      background: var(--color-teal-light);
+    }
+  }
+}
+
+.icon-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+}
+
+.label {
+  line-height: 1.25;
+}
+
+// Telas muito estreitas (ex.: 320 px): rótulo menor para "Exercícios" caber.
+@media (max-width: 339px) {
+  .tab {
+    font-size: 0.8125rem;
+    letter-spacing: 0;
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "equilibra-atm",
+  "version": "0.1.0",
+  "description": "App (PWA) de autocuidado para pessoas com DTM e bruxismo — projeto de pesquisa do PPG CTAO, ICT-UNESP.",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "prebuild": "npm run content:check",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "content:build": "node scripts/content/build-content.mjs",
+    "content:check": "node scripts/content/check-content.mjs",
+    "content:check:strict": "node scripts/content/check-content.mjs --strict",
+    "icons:build": "node scripts/design/build-icons.mjs && prettier --write src/app/shared/ui/icon/icons.ts --log-level warn"
+  },
+  "packageManager": "npm@11.19.0",
+  "dependencies": {
+    "@angular/common": "^22.2.0",
+    "@angular/compiler": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@angular/forms": "^22.2.0",
+    "@angular/platform-browser": "^22.2.0",
+    "@angular/router": "^22.2.0",
+    "@angular/service-worker": "^22.2.0",
+    "@fontsource-variable/nunito-sans": "^5.3.0",
+    "dexie": "^4.4.6",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.2.3",
+    "@angular/cli": "^22.2.3",
+    "@angular/compiler-cli": "^22.2.0",
+    "exceljs": "^4.4.0",
+    "fake-indexeddb": "^6.2.6",
+    "jsdom": "^30.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2",
+    "vitest": "^5.0.0"
+  }
+}

@@ -1,0 +1,49 @@
+<app-page-header title="Início" />
+<div class="page">
+  <section class="hero" aria-labelledby="greeting">
+    <img
+      class="decoration one"
+      src="images/inicio-decoracao-1.svg"
+      width="180"
+      height="180"
+      alt=""
+    />
+    <img
+      class="decoration two"
+      src="images/inicio-decoracao-2.svg"
+      width="110"
+      height="110"
+      alt=""
+    />
+    <p class="weekday">{{ weekday }}</p>
+    <h1 id="greeting">{{ greeting }}!</h1>
+    <p class="subtitle">Veja como está o seu cuidado com a mandíbula.</p>
+  </section>
+
+  <section class="summary" aria-labelledby="summary-title">
+    <h2 id="summary-title">Seu resumo</h2>
+    <div class="grid">
+      @for (item of indicators(); track item.tone) {
+        <app-indicator
+          [tone]="item.tone"
+          [label]="item.label"
+          [value]="item.value"
+          [unit]="item.unit"
+          [detail]="item.detail"
+        />
+      }
+    </div>
+    <a class="btn-primary register" routerLink="/diario">
+      <app-icon name="mais" />
+      {{ registerLabel }}
+    </a>
+  </section>
+
+  <aside class="tip" aria-labelledby="tip-title">
+    <span class="tip-icon"><app-icon name="lampada" /></span>
+    <div>
+      <h2 id="tip-title">{{ tipCode | content: 'title' }}</h2>
+      <p>{{ tipCode | content: 'body' }}</p>
+    </div>
+  </aside>
+</div>

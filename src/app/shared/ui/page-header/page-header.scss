@@ -1,0 +1,79 @@
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: block;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  min-height: calc(var(--header-height) + var(--safe-area-top));
+  padding: var(--safe-area-top) var(--space-lg) 0;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+
+  &.sos {
+    background: var(--color-sos-bg);
+
+    .title {
+      color: var(--color-sos);
+    }
+
+    .round-button {
+      background: var(--color-sos-light);
+      color: var(--color-sos);
+    }
+  }
+}
+
+.logo {
+  flex: none;
+  border-radius: var(--radius-pill);
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-text);
+  font-size: var(--text-title-sm);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-title);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Círculo de 40 do Figma; a área de toque chega a 48 com a margem invisível.
+.round-button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-light);
+  color: var(--color-primary);
+  cursor: pointer;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+  }
+}
+
+.skip {
+  min-height: var(--touch-target);
+  padding: 0 var(--space-md);
+  border: 0;
+  background: transparent;
+  color: var(--color-primary);
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+}

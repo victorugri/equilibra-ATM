@@ -1,0 +1,81 @@
+<app-page-header title="Diário" />
+<div class="page">
+  <h1 class="visually-hidden">Diário — registro de hoje</h1>
+  <app-diary-tabs />
+
+  <div class="date-row">
+    <p class="date">
+      <app-icon name="calendario" />
+      Hoje, {{ today | date: "d 'de' MMMM" }}
+    </p>
+    <p class="status" [class.done]="registeredToday()">
+      <span class="dot" aria-hidden="true"></span>
+      {{ registeredToday() ? 'Registrado' : 'Não registrado' }}
+    </p>
+  </div>
+
+  <form class="form" (submit)="save($event)" novalidate>
+    <section class="card" aria-labelledby="pain-question">
+      <h2 id="pain-question">{{ question.question }}</h2>
+      @if (question.hint) {
+        <p id="pain-hint" class="hint">{{ question.hint }}</p>
+      }
+      <app-pain-scale
+        [(value)]="pain"
+        labelledBy="pain-question"
+        [describedBy]="question.hint ? 'pain-hint' : undefined"
+      />
+    </section>
+
+    <section class="card answers" aria-label="Respostas rápidas">
+      <app-choice-group legend="Fiz os exercícios" [options]="yesNo" [(value)]="exercises" />
+      <app-choice-group legend="Usei a placa" [options]="splintOptions" [(value)]="splint" />
+      <app-choice-group legend="Dormi bem" [options]="yesNo" [(value)]="sleptWell" />
+    </section>
+
+    <section class="card">
+      <label class="note-label" for="note">
+        <app-icon name="observacao" />
+        Observação (opcional)
+      </label>
+      <input
+        id="note"
+        class="note"
+        type="text"
+        maxlength="140"
+        autocomplete="off"
+        [value]="note()"
+        (input)="note.set($any($event.target).value)"
+      />
+    </section>
+
+    @if (error()) {
+      <p class="error" role="alert">{{ error() }}</p>
+    }
+    <button type="submit" class="btn-primary save" [disabled]="saving()">
+      <app-icon name="salvar" />
+      Salvar registro
+    </button>
+    <p class="privacy">
+      <app-icon name="cadeado" />
+      Seus dados ficam salvos apenas com você e sob a proteção da LGPD.
+    </p>
+  </form>
+
+  <p class="saved" role="status">
+    @if (savedAt(); as savedAt) {
+      Registro salvo às {{ savedAt | date: 'HH:mm' }}.
+    }
+  </p>
+
+  <section class="card week" aria-labelledby="week-title">
+    <h2 id="week-title">Últimos 7 dias</h2>
+    <app-week-chart [series]="week()" />
+    @if (weekAverage(); as average) {
+      <p class="average">
+        <strong>{{ average.title }}:</strong> {{ average.text }}
+      </p>
+    }
+    <a class="btn-link more" routerLink="/diario/evolucao">Ver evolução completa</a>
+  </section>
+</div>

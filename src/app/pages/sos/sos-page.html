@@ -1,0 +1,88 @@
+<app-page-header title="SOS - Estou com dor" variant="sos" />
+<div class="page">
+  <header class="intro">
+    <p class="seal"><app-icon name="sos-selo" />Alívio imediato</p>
+    <h1>{{ 'SOS-01' | content }}</h1>
+  </header>
+
+  @let step = current();
+  <div class="progress">
+    <div class="progress-row">
+      <p class="progress-step">
+        <app-icon name="sos-progresso" />Passo {{ step.n }} de {{ steps.length }}
+      </p>
+      <p class="progress-name">{{ step.short }}</p>
+    </div>
+    <div
+      class="bar"
+      role="progressbar"
+      aria-label="Progresso dos passos"
+      aria-valuemin="1"
+      [attr.aria-valuemax]="steps.length"
+      [attr.aria-valuenow]="step.n"
+    >
+      <span [style.width.%]="progress()"></span>
+    </div>
+  </div>
+
+  @if (timer.state() !== 'idle' && !step.timer) {
+    <div class="timer-banner">
+      <p>{{ timerStep.title }}</p>
+      <app-timer-controls [timer]="timer" />
+    </div>
+  }
+
+  <article class="step-card" aria-labelledby="step-title">
+    <div class="step-head">
+      <div class="step-titles">
+        @if (step.n === 1) {
+          <span class="tag">Ação imediata</span>
+        }
+        <h2 id="step-title" #stepTitle tabindex="-1">{{ step.n }}. {{ step.title }}</h2>
+      </div>
+      @if (step.icon; as icon) {
+        <span class="step-icon"><app-icon [name]="icon" /></span>
+      }
+    </div>
+    <p class="instruction">{{ step.code | content }}</p>
+    @if (step.timer) {
+      <app-timer-controls [timer]="timer" />
+    }
+    @if (isLast()) {
+      <a class="btn-primary next" routerLink="/inicio">Concluir</a>
+    } @else {
+      <button type="button" class="btn-primary next" (click)="goTo(index() + 1)">
+        Próximo passo
+        <app-icon name="seta-botao" />
+      </button>
+    }
+  </article>
+
+  @if (following().length) {
+    <section class="following" aria-labelledby="following-title">
+      <h2 id="following-title">Passos seguintes desta sequência:</h2>
+      @for (next of following(); track next.n) {
+        <button type="button" class="following-step" (click)="goTo(next.n - 1)">
+          <span class="number" aria-hidden="true">{{ next.n }}</span>
+          <span class="following-texts">
+            <span class="following-title">
+              <span class="visually-hidden">Passo {{ next.n }}: </span>{{ next.title }}
+            </span>
+            <span class="following-text">{{ next.code | content }}</span>
+          </span>
+          @if (next.timer) {
+            <span class="following-time" aria-hidden="true">{{ timer.display() }}</span>
+          }
+        </button>
+      }
+    </section>
+  }
+
+  <aside class="dentist" aria-labelledby="dentist-title">
+    <span class="dentist-icon"><app-icon name="alerta" /></span>
+    <div>
+      <h2 id="dentist-title">Quando procurar seu dentista:</h2>
+      <p>{{ 'SOS-07' | content }}</p>
+    </div>
+  </aside>
+</div>

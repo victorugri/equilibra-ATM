@@ -1,0 +1,122 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-page);
+  padding: var(--space-lg) var(--space-page) var(--space-xl);
+}
+
+// Saudação
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-page) var(--space-page) 22px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(147deg, #005058 7%, #1e8f8c 79%);
+  box-shadow: var(--shadow-card-lg);
+  color: var(--color-on-primary);
+
+  h1 {
+    position: relative;
+    margin-top: var(--space-xs);
+    font-size: var(--text-title-lg);
+    letter-spacing: -0.025em;
+    line-height: 36px;
+  }
+}
+
+.decoration {
+  position: absolute;
+  pointer-events: none;
+
+  &.one {
+    top: -60px;
+    left: 230px;
+  }
+
+  &.two {
+    top: 80px;
+    left: 290px;
+  }
+}
+
+.weekday {
+  position: relative;
+  align-self: flex-start;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 18%);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.03em;
+}
+
+// Figma: branco a 88%; 100% para o texto de 18 px manter 4,5:1 também na parte clara.
+.subtitle {
+  position: relative;
+  font-size: var(--text-body-lg);
+  letter-spacing: 0.01em;
+  line-height: 26px;
+}
+
+// Painel
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+
+  h2 {
+    color: var(--color-text);
+    font-size: var(--text-title-sm);
+    line-height: var(--line-height-title);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.register {
+  border-radius: var(--radius-button);
+  box-shadow: var(--shadow-button);
+}
+
+// Dica do dia (INI-06)
+.tip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-page);
+  border-radius: 18px;
+  background: var(--color-tip-bg);
+
+  h2 {
+    color: var(--color-tip-title);
+    font-size: var(--text-body-lg);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.02em;
+  }
+
+  p {
+    margin-top: 2px;
+    color: var(--color-tip-text);
+    font-size: var(--text-label);
+    letter-spacing: 0.01em;
+  }
+}
+
+.tip-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-tip-icon-bg);
+  color: var(--color-tip-icon);
+}

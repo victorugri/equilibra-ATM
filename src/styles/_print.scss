@@ -1,0 +1,20 @@
+// Impressão (ex.: relatório para o dentista): só o conteúdo da página, fundo branco.
+@media print {
+  app-page-header,
+  app-tab-bar,
+  app-sos-button,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  app-root > .frame,
+  app-root > .frame > .main {
+    max-width: none;
+    padding: 0 !important;
+    background: #fff;
+  }
+}

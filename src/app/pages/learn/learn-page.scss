@@ -1,0 +1,107 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg) var(--space-page) var(--space-lg);
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+
+  h1 {
+    color: var(--color-text);
+    font-size: var(--text-title-lg);
+    letter-spacing: -0.025em;
+    line-height: 36px;
+  }
+}
+
+.heading-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background: rgb(0 96 103 / 10%);
+  color: var(--color-primary);
+}
+
+.subtitle {
+  margin-top: 5px;
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-lg);
+  letter-spacing: 0.01em;
+  line-height: 1.625;
+}
+
+.modules {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding-top: 28px;
+}
+
+.modules-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 {
+    color: var(--color-text);
+    font-size: var(--text-title-md);
+    font-weight: var(--font-weight-bold);
+    line-height: 30px;
+  }
+}
+
+.count {
+  color: var(--color-primary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.03em;
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: calc(var(--space-md) * -1 + 2px);
+  color: var(--color-text-secondary);
+  font-size: var(--text-label);
+  letter-spacing: 0.01em;
+
+  app-icon {
+    color: var(--color-primary);
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footnote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: 28px;
+  padding: 10px var(--space-lg);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-light);
+  color: var(--color-text-secondary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.03em;
+  text-align: center;
+
+  app-icon {
+    color: var(--color-success-strong);
+  }
+}

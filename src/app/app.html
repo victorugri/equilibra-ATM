@@ -1,0 +1,18 @@
+<div class="frame">
+  <main class="main">
+    <router-outlet />
+  </main>
+
+  @if (showTabBar() || showSos()) {
+    <div class="bottom">
+      @if (showSos()) {
+        <div class="sos">
+          <app-sos-button />
+        </div>
+      }
+      @if (showTabBar()) {
+        <app-tab-bar />
+      }
+    </div>
+  }
+</div>

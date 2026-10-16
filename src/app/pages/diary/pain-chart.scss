@@ -1,0 +1,89 @@
+:host {
+  display: block;
+}
+
+.frame {
+  position: relative;
+}
+
+svg {
+  display: block;
+  overflow: visible;
+  touch-action: pan-y;
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 4px;
+    border-radius: var(--radius-xs);
+  }
+}
+
+.grid {
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
+.axis {
+  fill: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.line {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+// Marcador com anel da cor do fundo, para não se perder onde cruza a linha.
+.dot {
+  fill: var(--color-primary);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+}
+
+.value {
+  fill: var(--color-text);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-bold);
+}
+
+.check {
+  circle {
+    fill: var(--color-primary);
+  }
+
+  path {
+    fill: none;
+    stroke: var(--color-on-primary);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.crosshair {
+  stroke: var(--color-text-tertiary);
+  stroke-width: 1;
+}
+
+.readout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-xs) var(--space-sm);
+  min-height: 44px;
+  margin-top: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-xs);
+  background: var(--color-surface-light);
+  color: var(--color-text-secondary);
+  font-size: var(--text-caption);
+
+  strong {
+    color: var(--color-text);
+    font-size: var(--text-label);
+  }
+}
