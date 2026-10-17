@@ -1,5 +1,5 @@
 import { Service, computed, inject, signal } from '@angular/core';
-import { APP_DATABASE, ExerciseSession } from './app-database';
+import { APP_DATABASE, ExerciseSession, newUid } from './app-database';
 import { dayKey } from './day';
 
 /** Chave usada na fase 2, quando as sessões ficavam no localStorage. */
@@ -28,7 +28,7 @@ export class ExerciseSessions {
   /** Registra uma sessão concluída e devolve quantas foram feitas hoje. */
   async record(at = new Date()): Promise<number> {
     await this.ready;
-    const session: ExerciseSession = { at };
+    const session: ExerciseSession = { at, uid: newUid(), dirty: 1 };
     session.id = await this.db.sessions.add(session);
     this.list.update((list) => [...list, session]);
     this.refresh();
@@ -40,9 +40,14 @@ export class ExerciseSessions {
     this.todayKey.set(dayKey(new Date()));
   }
 
+  /** Relê o banco local (ex.: depois de baixar sessões da conta ou sair dela). */
+  async reload(): Promise<void> {
+    this.list.set(await this.db.sessions.orderBy('at').toArray());
+  }
+
   private async load(): Promise<void> {
     await this.migrateFromLocalStorage();
-    this.list.set(await this.db.sessions.orderBy('at').toArray());
+    await this.reload();
   }
 
   /** Leva para o IndexedDB as sessões guardadas no localStorage pela fase 2. */
@@ -57,7 +62,7 @@ export class ExerciseSessions {
     try {
       const list: unknown = JSON.parse(raw);
       const sessions = (Array.isArray(list) ? list : [])
-        .map((iso) => ({ at: new Date(String(iso)) }))
+        .map((iso): ExerciseSession => ({ at: new Date(String(iso)), uid: newUid(), dirty: 1 }))
         .filter((session) => !isNaN(session.at.getTime()));
       if (sessions.length) await this.db.sessions.bulkAdd(sessions);
     } catch {

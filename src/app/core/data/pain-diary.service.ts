@@ -1,8 +1,14 @@
 import { Service, computed, inject, signal } from '@angular/core';
-import { APP_DATABASE, PainEntry } from './app-database';
+import { APP_DATABASE, PainEntry, newUid } from './app-database';
 import { dayKey } from './day';
 
-/** Diário da dor guardado no aparelho. */
+/** Campos que a pessoa preenche no diário. */
+export type PainEntryInput = Pick<
+  PainEntry,
+  'pain' | 'exercises' | 'splint' | 'sleptWell' | 'note'
+>;
+
+/** Diário da dor guardado no aparelho (e enviado à conta, se houver). */
 @Service()
 export class PainDiary {
   private readonly db = inject(APP_DATABASE);
@@ -12,7 +18,7 @@ export class PainDiary {
   readonly entries = this.list.asReadonly();
   readonly loaded = signal(false);
   /** Resolve quando os registros guardados foram lidos. */
-  readonly ready: Promise<void> = this.load();
+  readonly ready: Promise<void> = this.reload();
 
   readonly last = computed(() => this.list().at(-1) ?? null);
   readonly hasEntryToday = computed(() => {
@@ -20,19 +26,19 @@ export class PainDiary {
     return this.list().some((entry) => dayKey(entry.at) === today);
   });
 
-  async add(entry: Omit<PainEntry, 'id' | 'at'>, at = new Date()): Promise<PainEntry> {
+  async add(entry: PainEntryInput, at = new Date()): Promise<PainEntry> {
     if (!Number.isInteger(entry.pain) || entry.pain < 0 || entry.pain > 10) {
       throw new RangeError('A dor deve ser um número inteiro de 0 a 10.');
     }
-    const saved: PainEntry = { ...entry, note: entry.note.trim(), at };
+    const saved: PainEntry = { ...entry, note: entry.note.trim(), at, uid: newUid(), dirty: 1 };
     saved.id = await this.db.pain.add(saved);
     this.list.update((list) => [...list, saved]);
     return saved;
   }
 
-  private async load(): Promise<void> {
-    const entries = await this.db.pain.orderBy('at').toArray();
-    this.list.set(entries);
+  /** Relê o banco local (ex.: depois de baixar registros da conta ou sair dela). */
+  async reload(): Promise<void> {
+    this.list.set(await this.db.pain.orderBy('at').toArray());
     this.loaded.set(true);
   }
 }

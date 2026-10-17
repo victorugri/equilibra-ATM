@@ -11,7 +11,7 @@ export class AppUsage {
   private readonly firstUse = signal<Date | null>(null);
 
   /** Resolve quando a data do primeiro acesso foi lida (ou gravada, no primeiro uso). */
-  readonly ready: Promise<void> = this.load();
+  readonly ready: Promise<void> = this.reload();
 
   /** Dias de uso desde o primeiro acesso, contando o dia de hoje (primeiro dia = 1). */
   readonly daysUsing = computed(() => {
@@ -19,7 +19,8 @@ export class AppUsage {
     return first ? daysBetween(first, new Date()) + 1 : null;
   });
 
-  private async load(): Promise<void> {
+  /** Lê (ou grava, se não houver) a data do primeiro acesso. */
+  async reload(): Promise<void> {
     const saved = await this.db.meta.get(FIRST_USE_KEY);
     if (saved?.value instanceof Date) {
       this.firstUse.set(saved.value);

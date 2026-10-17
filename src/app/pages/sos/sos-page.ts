@@ -11,9 +11,11 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentPipe } from '../../core/content/content.pipe';
+import { ProfileStore } from '../../core/data/profile.service';
 import { Icon } from '../../shared/ui/icon/icon';
 import { IconName } from '../../shared/ui/icon/icons';
 import { PageHeader } from '../../shared/ui/page-header/page-header';
+import { telLink } from '../profile/contact-links';
 import { CompressTimer } from './compress-timer';
 import { TimerControls } from './timer-controls';
 
@@ -74,6 +76,9 @@ export class SosPage {
   private readonly stepTitle = viewChild<ElementRef<HTMLElement>>('stepTitle');
 
   protected readonly steps = SOS_STEPS;
+  /** Botão "Ligar para meu dentista" (Figma 7:969), se o telefone foi cadastrado no Perfil. */
+  private readonly profile = inject(ProfileStore).profile;
+  protected readonly dentistCall = computed(() => telLink(this.profile().dentistPhone));
   protected readonly index = signal(0);
   protected readonly current = computed(() => SOS_STEPS[this.index()]);
   protected readonly following = computed(() => SOS_STEPS.slice(this.index() + 1));

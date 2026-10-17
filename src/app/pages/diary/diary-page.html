@@ -29,7 +29,10 @@
 
     <section class="card answers" aria-label="Respostas rápidas">
       <app-choice-group legend="Fiz os exercícios" [options]="yesNo" [(value)]="exercises" />
-      <app-choice-group legend="Usei a placa" [options]="splintOptions" [(value)]="splint" />
+      <!-- Quem disse no cadastro que não usa placa não vê esta pergunta. -->
+      @if (askSplint()) {
+        <app-choice-group legend="Usei a placa" [options]="splintOptions" [(value)]="splint" />
+      }
       <app-choice-group legend="Dormi bem" [options]="yesNo" [(value)]="sleptWell" />
     </section>
 

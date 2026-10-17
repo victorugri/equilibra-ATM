@@ -13,8 +13,8 @@ export interface DayPoint {
  * "Exercício feito" = sessão do 6x6 registrada no dia ou "fiz os exercícios" no diário.
  */
 export function dailySeries(
-  entries: readonly PainEntry[],
-  sessions: readonly ExerciseSession[],
+  entries: readonly Pick<PainEntry, 'at' | 'pain' | 'exercises'>[],
+  sessions: readonly Pick<ExerciseSession, 'at'>[],
   days: number,
   today: Date,
 ): DayPoint[] {

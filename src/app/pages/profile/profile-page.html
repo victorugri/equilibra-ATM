@@ -1,0 +1,181 @@
+<app-page-header title="Perfil" />
+<div class="page">
+  <h1 class="visually-hidden">Perfil</h1>
+
+  <!-- 1. Perfil e conta -->
+  <section class="card" aria-labelledby="profile-name">
+    <div class="identity">
+      <span class="avatar" aria-hidden="true">
+        @if (initials()) {
+          {{ initials() }}
+        } @else {
+          <app-icon name="pessoa" />
+        }
+        @if (user()) {
+          <span class="avatar-badge"><app-icon name="selo-check" /></span>
+        }
+      </span>
+      <div class="identity-text">
+        <h2 id="profile-name">{{ displayName() }}</h2>
+        @if (user(); as user) {
+          <p class="email">{{ user.email }}</p>
+          @if (user.createdAt; as createdAt) {
+            <p class="since">Membro desde {{ createdAt | date: 'MMM/yyyy' }}</p>
+          }
+        } @else {
+          <p class="email">Sem conta: seus registros ficam só neste aparelho.</p>
+        }
+      </div>
+    </div>
+
+    @if (user()) {
+      <p class="sync" role="status">
+        @switch (sync.status()) {
+          @case ('syncing') {
+            Guardando na sua conta…
+          }
+          @case ('error') {
+            Não foi possível guardar na conta agora. Tentaremos de novo.
+          }
+          @default {
+            @if (sync.pending() > 0) {
+              {{ sync.pending() }} registro(s) esperando internet para ir para a conta.
+            } @else {
+              Tudo guardado na sua conta.
+            }
+          }
+        }
+      </p>
+    } @else if (auth.available) {
+      <div class="account-actions">
+        <a class="btn-primary" routerLink="/conta/criar">Criar conta</a>
+        <a class="btn-secondary" routerLink="/conta/entrar">Entrar</a>
+      </div>
+    }
+    <a class="small-button" routerLink="/perfil/editar">
+      <app-icon name="editar" />
+      Editar dados
+    </a>
+  </section>
+
+  <!-- 2. Compartilhar com meu dentista -->
+  <section class="card" aria-labelledby="share-title">
+    <div class="section-head">
+      <span class="section-icon"><app-icon name="compartilhar" /></span>
+      <div>
+        <h2 id="share-title">Compartilhar com meu dentista</h2>
+        <p>{{ reportText | content }}</p>
+      </div>
+    </div>
+    <a class="btn-primary dark" routerLink="/diario/relatorio">
+      <app-icon name="pdf" />
+      Gerar relatório para meu dentista
+    </a>
+    <p class="hint">Você escolhe o que compartilhar e quando.</p>
+  </section>
+
+  <!-- 3. Privacidade e meus dados (LGPD) -->
+  <section class="card" aria-labelledby="privacy-title">
+    <div class="section-head">
+      <span class="section-icon green"><app-icon name="privacidade" /></span>
+      <div>
+        <h2 id="privacy-title">Privacidade e meus dados</h2>
+        <p>Seus dados de saúde são tratados conforme a Lei Geral de Proteção de Dados (LGPD).</p>
+      </div>
+    </div>
+    <ul class="rows">
+      <li>
+        <a class="row" routerLink="/perfil/meus-dados">
+          <app-icon name="ver" />
+          <span>Ver todos os meus dados salvos</span>
+          <app-icon name="chevron" class="chevron" />
+        </a>
+      </li>
+      <li>
+        <button type="button" class="row" (click)="download()">
+          <app-icon name="baixar" />
+          <span>Baixar cópia dos meus dados (formato aberto)</span>
+          <app-icon name="chevron" class="chevron" />
+        </button>
+      </li>
+      @if (user()) {
+        <li>
+          <button type="button" class="row" (click)="signOut()">
+            <app-icon name="seta-botao" />
+            <span>Sair da conta</span>
+            <app-icon name="chevron" class="chevron" />
+          </button>
+        </li>
+        <li>
+          <button type="button" class="row danger" (click)="ask('delete-account')">
+            <app-icon name="apagar" />
+            <span>Apagar minha conta e excluir dados</span>
+            <app-icon name="chevron" class="chevron" />
+          </button>
+        </li>
+      } @else {
+        <li>
+          <button type="button" class="row danger" (click)="ask('delete-local')">
+            <app-icon name="apagar" />
+            <span>Apagar meus dados deste aparelho</span>
+            <app-icon name="chevron" class="chevron" />
+          </button>
+        </li>
+      }
+    </ul>
+    @if (message()) {
+      <p class="message" role="status">{{ message() }}</p>
+    }
+  </section>
+
+  <!-- 4. Meu dentista -->
+  <section class="card" aria-labelledby="dentist-title">
+    <div class="section-head center">
+      <span class="section-icon cyan large"><app-icon name="dentista" /></span>
+      <div>
+        <p class="eyebrow">Meu dentista</p>
+        @if (profile().dentistName || profile().dentistPhone) {
+          <h2 id="dentist-title">{{ profile().dentistName || 'Seu dentista' }}</h2>
+          <p>{{ profile().dentistPhone }}</p>
+        } @else {
+          <h2 id="dentist-title">Seu dentista</h2>
+          <p>
+            <a routerLink="/perfil/editar">Cadastre aqui o contato do seu dentista</a>
+          </p>
+        }
+      </div>
+    </div>
+    @if (dentistCall() || dentistWhatsapp()) {
+      <div class="contact-actions">
+        @if (dentistCall(); as call) {
+          <a class="contact" [href]="call">
+            <app-icon name="ligar" />
+            Ligar
+          </a>
+        }
+        @if (dentistWhatsapp(); as whatsapp) {
+          <a class="contact whatsapp" [href]="whatsapp" target="_blank" rel="noopener">
+            <app-icon name="whatsapp" />
+            WhatsApp
+          </a>
+        }
+      </div>
+    }
+  </section>
+
+  <p class="footer">Conteúdo baseado em revisão da literatura científica.</p>
+</div>
+
+<app-confirm-dialog
+  [title]="action() === 'delete-account' ? 'Apagar sua conta?' : 'Apagar seus dados?'"
+  [message]="
+    action() === 'delete-account'
+      ? 'A conta e todos os seus registros serão apagados do servidor e deste aparelho. Não dá para desfazer.'
+      : 'Todos os seus registros e o seu perfil serão apagados deste aparelho. Não dá para desfazer.'
+  "
+  confirmLabel="Apagar tudo"
+  [danger]="true"
+  [busy]="busy()"
+  [error]="dialogError()"
+  (confirm)="confirm()"
+/>

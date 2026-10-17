@@ -8,6 +8,7 @@ import { daysBetween } from '../../core/data/day';
 import { averagePain, dailySeries } from '../../core/data/diary-stats';
 import { ExerciseSessions } from '../../core/data/exercise-sessions.service';
 import { PainDiary } from '../../core/data/pain-diary.service';
+import { ProfileStore } from '../../core/data/profile.service';
 import { Icon } from '../../shared/ui/icon/icon';
 import { Indicator, IndicatorTone } from '../../shared/ui/indicator/indicator';
 import { IndicatorVars, indicatorParts } from '../../shared/ui/indicator/indicator-text';
@@ -46,7 +47,12 @@ export class HomePage {
 
   private readonly now = new Date();
   protected readonly tipCode = TIP;
-  protected readonly greeting = greetingFor(this.now);
+  private readonly nickname = inject(ProfileStore).nickname;
+  /** "Boa tarde, Maria!" (com apelido) ou "Boa tarde!". */
+  protected readonly greeting = computed(() => {
+    const name = this.nickname();
+    return `${greetingFor(this.now)}${name ? ', ' + name : ''}!`;
+  });
   protected readonly weekday = capitalize(this.datePipe.transform(this.now, 'EEEE') ?? '');
   /** Botões não levam ponto final ("Registrar minha dor de hoje."). */
   protected readonly registerLabel = this.content.get(REGISTER_BUTTON).replace(/\.$/, '');

@@ -1,0 +1,160 @@
+// Telas de conta (Figma 23:2 e 24:2).
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  padding: var(--space-xl) var(--space-page) 40px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+
+  h1 {
+    color: var(--color-text);
+    font-size: var(--text-title-lg);
+    line-height: 1.2;
+  }
+
+  p {
+    color: var(--color-text-secondary);
+    font-size: var(--text-body-lg);
+    line-height: var(--line-height-body);
+  }
+}
+
+.eyebrow {
+  color: var(--color-success);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+// Consentimento: caixa de seleção de 28 px (Figma 23:26) dentro de um cartão claro.
+.consent {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-light);
+  color: var(--color-text);
+  font-size: var(--text-label);
+  line-height: var(--line-height-body);
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+  }
+
+  &:has(input:focus-visible) {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+.checkbox {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--color-primary);
+  border-radius: 6px;
+  background: var(--color-surface);
+  color: transparent;
+
+  .consent:has(input:checked) & {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+}
+
+.consent-detail {
+  display: block;
+  margin-top: var(--space-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--text-caption);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  color: var(--color-text-secondary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-input-border);
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.btn-link {
+  margin-top: calc(var(--space-md) * -1);
+}
+
+// Opções Sim / Não / Não sei (Figma 24:26).
+.options {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.option {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  border: 1.5px solid var(--color-input-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+
+  &.selected {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  &:has(:focus-visible) {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+.minimal-note {
+  padding: 14px var(--space-lg);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-light);
+  color: var(--color-text-secondary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+}

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { onboardingGuard } from './layout/onboarding.guard';
 import { ScreenData, screen } from './layout/screen';
 import { LEARN_MODULES } from './pages/learn/learn-modules';
 
@@ -14,7 +15,8 @@ const focused: ScreenData = { tabBar: false, sos: false };
 /** Telas internas que no Figma não têm barra inferior nem SOS (módulos, 6x6). */
 const internal: ScreenData = focused;
 
-export const routes: Routes = [
+/** Telas do app em si: só depois da entrada (privacidade e boas-vindas). */
+const appScreens: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'inicio' },
 
   // Abas principais
@@ -44,7 +46,12 @@ export const routes: Routes = [
     { figma: '7:2310' },
     { loadComponent: () => import('./pages/diary/diary-page').then((m) => m.DiaryPage) },
   ),
-  page('perfil', 'Perfil', { figma: '7:3685' }),
+  screen(
+    'perfil',
+    'Perfil',
+    { figma: '7:3685' },
+    { loadComponent: () => import('./pages/profile/profile-page').then((m) => m.ProfilePage) },
+  ),
 
   // Aprender
   ...LEARN_MODULES.map((learnModule) =>
@@ -90,12 +97,21 @@ export const routes: Routes = [
   page('registro-matinal', 'Registro da manhã', { ...focused, figma: '7:3370', backTo: '/inicio' }),
   page('modo-noite', 'Modo noite', { ...focused, figma: '7:3552', backTo: '/inicio' }),
 
-  // SOS
+  // Perfil
   screen(
-    'sos',
-    'SOS – Estou com dor',
-    { ...focused, figma: '7:749', backTo: '/inicio' },
-    { loadComponent: () => import('./pages/sos/sos-page').then((m) => m.SosPage) },
+    'perfil/editar',
+    'Editar dados',
+    { ...focused, figma: '24:2', backTo: '/perfil', mode: 'edit' },
+    {
+      loadComponent: () =>
+        import('./pages/account/profile-form-page').then((m) => m.ProfileFormPage),
+    },
+  ),
+  screen(
+    'perfil/meus-dados',
+    'Meus dados',
+    { ...focused, backTo: '/perfil' },
+    { loadComponent: () => import('./pages/profile/my-data-page').then((m) => m.MyDataPage) },
   ),
 
   // Lembretes
@@ -107,38 +123,77 @@ export const routes: Routes = [
   page('conquista', 'Conquista', { ...focused, figma: '7:4019', backTo: '/inicio' }),
   page('resumo-semanal', 'Resumo da semana', { ...focused, figma: '7:4142', backTo: '/inicio' }),
   page('bem-vindo-de-volta', 'Bem-vindo de volta', { ...focused, backTo: '/inicio' }),
+];
 
-  // Onboarding e cadastro (fase 4)
-  page('boas-vindas', 'Privacidade dos seus dados', {
-    ...focused,
-    figma: '7:300',
-    disclaimer: true,
-  }),
-  page('boas-vindas/apresentacao', 'Boas-vindas', {
-    ...focused,
-    figma: '7:409',
-    backTo: '/boas-vindas',
-  }),
-  page('boas-vindas/lembretes', 'Seus lembretes', {
-    ...focused,
-    figma: '7:483',
-    backTo: '/boas-vindas/apresentacao',
-  }),
-  page('boas-vindas/como-aprender', 'Como prefere aprender', {
-    ...focused,
-    figma: '7:618',
-    backTo: '/boas-vindas/lembretes',
-  }),
-  page('boas-vindas/criar-conta', 'Criar conta', {
-    ...focused,
-    figma: '23:2',
-    backTo: '/boas-vindas/como-aprender',
-  }),
-  page('boas-vindas/cadastro', 'Cadastro', {
-    ...focused,
-    figma: '24:2',
-    backTo: '/boas-vindas/criar-conta',
-  }),
+export const routes: Routes = [
+  // Entrada no app (primeiro acesso)
+  screen(
+    'boas-vindas',
+    'Privacidade dos seus dados',
+    { ...focused, figma: '7:300' },
+    {
+      loadComponent: () => import('./pages/onboarding/privacy-page').then((m) => m.PrivacyPage),
+    },
+  ),
+  screen(
+    'boas-vindas/apresentacao',
+    'Boas-vindas',
+    { ...focused, figma: '7:409' },
+    {
+      loadComponent: () => import('./pages/onboarding/welcome-page').then((m) => m.WelcomePage),
+    },
+  ),
 
+  // Conta (opcional)
+  screen(
+    'conta/criar',
+    'Criar conta',
+    { ...focused, figma: '23:2' },
+    { loadComponent: () => import('./pages/account/sign-up-page').then((m) => m.SignUpPage) },
+  ),
+  screen(
+    'conta/entrar',
+    'Entrar',
+    { ...focused, backTo: '/perfil' },
+    { loadComponent: () => import('./pages/account/sign-in-page').then((m) => m.SignInPage) },
+  ),
+  screen(
+    'conta/esqueci-senha',
+    'Recuperar senha',
+    { ...focused, backTo: '/conta/entrar' },
+    {
+      loadComponent: () =>
+        import('./pages/account/forgot-password-page').then((m) => m.ForgotPasswordPage),
+    },
+  ),
+  screen(
+    'conta/cadastro',
+    'Complete seu cadastro',
+    { ...focused, figma: '24:2', mode: 'signup' },
+    {
+      loadComponent: () =>
+        import('./pages/account/profile-form-page').then((m) => m.ProfileFormPage),
+    },
+  ),
+  // Link do e-mail de recuperação de senha (Supabase).
+  screen(
+    'redefinir-senha',
+    'Nova senha',
+    { ...focused, backTo: '/conta/entrar' },
+    {
+      loadComponent: () =>
+        import('./pages/account/reset-password-page').then((m) => m.ResetPasswordPage),
+    },
+  ),
+
+  // SOS fica sempre acessível, mesmo antes da entrada no app.
+  screen(
+    'sos',
+    'SOS – Estou com dor',
+    { ...focused, figma: '7:749', backTo: '/inicio' },
+    { loadComponent: () => import('./pages/sos/sos-page').then((m) => m.SosPage) },
+  ),
+
+  { path: '', canActivateChild: [onboardingGuard], children: appScreens },
   { path: '**', redirectTo: 'inicio' },
 ];

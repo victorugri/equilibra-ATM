@@ -5,7 +5,16 @@ const today = new Date(2026, 9, 16, 15, 0);
 
 function entry(daysAgo: number, pain: number, exercises: PainEntry['exercises'] = null): PainEntry {
   const at = new Date(2026, 9, 16 - daysAgo, 9, 30);
-  return { at, pain, exercises, splint: null, sleptWell: null, note: '' };
+  return {
+    uid: `e${daysAgo}-${pain}`,
+    at,
+    pain,
+    exercises,
+    splint: null,
+    sleptWell: null,
+    note: '',
+    dirty: 0,
+  };
 }
 
 describe('estatísticas do diário', () => {

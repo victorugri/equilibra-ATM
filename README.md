@@ -7,7 +7,7 @@ diário da dor.
 > Este aplicativo ajuda você a cuidar da DTM no dia a dia, mas não substitui a consulta.
 > O diagnóstico e o plano de tratamento são feitos pelo seu dentista.
 
-**Situação:** em desenvolvimento (fase 3 — diário e dados no aparelho). Ainda não usar com pacientes.
+**Situação:** em desenvolvimento (fase 4 — conta opcional e LGPD). Ainda não usar com pacientes.
 
 ## Sobre a pesquisa
 
@@ -75,7 +75,10 @@ src/styles/             tokens de design (_tokens.scss) e estilos globais
 src/app/core/content/   ContentService e pipe "content"
 src/app/layout/         barra inferior, botão SOS, configuração das telas
 src/app/shared/ui/      componentes reutilizáveis (ícone, cabeçalho, aviso fixo…)
-src/app/core/data/      banco local (IndexedDB): diário da dor, sessões do 6x6, primeiro acesso
+src/app/core/data/      banco local (IndexedDB): diário, sessões do 6x6, perfil, LGPD
+src/app/core/auth/      conta opcional (Supabase Auth)
+src/app/core/sync/      sincronização aparelho ↔ conta
+supabase/               migrações, configuração e consultas do backend
 src/app/pages/          telas
 ```
 
@@ -94,11 +97,36 @@ precisar consultar o Figma de novo.
 
 ## Dados
 
-Nesta fase todos os dados ficam **só no aparelho**, num banco IndexedDB (via [Dexie](https://dexie.org)):
-registros do diário da dor, sessões do Programa 6x6 (com data e hora, para medir a adesão) e a data
-do primeiro acesso. Nada é enviado para servidor. O relatório para o dentista é montado no próprio
-aparelho e só sai dele se a pessoa imprimir ou salvar em PDF. Conta, sincronização e as opções da
-LGPD (ver, baixar e apagar os dados) vêm na fase 4.
+- **Sem conta:** tudo fica só no aparelho, num banco IndexedDB (via [Dexie](https://dexie.org)):
+  diário da dor, sessões do Programa 6x6 (com data e hora, para medir a adesão), perfil e
+  consentimento. Nada é enviado para servidor.
+- **Com conta (opcional):** o aparelho continua sendo a fonte; os registros novos são enviados
+  para o [Supabase](https://supabase.com) (servidor em São Paulo) e voltam se a pessoa entrar em
+  outro aparelho. Cada pessoa só acessa os próprios dados (RLS).
+- **Direitos do titular (LGPD):** no Perfil a pessoa vê, baixa (JSON) e apaga os dados — e a
+  conta inteira, se tiver uma. O relatório para o dentista é montado no aparelho.
+
+### Backend (Supabase)
+
+O esquema do banco está em `supabase/migrations` e a configuração de autenticação em
+`supabase/config.toml`. Os modelos de e-mail em português (`supabase/templates`) estão
+desativados ali: no plano gratuito, só dá para usá-los com um servidor de e-mail (SMTP) próprio.
+Consultas para a equipe de pesquisa: `supabase/queries/pesquisa.sql`.
+
+Para usar um projeto Supabase seu:
+
+1. Crie o projeto e troque a URL e a chave publicável em `src/environments/environment.ts`.
+2. Rode, na raiz do repositório:
+
+```bash
+npx supabase login
+npx supabase link --project-ref SEU_PROJECT_REF
+npm run db:push
+npm run db:config
+```
+
+A chave publicável é pública por natureza. **Nunca** coloque no código a secret key /
+service_role nem a senha do banco.
 
 ## Contribuindo
 

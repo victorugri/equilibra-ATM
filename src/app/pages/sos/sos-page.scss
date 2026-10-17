@@ -291,3 +291,19 @@
   background: var(--color-sos-badge);
   color: var(--color-sos-action);
 }
+
+.call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  min-height: 54px;
+  margin-top: var(--space-lg);
+  padding: 13px var(--space-lg);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-blue);
+  color: var(--color-primary);
+  font-size: var(--text-title-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}

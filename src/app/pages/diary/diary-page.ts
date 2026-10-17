@@ -6,6 +6,7 @@ import { YesNo } from '../../core/data/app-database';
 import { averagePain, dailySeries } from '../../core/data/diary-stats';
 import { ExerciseSessions } from '../../core/data/exercise-sessions.service';
 import { PainDiary } from '../../core/data/pain-diary.service';
+import { ProfileStore } from '../../core/data/profile.service';
 import { ChoiceGroup, ChoiceOption } from '../../shared/ui/choice-group/choice-group';
 import { Icon } from '../../shared/ui/icon/icon';
 import { PageHeader } from '../../shared/ui/page-header/page-header';
@@ -40,6 +41,8 @@ export class DiaryPage {
 
   protected readonly today = new Date();
   protected readonly yesNo = YES_NO;
+  private readonly profile = inject(ProfileStore);
+  protected readonly askSplint = computed(() => this.profile.profile().usesSplint !== 'no');
   protected readonly splintOptions: ChoiceOption<'yes' | 'no' | 'not-used'>[] = [
     ...YES_NO,
     { value: 'not-used', label: 'Não uso' },

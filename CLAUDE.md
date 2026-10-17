@@ -76,6 +76,10 @@ não versionado). Princípio que guia tudo: simplicidade — menos telas, campos
   (screenshots, especificações e SVGs já baixados). Ícones: SVG em `design/assets` + `npm run icons:build`.
 - **Dados:** `src/app/core/data` (Dexie/IndexedDB, só no aparelho). Serviços com `ready` (Promise) e
   signals; estatísticas puras em `diary-stats.ts`. Testes usam `fake-indexeddb` (src/test-setup.ts).
+- **Conta (opcional) e sincronização:** Supabase (São Paulo). `AuthService` carrega o cliente sob
+  demanda; `SyncService` envia o que tem `dirty = 1` e traz o que falta. Esquema e RLS em
+  `supabase/migrations`; quem aplica no projeto é o usuário (`npm run db:push`). Não criar contas
+  nem fazer login no Supabase real durante testes — isso é com o usuário.
 - **Gráficos:** SVG próprio, uma cor; leitura do dia abaixo do gráfico e tabela com os valores.
 - **Convenções:** identificadores em inglês; textos de interface e comentários em português (pt-BR).
 - **Commits:** o usuário faz os commits; não commitar.

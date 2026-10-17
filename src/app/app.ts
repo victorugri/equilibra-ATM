@@ -4,6 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { AppUsage } from './core/data/app-usage.service';
+import { SyncService } from './core/sync/sync.service';
 import { ScreenData, deepestScreenData } from './layout/screen';
 import { SosButton } from './layout/sos-button/sos-button';
 import { TabBar } from './layout/tab-bar/tab-bar';
@@ -38,5 +39,7 @@ export class App {
     inject(ViewportScroller).setOffset([0, 80]);
     // Registra o primeiro acesso (conta os "Dias se cuidando" do Início).
     inject(AppUsage);
+    // Com conta, envia os registros pendentes e traz os de outros aparelhos.
+    inject(SyncService);
   }
 }

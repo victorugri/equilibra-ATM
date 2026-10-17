@@ -4,19 +4,27 @@ import { Router } from '@angular/router';
 import { Icon } from '../icon/icon';
 
 /** Variantes do componente "Cabeçalho" (Figma 27:19). */
-export type HeaderVariant = 'main' | 'internal' | 'sos';
+export type HeaderVariant = 'main' | 'internal' | 'sos' | 'onboarding';
 
 /**
  * Cabeçalho das telas (Figma 27:19). Principal: telas das abas. Interna: telas com
- * voltar. SOS: fluxo de crise, com fechar. "Pular" aparece só quando showSkip = true.
+ * voltar. SOS: fluxo de crise, com fechar. Onboarding: primeiro acesso, com o nome do app.
+ * "Pular" aparece só quando showSkip = true.
  */
 @Component({
   selector: 'app-page-header',
   imports: [Icon],
   template: `
-    <header class="header" [class.sos]="variant() === 'sos'">
+    <header
+      class="header"
+      [class.sos]="variant() === 'sos'"
+      [class.onboarding]="variant() === 'onboarding'"
+    >
       @switch (variant()) {
         @case ('main') {
+          <img class="logo" src="icons/icon.svg" alt="" width="32" height="32" />
+        }
+        @case ('onboarding') {
           <img class="logo" src="icons/icon.svg" alt="" width="32" height="32" />
         }
         @case ('internal') {

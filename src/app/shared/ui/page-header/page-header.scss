@@ -28,6 +28,13 @@
   }
 }
 
+// Onboarding: "Equilibra ATM" Bold 18 na cor primária.
+.onboarding .title {
+  color: var(--color-primary);
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-bold);
+}
+
 .logo {
   flex: none;
   border-radius: var(--radius-pill);
@@ -70,10 +77,11 @@
 .skip {
   min-height: var(--touch-target);
   padding: 0 var(--space-md);
+  margin-right: calc(var(--space-md) * -1);
   border: 0;
   background: transparent;
-  color: var(--color-primary);
+  color: var(--color-text-secondary);
   font-size: var(--text-label);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
 }

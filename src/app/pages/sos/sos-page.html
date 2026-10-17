@@ -83,6 +83,12 @@
     <div>
       <h2 id="dentist-title">Quando procurar seu dentista:</h2>
       <p>{{ 'SOS-07' | content }}</p>
+      @if (dentistCall(); as call) {
+        <a class="call" [href]="call">
+          <app-icon name="ligar" />
+          Ligar para meu dentista
+        </a>
+      }
     </div>
   </aside>
 </div>

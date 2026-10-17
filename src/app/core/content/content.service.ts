@@ -28,6 +28,11 @@ export class ContentService {
     return vars || /\{[^}]+\}/.test(value) ? this.fill(code, value, vars ?? {}) : value;
   }
 
+  /** Versão da dissertação usada para gerar o banco (registrada com o consentimento). */
+  version(): string | null {
+    return this.bank.source.dissertationVersion;
+  }
+
   /** Retorna a linha completa do banco, ou undefined se o código não puder ser usado. */
   entry(code: string): ContentEntry | undefined {
     const entry = this.bank.entries[code];
