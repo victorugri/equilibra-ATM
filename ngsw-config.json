@@ -9,7 +9,8 @@
         "files": [
           "/index.html",
           "/manifest.webmanifest",
-          "/icons/icon.svg",
+          "/favicon.ico",
+          "/icons/lotus.svg",
           "/*.css",
           "/*.js",
           "/media/nunito-sans-latin-wght-normal-*.woff2"

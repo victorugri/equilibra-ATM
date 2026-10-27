@@ -46,7 +46,8 @@ Também há telas que o contexto não cita: **7:618** "Como prefere aprender (4 
 
 - **Cabeçalho (27:19)**, altura 64, fundo `#F9F9FF`, borda inferior 1px `#DEE3EA`, padding 0 16,
   gap 12, título Nunito Sans ExtraBold 20 `#111C2D` (uma linha, reticências).
-  - *Principal* (abas): "logo" círculo 32 `#147A82` + título.
+  - *Principal* (abas): logo 32 + título. O círculo do Figma deu lugar à lótus de 3 pétalas
+    (`design/assets/logo`, pacote da Dra. Tayná); no Início o título é "Equilibra ATM".
   - *Interna*: botão voltar círculo 40 `#F0F3FF` com chevron 22 (traço 2,5 `#006067`).
   - *SOS*: fundo `#FFF4F2`, botão fechar círculo 40 `#FFDAD6` com X, título `#93000A`.
 - **Barra inferior**, altura 80, fundo `rgba(249,249,255,.95)` + blur 12, sombra

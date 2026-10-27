@@ -37,8 +37,9 @@ export function reminderNotification(eventId: string, exercise?: ExerciseProgres
     notification: {
       title: NOTIFICATION.title,
       body,
-      icon: '/icons/icon-192x192.png',
-      badge: '/icons/icon-96x96.png',
+      icon: '/icons/icone-192.png',
+      // O Android usa só a transparência do badge: a lótus sem fundo.
+      badge: '/icons/lotus-512.png',
       lang: 'pt-BR',
       // Um lembrete novo substitui o anterior ainda na tela.
       tag: 'lembrete',

@@ -71,6 +71,14 @@
 >   aviso de conferência, o formulário (atalho "Marcar os 6"), o código com QR e "Imprimir", e a
 >   lista com "Ver código", "Editar" e "Encerrar". O canvas "Início e logo" não foi usado (não
 >   tenho acesso).
+>
+> **Seção 6 (27/10/2026):**
+> - O pacote completo fica em `design/assets/logo`. Em `public/` vão só os usados: `favicon.ico`,
+>   `icons/lotus.svg` (cabeçalho e aba do navegador), `icone-app.svg`, `icone-192/512`,
+>   `icone-maskable-192/512` (manifest) e `icone-180` (apple-touch-icon). Os ícones antigos saíram.
+> - Cabeçalho principal e de onboarding com a lótus; no Início o título virou "Equilibra ATM".
+> - Notificação dos lembretes: ícone `icone-192.png` e badge `lotus-512.png` (fundo transparente,
+>   que é o que o Android usa). Vale com o próximo `npm run functions:deploy`.
 
 Victor, estas são as correções que a Dra. Tayná aprovou depois da revisão do app publicado em
 equilibraatm.ugrinovich.com. O app é para **pacientes com DTM em geral**, não para a pesquisa do
@@ -633,5 +641,5 @@ código original no lugar de um novo.
   `DailyPlanCard`. O item de exercícios entra com a seção 4
 - [x] Lembretes: 3 por dia, silêncio 21h–8h, teto de 6; modo avaliação e registro matinal fora da
   rotina (seção 5). A sessão de exercício vai na mesma notificação (pode desligar)
-- [ ] Ícones novos, manifest e favicon (seção 6)
+- [x] Ícones novos, manifest e favicon (seção 6)
 - [ ] Testar com e sem conta, on-line e off-line, em 390 px de largura

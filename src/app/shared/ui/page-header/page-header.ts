@@ -22,10 +22,10 @@ export type HeaderVariant = 'main' | 'internal' | 'sos' | 'onboarding';
     >
       @switch (variant()) {
         @case ('main') {
-          <img class="logo" src="icons/icon.svg" alt="" width="32" height="32" />
+          <img class="logo" src="icons/lotus.svg" alt="" width="32" height="32" />
         }
         @case ('onboarding') {
-          <img class="logo" src="icons/icon.svg" alt="" width="32" height="32" />
+          <img class="logo" src="icons/lotus.svg" alt="" width="32" height="32" />
         }
         @case ('internal') {
           <button type="button" class="round-button" (click)="goBack()" aria-label="Voltar">
