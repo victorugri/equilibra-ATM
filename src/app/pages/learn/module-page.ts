@@ -1,6 +1,7 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, effect, inject, input, untracked } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentPipe } from '../../core/content/content.pipe';
+import { CareLog } from '../../core/data/care-log.service';
 import { ContentBlock } from '../../shared/ui/content-block/content-block';
 import { Disclaimer } from '../../shared/ui/disclaimer/disclaimer';
 import { PageHeader } from '../../shared/ui/page-header/page-header';
@@ -48,4 +49,13 @@ export class ModulePage {
   protected readonly total = LEARN_MODULES.length;
   protected readonly learnModule = computed(() => LEARN_MODULES[this.module() - 1]);
   protected readonly next = computed(() => (this.module() < this.total ? this.module() + 1 : null));
+
+  constructor() {
+    // Módulo aberto conta como lido para o Plano de hoje ("Ler o Módulo {n}").
+    const careLog = inject(CareLog);
+    effect(() => {
+      const n = this.module();
+      untracked(() => void careLog.markModuleRead(n));
+    });
+  }
 }

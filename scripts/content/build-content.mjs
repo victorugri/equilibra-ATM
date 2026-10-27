@@ -8,11 +8,15 @@
 //   ficam só como código bloqueado, para que o verificador recuse o uso delas.
 // - O trecho literal da dissertação, a seção e as observações de revisão não são
 //   exportados (ficam só na planilha).
+// - Rótulos internos da pesquisa (internal-labels.mjs) não vão para o app: o build falha se
+//   aparecerem no texto, e as referências internas são retiradas.
 
 import ExcelJS from 'exceljs';
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { basename, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeFunctionTexts } from './function-texts.mjs';
+import { internalLabel } from './internal-labels.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const DEFAULT_XLSX = resolve(ROOT, 'banco_conteudo_app_DTM.xlsx');
@@ -34,7 +38,14 @@ const COLUMNS = {
 };
 
 /** Tipos cujo texto segue o formato "Título — corpo". */
-const TITLED_TYPES = new Set(['Bloco', 'Dica', 'Destaque', 'Indicador', 'Passo a passo']);
+const TITLED_TYPES = new Set([
+  'Bloco',
+  'Dica',
+  'Destaque',
+  'Indicador',
+  'Item do plano',
+  'Passo a passo',
+]);
 const TITLE_SEPARATOR = ' — ';
 
 const xlsxPath = resolve(process.argv[2] ?? DEFAULT_XLSX);
@@ -53,7 +64,8 @@ if (!sheet) fail(`Aba "${SHEET_CONTENT}" não encontrada.`);
 const columnIndex = mapColumns(sheet.getRow(1));
 const entries = {};
 const blocked = {};
-const report = { revisar: [], semStatus: [], notes: [] };
+const report = { revisar: [], semStatus: [], notes: [], internalRefs: [] };
+const leaks = [];
 
 sheet.eachRow((row, rowNumber) => {
   if (rowNumber === 1) return;
@@ -66,11 +78,24 @@ sheet.eachRow((row, rowNumber) => {
     fail(`Código duplicado na linha ${rowNumber}: ${raw.code}`);
 
   const status = normalizeStatus(raw.status);
-  if (status === 'lacuna' || raw.text.includes('[A DEFINIR')) {
-    blocked[raw.code] = raw.status || 'Texto [A DEFINIR]';
+  // O motivo vai para o bundle: fica neutro, sem o status da planilha.
+  if (status === 'lacuna') {
+    blocked[raw.code] = 'sem embasamento';
+    return;
+  }
+  if (raw.text.includes('[A DEFINIR')) {
+    blocked[raw.code] = 'texto a definir';
     return;
   }
   if (!raw.text) fail(`Linha ${rowNumber} (${raw.code}) sem "Texto para o app".`);
+
+  const leak = internalLabel(raw.text);
+  if (leak) leaks.push(`${raw.code} (linha ${rowNumber}): ${leak} → "${raw.text.slice(0, 80)}…"`);
+
+  const references = parseReferences(raw.references);
+  const publicReferences = references.filter((ref) => !internalLabel(ref));
+  if (publicReferences.length < references.length)
+    report.internalRefs.push(raw.code);
 
   const entry = {
     code: raw.code,
@@ -78,7 +103,7 @@ sheet.eachRow((row, rowNumber) => {
     screen: raw.screen,
     type: raw.type,
     text: raw.text,
-    references: parseReferences(raw.references),
+    references: publicReferences,
     status,
     approvedByAdvisor: /^aprovado/i.test(raw.advisorReview),
   };
@@ -102,6 +127,11 @@ sheet.eachRow((row, rowNumber) => {
   entries[entry.code] = entry;
 });
 
+if (leaks.length) {
+  for (const leak of leaks) console.error(`✖ Texto interno vazando: ${leak}`);
+  fail('Conteúdo bloqueado. Corrija a planilha.');
+}
+
 const bank = {
   $comment:
     'Gerado por scripts/content/build-content.mjs a partir da planilha do banco de conteúdo. Não edite à mão: altere a planilha e rode "npm run content:build".',
@@ -115,6 +145,7 @@ const bank = {
 
 mkdirSync(dirname(OUTPUT), { recursive: true });
 writeFileSync(OUTPUT, JSON.stringify(bank, null, 2) + '\n', 'utf8');
+writeFunctionTexts(bank);
 
 console.log(
   `✔ ${Object.keys(entries).length} textos exportados para ${OUTPUT.replace(ROOT + '\\', '').replace(ROOT + '/', '')}`,
@@ -128,6 +159,8 @@ if (report.semStatus.length)
   console.log(
     `  ${report.semStatus.length} sem status na planilha: ${report.semStatus.join(', ')}`,
   );
+if (report.internalRefs.length)
+  console.log(`  Referências internas retiradas: ${report.internalRefs.join(', ')}`);
 if (report.notes.length) console.log(`  Marcações editoriais: ${report.notes.join('; ')}`);
 
 // ---------------------------------------------------------------------------

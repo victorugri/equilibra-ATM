@@ -20,6 +20,8 @@
     <p class="subtitle">Veja como está o seu cuidado com a mandíbula.</p>
   </section>
 
+  <app-daily-plan-card />
+
   <section class="summary" aria-labelledby="summary-title">
     <h2 id="summary-title">Seu resumo</h2>
     <div class="grid">
@@ -33,17 +35,5 @@
         />
       }
     </div>
-    <a class="btn-primary register" routerLink="/diario">
-      <app-icon name="mais" />
-      {{ registerLabel }}
-    </a>
   </section>
-
-  <aside class="tip" aria-labelledby="tip-title">
-    <span class="tip-icon"><app-icon name="lampada" /></span>
-    <div>
-      <h2 id="tip-title">{{ tipCode | content: 'title' }}</h2>
-      <p>{{ tipCode | content: 'body' }}</p>
-    </div>
-  </aside>
 </div>

@@ -1,0 +1,247 @@
+// Área do dentista e formulário da prescrição (uma tela, pensada para o computador do consultório).
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  padding: var(--space-lg) var(--space-page) 40px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+
+  h1 {
+    color: var(--color-text);
+    font-size: var(--text-title-lg);
+    line-height: 1.2;
+  }
+
+  p {
+    color: var(--color-text-secondary);
+    font-size: var(--text-body-lg);
+    line-height: var(--line-height-body);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-page);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+
+  h2 {
+    color: var(--color-text);
+    font-size: var(--text-title-sm);
+  }
+
+  p {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-body);
+  }
+}
+
+.muted {
+  color: var(--color-text-secondary);
+  font-size: var(--text-label);
+  line-height: var(--line-height-body);
+}
+
+.section-title {
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+  font-size: var(--text-title-sm);
+}
+
+.workspace {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+// Formulário
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-lg) var(--space-page);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+
+  h3 {
+    color: var(--color-primary);
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  min-height: var(--touch-target);
+  color: var(--color-text);
+  font-size: var(--text-body);
+  cursor: pointer;
+
+  input {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    accent-color: var(--color-primary);
+  }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.select,
+.textarea {
+  width: 100%;
+  min-height: var(--button-height);
+  padding: var(--space-md);
+  border: 1.5px solid var(--color-input-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--text-body-lg);
+
+  &:focus-visible {
+    border-color: var(--color-primary);
+    outline: var(--focus-ring);
+    outline-offset: 1px;
+  }
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.link-button {
+  min-height: var(--touch-target);
+  padding: 0 var(--space-xs);
+  border: 0;
+  background: transparent;
+  color: var(--color-primary);
+  font: inherit;
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-bold);
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  &.danger {
+    color: var(--color-sos);
+  }
+}
+
+// Lista
+.list ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-page);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card-sm);
+
+  p {
+    color: var(--color-text);
+    font-size: var(--text-body);
+    line-height: var(--line-height-body);
+  }
+
+  .muted {
+    color: var(--color-text-secondary);
+    font-size: var(--text-label);
+  }
+}
+
+.item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.item-code {
+  color: var(--color-primary);
+  font-size: var(--text-title-sm);
+  letter-spacing: 0.12em;
+}
+
+.badge {
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-success-light);
+  color: var(--color-success);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-bold);
+
+  &.off {
+    background: var(--color-surface-light-alt);
+    color: var(--color-text-secondary);
+  }
+}
+
+.item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.account {
+  margin-top: var(--space-md);
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  .page {
+    padding: 0;
+  }
+}

@@ -1,5 +1,5 @@
 import { PainEntry } from './app-database';
-import { averageOnExerciseDays, averagePain, dailySeries } from './diary-stats';
+import { averagePain, dailySeries } from './diary-stats';
 
 const today = new Date(2026, 9, 16, 15, 0);
 
@@ -42,7 +42,7 @@ describe('estatísticas do diário', () => {
     expect(averagePain(series)).toBe(2);
   });
 
-  it('calcula a média geral e a dos dias com exercício (DIA-04)', () => {
+  it('calcula a média das médias diárias (DIA-04)', () => {
     const series = dailySeries(
       [entry(0, 6), entry(1, 2, 'yes'), entry(2, 3, 'yes'), entry(3, 8)],
       [],
@@ -50,12 +50,10 @@ describe('estatísticas do diário', () => {
       today,
     );
     expect(averagePain(series)).toBe(4.8);
-    expect(averageOnExerciseDays(series)).toBe(2.5);
   });
 
   it('devolve null sem registros', () => {
     const series = dailySeries([], [{ at: today }], 7, today);
     expect(averagePain(series)).toBeNull();
-    expect(averageOnExerciseDays(series)).toBeNull();
   });
 });

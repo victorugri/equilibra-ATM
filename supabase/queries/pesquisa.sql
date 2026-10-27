@@ -57,3 +57,50 @@ select
   ) as dias_com_sessao
 from auth.users u
 order by u.email;
+
+-- 5. Adesão aos lembretes por participante ------------------------------------------------
+-- Conta só os lembretes que chegaram ao serviço de notificação (sent_at preenchido).
+-- "Respondidos" = escolheu uma das 4 opções do check-in (LEM-02).
+select
+  u.email,
+  count(*) filter (where e.sent_at is not null) as lembretes_enviados,
+  count(*) filter (where e.sent_at is not null and e.opened_at is not null) as abertos,
+  count(*) filter (where e.sent_at is not null and e.answered_at is not null) as respondidos,
+  count(*) filter (where e.sent_at is not null and e.skipped_at is not null and e.answer is null)
+    as pulados,
+  round(
+    100.0 * count(*) filter (where e.sent_at is not null and e.answered_at is not null)
+      / nullif(count(*) filter (where e.sent_at is not null), 0),
+    1
+  ) as percentual_respondidos
+from auth.users u
+join public.reminder_events e on e.user_id = u.id
+group by u.email
+order by u.email;
+
+-- 6. Respostas do check-in por participante ---------------------------------------------
+-- relaxed = relaxada; touching = dentes encostando; clenching = apertando; tense = músculos tensos.
+select
+  u.email,
+  count(*) filter (where e.answer = 'relaxed') as relaxada,
+  count(*) filter (where e.answer = 'touching') as dentes_encostando,
+  count(*) filter (where e.answer = 'clenching') as apertando,
+  count(*) filter (where e.answer = 'tense') as musculos_tensos
+from auth.users u
+join public.reminder_events e on e.user_id = u.id
+where e.answer is not null
+group by u.email
+order by u.email;
+
+-- 7. Todos os lembretes, um por linha (horário de São Paulo) ------------------------------
+select
+  u.email,
+  e.scheduled_for at time zone 'America/Sao_Paulo' as lembrete,
+  e.sent_at at time zone 'America/Sao_Paulo' as enviado_em,
+  e.opened_at at time zone 'America/Sao_Paulo' as aberto_em,
+  e.answer as resposta,
+  e.answered_at at time zone 'America/Sao_Paulo' as respondido_em,
+  e.skipped_at at time zone 'America/Sao_Paulo' as pulado_em
+from public.reminder_events e
+join auth.users u on u.id = e.user_id
+order by u.email, e.scheduled_for;

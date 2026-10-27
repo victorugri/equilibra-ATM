@@ -22,7 +22,7 @@
       "module": "Aprender",
       "screen": "Lição \"O que é DTM\"",
       "type": "Lição",
-      "text": "A DTM é muito comum: cerca de 1 em cada 3 adultos tem algum sinal dela. Ela aparece mais em mulheres e em pessoas de 18 a 60 anos. Você não está sozinho.",
+      "text": "A DTM é muito comum: cerca de 1 em cada 3 adultos tem algum sinal dela. Ela aparece mais em mulheres e em pessoas de 18 a 60 anos. Você não está só.",
       "references": [
         "Zieliński et al. (2024)",
         "Progiante et al. (2015)"
@@ -215,9 +215,7 @@
       "screen": "Aviso fixo",
       "type": "Aviso",
       "text": "Este aplicativo ajuda você a cuidar da DTM no dia a dia, mas não substitui a consulta. O diagnóstico e o plano de tratamento são feitos pelo seu dentista.",
-      "references": [
-        "Síntese da seção 2.5"
-      ],
+      "references": [],
       "status": "embasado",
       "approvedByAdvisor": false
     },
@@ -279,8 +277,7 @@
       "type": "Explicação",
       "text": "Lembretes ao longo do dia ajudam a perceber e soltar o hábito de apertar os dentes. Você escolhe quantas vezes e em que horários quer ser lembrado, e pode pausar quando quiser.",
       "references": [
-        "Graham et al. (2026)",
-        "resultados do questionário (Apêndice B)"
+        "Graham et al. (2026)"
       ],
       "status": "embasado",
       "approvedByAdvisor": false
@@ -475,7 +472,7 @@
       "module": "Exercícios",
       "screen": "Registro de adesão",
       "type": "Mensagem",
-      "text": "Sessão registrada! Hoje você fez {n} de 6 sessões.",
+      "text": "Sessão registrada! Hoje você fez {n} de {meta} sessões.",
       "references": [
         "Mulet et al. (2007)",
         "Sallam et al. (2025)"
@@ -734,7 +731,7 @@
       "module": "Diário da dor",
       "screen": "Evolução",
       "type": "Mensagem",
-      "text": "Sua dor média nos últimos 7 dias: {x}/10. Nos dias em que você fez os exercícios, a dor média foi {y}/10.",
+      "text": "Sua dor média nos últimos 7 dias: {x}/10.",
       "references": [],
       "status": "embasado",
       "approvedByAdvisor": false
@@ -757,9 +754,7 @@
       "screen": "Compartilhar com meu dentista",
       "type": "Explicação",
       "text": "Se quiser, você pode gerar um relatório com sua dor, exercícios e lembretes respondidos para levar ao seu dentista. Isso é opcional.",
-      "references": [
-        "Resultados do questionário (Apêndice B)"
-      ],
+      "references": [],
       "status": "embasado",
       "approvedByAdvisor": false
     },
@@ -806,7 +801,7 @@
       "module": "Aprender",
       "screen": "Aprender · Módulo 1 – Entendendo a DTM e o bruxismo",
       "type": "Bloco",
-      "text": "É comum — Cerca de 1 em cada 3 adultos tem algum sinal de DTM. Ela aparece mais em mulheres. Você não está sozinho.",
+      "text": "É comum — Cerca de 1 em cada 3 adultos tem algum sinal de DTM. Ela aparece mais em mulheres. Você não está só.",
       "references": [
         "Zieliński et al. (2024)",
         "Progiante et al. (2015)"
@@ -814,7 +809,7 @@
       "status": "sem-status",
       "approvedByAdvisor": false,
       "title": "É comum",
-      "body": "Cerca de 1 em cada 3 adultos tem algum sinal de DTM. Ela aparece mais em mulheres. Você não está sozinho."
+      "body": "Cerca de 1 em cada 3 adultos tem algum sinal de DTM. Ela aparece mais em mulheres. Você não está só."
     },
     "APR-M1.3": {
       "code": "APR-M1.3",
@@ -936,9 +931,7 @@
       "screen": "Aprender · Módulo 2 – Como é o tratamento",
       "type": "Dica",
       "text": "Importante — Este aplicativo não substitui a consulta. O diagnóstico e o plano de tratamento são definidos pelo seu dentista.",
-      "references": [
-        "Síntese da seção 2.5"
-      ],
+      "references": [],
       "status": "embasado",
       "approvedByAdvisor": false,
       "title": "Importante",
@@ -1446,8 +1439,7 @@
       "type": "Indicador",
       "text": "Próximo lembrete — {hh:mm} · Relaxar a mandíbula.",
       "references": [
-        "Graham et al. (2026)",
-        "resultados do questionário (Apêndice B)"
+        "Graham et al. (2026)"
       ],
       "status": "embasado",
       "approvedByAdvisor": false,
@@ -1478,13 +1470,181 @@
       "approvedByAdvisor": false,
       "title": "Dica do dia",
       "body": "Evite mascar chiclete, morder objetos e roer unhas: esses hábitos sobrecarregam a mandíbula."
+    },
+    "REL-P01": {
+      "code": "REL-P01",
+      "module": "Diário da dor",
+      "screen": "Evolução · gráfico e tabela",
+      "type": "Título",
+      "text": "Registro diário",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
+    },
+    "REL-P02": {
+      "code": "REL-P02",
+      "module": "Diário da dor",
+      "screen": "Evolução · cartão do relatório",
+      "type": "Mensagem",
+      "text": "Seu dentista vai interpretar esses dados com você.",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
+    },
+    "INI-P01": {
+      "code": "INI-P01",
+      "module": "Início",
+      "screen": "Início · Plano de hoje",
+      "type": "Título",
+      "text": "Plano de hoje",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
+    },
+    "INI-P02": {
+      "code": "INI-P02",
+      "module": "Início",
+      "screen": "Início · Plano de hoje (item 1)",
+      "type": "Item do plano",
+      "text": "Como está sua dor? — Leva 15 segundos",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false,
+      "title": "Como está sua dor?",
+      "body": "Leva 15 segundos"
+    },
+    "INI-P04": {
+      "code": "INI-P04",
+      "module": "Início",
+      "screen": "Início · Plano de hoje (item 3)",
+      "type": "Item do plano",
+      "text": "Alívio: compressa morna — 20 minutos, com timer",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false,
+      "title": "Alívio: compressa morna",
+      "body": "20 minutos, com timer"
+    },
+    "INI-P05": {
+      "code": "INI-P05",
+      "module": "Início",
+      "screen": "Início · Plano de hoje (item 3)",
+      "type": "Item do plano",
+      "text": "Ler o Módulo {n} — Cerca de 3 minutos",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false,
+      "title": "Ler o Módulo {n}",
+      "body": "Cerca de 3 minutos"
+    },
+    "INI-P07": {
+      "code": "INI-P07",
+      "module": "Início",
+      "screen": "Início · Plano de hoje (fim)",
+      "type": "Mensagem",
+      "text": "Tudo feito por hoje. Até amanhã!",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
+    },
+    "EX-P01": {
+      "code": "EX-P01",
+      "module": "Exercícios",
+      "screen": "Exercícios · prescrição (convite)",
+      "type": "Título",
+      "text": "Seus exercícios vêm do seu dentista",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
+    },
+    "EX-P02": {
+      "code": "EX-P02",
+      "module": "Exercícios",
+      "screen": "Exercícios · prescrição (convite)",
+      "type": "Mensagem",
+      "text": "Cada pessoa precisa de exercícios diferentes. Na consulta, peça ao seu dentista o código de exercícios e digite aqui.",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
+    },
+    "EX-P03": {
+      "code": "EX-P03",
+      "module": "Exercícios",
+      "screen": "Exercícios · prescrição (convite)",
+      "type": "Botão",
+      "text": "Liberar exercícios",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
+    },
+    "EX-P04": {
+      "code": "EX-P04",
+      "module": "Exercícios",
+      "screen": "Exercícios · prescrição (erro)",
+      "type": "Mensagem",
+      "text": "Código inválido ou vencido. Confira com seu dentista.",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
+    },
+    "EX-P05": {
+      "code": "EX-P05",
+      "module": "Exercícios",
+      "screen": "Exercícios · prescrição (topo)",
+      "type": "Título",
+      "text": "Exercícios indicados por {nome}",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
+    },
+    "EX-P06": {
+      "code": "EX-P06",
+      "module": "Exercícios",
+      "screen": "Exercícios · prescrição (recado)",
+      "type": "Título",
+      "text": "Recado do seu dentista",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
+    },
+    "EX-P07": {
+      "code": "EX-P07",
+      "module": "Exercícios",
+      "screen": "Exercícios · prescrição (encerrada)",
+      "type": "Aviso",
+      "text": "Seu dentista encerrou estes exercícios. Se tiver dúvida, fale com ele.",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
+    },
+    "INI-P03": {
+      "code": "INI-P03",
+      "module": "Início",
+      "screen": "Início · Plano de hoje (item 2)",
+      "type": "Item do plano",
+      "text": "Exercícios do seu dentista — {x} de {n} sessões",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false,
+      "title": "Exercícios do seu dentista",
+      "body": "{x} de {n} sessões"
+    },
+    "LEM-P01": {
+      "code": "LEM-P01",
+      "module": "Lembretes e monitoramento",
+      "screen": "Exercícios · sugestão de lembretes",
+      "type": "Pergunta",
+      "text": "Seu dentista sugeriu {n} lembretes por dia. Usar?",
+      "references": [],
+      "status": "sem-status",
+      "approvedByAdvisor": false
     }
   },
   "blocked": {
-    "APR-16": "Lacuna – sem embasamento na dissertação",
-    "EX-14": "Lacuna – sem embasamento na dissertação",
-    "SOS-06": "Lacuna – sem embasamento na dissertação",
-    "ALI-05": "Lacuna – sem embasamento na dissertação",
-    "MIN-02": "Lacuna – sem embasamento na dissertação"
+    "APR-16": "sem embasamento",
+    "EX-14": "sem embasamento",
+    "SOS-06": "sem embasamento",
+    "ALI-05": "sem embasamento",
+    "MIN-02": "sem embasamento"
   }
 }

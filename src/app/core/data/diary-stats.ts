@@ -34,15 +34,14 @@ export function dailySeries(
   });
 }
 
-/** Média das médias diárias (cada dia com registro pesa igual). */
+/**
+ * Média das médias diárias (cada dia com registro pesa igual).
+ * Dor e exercício ficam lado a lado, nunca cruzados: não calcular a dor "dos dias com exercício",
+ * que sugere causa e efeito (ajustes da Dra. Tayná, design/ajustes-tayna.md, seção 2).
+ */
 export function averagePain(series: readonly DayPoint[]): number | null {
   const values = series.flatMap((day) => (day.pain === null ? [] : [day.pain]));
   return values.length ? round1(mean(values)) : null;
-}
-
-/** Média dos dias com exercício que têm registro de dor (DIA-04, valor {y}). */
-export function averageOnExerciseDays(series: readonly DayPoint[]): number | null {
-  return averagePain(series.filter((day) => day.exercised));
 }
 
 function mean(values: readonly number[]): number {

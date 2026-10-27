@@ -1,5 +1,7 @@
-/** Programa 6x6 de Rocabado: 6 exercícios, 6 repetições cada, 6 vezes ao dia (EX-06). */
-export const SESSIONS_PER_DAY = 6;
+/**
+ * Programa 6x6 de Rocabado (EX-06). As sessões por dia vêm da prescrição do dentista
+ * (design/ajustes-tayna.md, seção 4).
+ */
 
 /** Título e posologia do programa. */
 export const PROGRAM_CODE = 'EX-R0';

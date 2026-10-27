@@ -160,6 +160,9 @@ export class ProfileFormPage {
   }
 
   protected async done(): Promise<void> {
-    await this.router.navigateByUrl(this.mode() === 'signup' ? '/inicio' : '/perfil');
+    // No cadastro, a próxima etapa é escolher os lembretes.
+    await this.router.navigateByUrl(
+      this.mode() === 'signup' ? '/boas-vindas/lembretes' : '/perfil',
+    );
   }
 }

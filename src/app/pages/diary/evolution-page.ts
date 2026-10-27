@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentPipe } from '../../core/content/content.pipe';
 import { ContentService } from '../../core/content/content.service';
-import { averageOnExerciseDays, averagePain, dailySeries } from '../../core/data/diary-stats';
+import { averagePain, dailySeries } from '../../core/data/diary-stats';
 import { ExerciseSessions } from '../../core/data/exercise-sessions.service';
 import { PainDiary } from '../../core/data/pain-diary.service';
 import { Icon } from '../../shared/ui/icon/icon';
@@ -11,11 +11,13 @@ import { DiaryTabs } from './diary-tabs';
 import { PainChart } from './pain-chart';
 import { dayMonth, formatPain, weekdayShort } from './weekday';
 
-/** Resumo descritivo dos 7 dias (DIA-04) e média da semana, quando não há dia com exercício. */
+/** Resumo descritivo dos 7 dias. */
 const SUMMARY = 'DIA-04';
-const WEEK_AVERAGE = 'INI-03';
-/** Texto do cartão do relatório para o dentista. */
+/** Título do gráfico e da tabela (dor e sessões lado a lado, sem comparação). */
+const CHART_SUBTITLE = 'REL-P01';
+/** Textos do cartão do relatório para o dentista. */
 export const REPORT_TEXT = 'PER-02';
+const REPORT_NOTE = 'REL-P02';
 
 type Period = 7 | 30;
 
@@ -32,6 +34,8 @@ export class EvolutionPage {
   private readonly content = inject(ContentService);
 
   protected readonly reportText = REPORT_TEXT;
+  protected readonly reportNote = REPORT_NOTE;
+  protected readonly chartSubtitle = CHART_SUBTITLE;
   protected readonly periods: readonly Period[] = [7, 30];
   protected readonly period = signal<Period>(7);
 
@@ -42,22 +46,10 @@ export class EvolutionPage {
     dailySeries(this.diary.entries(), this.sessions.all(), this.period(), new Date()),
   );
 
-  /** DIA-04 quando há as duas médias; só a média da semana (INI-03) quando não há exercício. */
+  /** DIA-04 com a média dos 7 dias, ou null sem registros. */
   protected readonly summary = computed(() => {
     const x = averagePain(this.week());
-    if (x === null) return null;
-    const y = averageOnExerciseDays(this.week());
-    if (y !== null) {
-      return {
-        title: null,
-        text: this.content.get(SUMMARY, 'text', { x: formatPain(x), y: formatPain(y) }),
-      };
-    }
-    const entry = this.content.entry(WEEK_AVERAGE);
-    return {
-      title: entry?.title ?? null,
-      text: this.content.get(WEEK_AVERAGE, 'body', { x: formatPain(x) }),
-    };
+    return x === null ? null : this.content.get(SUMMARY, 'text', { x: formatPain(x) });
   });
 
   protected readonly exerciseDays = computed(() => this.series().filter((d) => d.exercised).length);

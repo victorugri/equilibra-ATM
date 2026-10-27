@@ -6,9 +6,11 @@ import { APP_DATABASE, AppDatabase } from '../data/app-database';
 import { ExerciseSessions } from '../data/exercise-sessions.service';
 import { PainDiary } from '../data/pain-diary.service';
 import { ProfileStore } from '../data/profile.service';
+import { CheckinStore } from '../reminders/checkins.service';
+import { ReminderSettingsStore } from '../reminders/reminder-settings.service';
 import { PAGE_SIZE, SyncService } from './sync.service';
 
-type Row = { id: string } & Record<string, unknown>;
+type Row = Record<string, unknown>;
 type Result = { data: unknown; error: unknown };
 
 /** Servidor falso: as tabelas de uma única conta, com o limite de linhas do Supabase. */
@@ -18,8 +20,12 @@ class FakeServer {
     consents: [],
     pain_entries: [],
     exercise_sessions: [],
+    reminder_settings: [],
+    reminder_events: [],
   };
   failing = false;
+  /** Tabelas que respondem erro (ex.: ainda não criadas no servidor). */
+  readonly missing = new Set<string>();
   /** Roda antes de cada gravação (para simular o usuário mexendo durante o envio). */
   beforeWrite: ((table: string) => Promise<void>) | null = null;
 
@@ -31,6 +37,8 @@ class FakeServer {
 /** Imita o encadeamento do supabase-js usado pelo SyncService. */
 class FakeQuery implements PromiseLike<Result> {
   private payload: Row[] | null = null;
+  private changes: Row | null = null;
+  private filter: [string, unknown] | null = null;
   private ignoreDuplicates = false;
   private window: [number, number] | null = null;
   private single = false;
@@ -54,6 +62,14 @@ class FakeQuery implements PromiseLike<Result> {
     this.single = true;
     return this;
   }
+  update(changes: Row) {
+    this.changes = changes;
+    return this;
+  }
+  eq(column: string, value: unknown) {
+    this.filter = [column, value];
+    return this;
+  }
   upsert(rows: Row | Row[], options?: { ignoreDuplicates?: boolean }) {
     this.payload = [rows].flat();
     this.ignoreDuplicates = !!options?.ignoreDuplicates;
@@ -69,17 +85,26 @@ class FakeQuery implements PromiseLike<Result> {
 
   private async execute(): Promise<Result> {
     if (this.server.failing) return { data: null, error: new Error('sem conexão') };
-    if (this.payload) await this.server.beforeWrite?.(this.table);
+    if (this.server.missing.has(this.table))
+      return { data: null, error: new Error(`tabela ${this.table} não existe`) };
+    if (this.payload || this.changes) await this.server.beforeWrite?.(this.table);
     const rows = this.server.tables[this.table];
+    // reminder_settings tem uma linha por conta (chave user_id); as outras tabelas, id.
+    const key = this.table === 'reminder_settings' ? 'user_id' : 'id';
+    if (this.changes) {
+      const [column, value] = this.filter!;
+      for (const row of rows) if (row[column] === value) Object.assign(row, this.changes);
+      return { data: null, error: null };
+    }
     if (this.payload) {
       for (const row of this.payload) {
-        const index = rows.findIndex((saved) => saved.id === row.id);
+        const index = rows.findIndex((saved) => saved[key] === row[key]);
         if (index < 0) rows.push({ ...row });
         else if (!this.ignoreDuplicates) rows[index] = { ...rows[index], ...row };
       }
       return { data: null, error: null };
     }
-    const sorted = [...rows].sort((a, b) => a.id.localeCompare(b.id));
+    const sorted = [...rows].sort((a, b) => String(a[key]).localeCompare(String(b[key])));
     if (this.single) return { data: sorted[0] ?? null, error: null };
     const [from, to] = this.window ?? [0, sorted.length - 1];
     return { data: sorted.slice(from, Math.min(to + 1, from + PAGE_SIZE)), error: null };
@@ -220,6 +245,86 @@ describe('SyncService', () => {
     expect(server.tables['profiles'][0]['nickname']).toBe('Ana Maria');
     expect(profile.profile()).toMatchObject({ nickname: 'Ana Maria', dirty: 0 });
     expect(server.tables['consents']).toHaveLength(1);
+  });
+
+  it('envia as preferências de lembrete com os horários prontos para o agendador', async () => {
+    const sync = setup();
+    const reminders = TestBed.inject(ReminderSettingsStore);
+    await reminders.ready;
+    await reminders.save({ mode: 'three' });
+    user.set(USER);
+    await sync.sync();
+    expect(server.tables['reminder_settings']).toEqual([
+      expect.objectContaining({
+        user_id: USER.id,
+        mode: 'three',
+        times: ['10:00', '15:00', '20:00'],
+        quiet_start: '21:00',
+        quiet_end: '08:00',
+        exercise_reminders: true,
+        timezone: expect.any(String),
+      }),
+    ]);
+    expect(reminders.settings().dirty).toBe(0);
+  });
+
+  it('num aparelho novo, traz as preferências de lembrete da conta', async () => {
+    const sync = setup();
+    server.tables['reminder_settings'].push({
+      user_id: USER.id,
+      mode: 'custom',
+      times: ['09:30:00', '17:30:00'],
+      quiet_start: '23:00:00',
+      quiet_end: '06:00:00',
+      paused_on: null,
+      exercise_reminders: false,
+    });
+    user.set(USER);
+    await sync.sync();
+    expect(TestBed.inject(ReminderSettingsStore).settings()).toMatchObject({
+      mode: 'custom',
+      customTimes: ['09:30', '17:30'],
+      quietStart: '23:00',
+      quietEnd: '06:00',
+      exerciseReminders: false,
+      dirty: 0,
+    });
+  });
+
+  it('envia a resposta ao lembrete e não perde uma resposta dada durante o envio', async () => {
+    const sync = setup();
+    const eventId = '00000000-0000-4000-8000-000000000001';
+    server.tables['reminder_events'].push({ id: eventId, answer: null });
+    const checkins = TestBed.inject(CheckinStore);
+    await checkins.open(eventId);
+    server.beforeWrite = async (table) => {
+      server.beforeWrite = null;
+      if (table === 'reminder_events') await checkins.answer(eventId, 'touching');
+    };
+    user.set(USER);
+    await sync.sync();
+    await sync.sync();
+    expect(server.tables['reminder_events'][0]).toMatchObject({
+      answer: 'touching',
+      opened_at: expect.any(String),
+      answered_at: expect.any(String),
+    });
+    expect((await checkins.find(eventId))?.dirty).toBe(0);
+  });
+
+  it('uma tabela com erro não impede o resto de sincronizar', async () => {
+    const sync = setup();
+    await addLocalData();
+    server.missing.add('reminder_settings');
+    server.tables['exercise_sessions'].push({
+      id: 'sessao-de-outro-aparelho',
+      completed_at: '2026-10-01T10:00:00.000Z',
+    });
+    user.set(USER);
+    await sync.sync();
+    expect(sync.status()).toBe('error');
+    expect(server.tables['pain_entries']).toHaveLength(1);
+    expect(TestBed.inject(ExerciseSessions).all()).toHaveLength(2);
   });
 
   it('se o envio falhar, os dados continuam pendentes para a próxima vez', async () => {

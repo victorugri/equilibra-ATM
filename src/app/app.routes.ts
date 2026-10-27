@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { prescriptionGuard } from './core/prescription/prescription.guard';
 import { onboardingGuard } from './layout/onboarding.guard';
 import { ScreenData, screen } from './layout/screen';
 import { LEARN_MODULES } from './pages/learn/learn-modules';
@@ -68,18 +69,32 @@ const appScreens: Routes = [
   { path: 'sono', redirectTo: 'aprender/modulo/5' },
 
   // Exercícios
+  // Só com prescrição do dentista (design/ajustes-tayna.md, seção 4); sem ela, volta ao convite.
   screen(
-    'exercicios/6x6',
-    'Programa 6x6 de Rocabado',
+    'exercicios/meus',
+    'Seus exercícios',
     { ...internal, figma: '37:210', backTo: '/exercicios' },
-    { loadComponent: () => import('./pages/exercises/program-page').then((m) => m.ProgramPage) },
+    {
+      canMatch: [prescriptionGuard],
+      loadComponent: () => import('./pages/exercises/program-page').then((m) => m.ProgramPage),
+    },
   ),
   screen(
-    'exercicios/6x6/sessao',
-    'Sessão do 6x6',
-    { ...focused, backTo: '/exercicios/6x6' },
-    { loadComponent: () => import('./pages/exercises/session-page').then((m) => m.SessionPage) },
+    'exercicios/sessao',
+    'Sessão de exercícios',
+    { ...focused, backTo: '/exercicios/meus' },
+    {
+      canMatch: [prescriptionGuard],
+      loadComponent: () => import('./pages/exercises/session-page').then((m) => m.SessionPage),
+    },
   ),
+  { path: 'exercicios/6x6', redirectTo: 'exercicios/meus' },
+  { path: 'exercicios/6x6/sessao', redirectTo: 'exercicios/sessao' },
+  // QR Code do dentista: abre Exercícios com o código preenchido.
+  {
+    path: 'prescricao/:code',
+    redirectTo: ({ params }) => `/exercicios?codigo=${encodeURIComponent(params['code'])}`,
+  },
 
   // Diário
   screen(
@@ -94,7 +109,9 @@ const appScreens: Routes = [
     { ...focused, backTo: '/diario/evolucao' },
     { loadComponent: () => import('./pages/diary/report-page').then((m) => m.ReportPage) },
   ),
-  page('registro-matinal', 'Registro da manhã', { ...focused, figma: '7:3370', backTo: '/inicio' }),
+  // O Registro da manhã (7:3370) saiu da rotina: o "dormiu bem?" do diário cobre o sono
+  // (design/ajustes-tayna.md, seção 5).
+  { path: 'registro-matinal', redirectTo: 'diario' },
   page('modo-noite', 'Modo noite', { ...focused, figma: '7:3552', backTo: '/inicio' }),
 
   // Perfil
@@ -115,9 +132,21 @@ const appScreens: Routes = [
   ),
 
   // Lembretes
-  page('perfil/lembretes', 'Meus lembretes', { figma: '7:2142', backTo: '/perfil' }),
+  screen(
+    'perfil/lembretes',
+    'Meus lembretes',
+    { ...focused, figma: '7:2142', backTo: '/perfil' },
+    {
+      loadComponent: () => import('./pages/reminders/reminders-page').then((m) => m.RemindersPage),
+    },
+  ),
   // Aberta ao tocar na notificação "Seus dentes estão se tocando agora?" (7:1939).
-  page('lembrete', 'Resposta rápida', { ...focused, figma: '7:2020', backTo: '/inicio' }),
+  screen(
+    'lembrete',
+    'Check-in rápido',
+    { ...focused, figma: '7:2020', backTo: '/inicio' },
+    { loadComponent: () => import('./pages/reminders/checkin-page').then((m) => m.CheckinPage) },
+  ),
 
   // Engajamento
   page('conquista', 'Conquista', { ...focused, figma: '7:4019', backTo: '/inicio' }),
@@ -175,6 +204,18 @@ export const routes: Routes = [
         import('./pages/account/profile-form-page').then((m) => m.ProfileFormPage),
     },
   ),
+  // Depois do cadastro: escolher os lembretes (só com conta).
+  screen(
+    'boas-vindas/lembretes',
+    'Seus lembretes',
+    { ...focused, figma: '7:483' },
+    {
+      loadComponent: () =>
+        import('./pages/reminders/reminders-onboarding-page').then(
+          (m) => m.RemindersOnboardingPage,
+        ),
+    },
+  ),
   // Link do e-mail de recuperação de senha (Supabase).
   screen(
     'redefinir-senha',
@@ -192,6 +233,14 @@ export const routes: Routes = [
     'SOS – Estou com dor',
     { ...focused, figma: '7:749', backTo: '/inicio' },
     { loadComponent: () => import('./pages/sos/sos-page').then((m) => m.SosPage) },
+  ),
+
+  // Área do dentista: fora da entrada do paciente (privacidade e boas-vindas não se aplicam).
+  screen(
+    'dentista',
+    'Área do dentista',
+    { ...focused, backTo: '/inicio' },
+    { loadComponent: () => import('./pages/dentist/dentist-page').then((m) => m.DentistPage) },
   ),
 
   { path: '', canActivateChild: [onboardingGuard], children: appScreens },

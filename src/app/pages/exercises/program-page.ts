@@ -1,13 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentPipe } from '../../core/content/content.pipe';
+import { ContentService } from '../../core/content/content.service';
+import { PrescriptionStore } from '../../core/prescription/prescription.service';
 import { Icon } from '../../shared/ui/icon/icon';
 import { PageHeader } from '../../shared/ui/page-header/page-header';
 import { References } from '../../shared/ui/references/references';
 import { ExerciseCard } from './exercise-card';
-import { PROGRAM_CODE, ROCABADO_EXERCISES, SAFETY_CODE } from './rocabado';
+import { prescribedExercises } from './exercise-catalog';
+import { SAFETY_CODE } from './rocabado';
 
-/** Programa 6x6 de Rocabado — os 6 exercícios com vídeo e passo a passo (Figma 37:210). */
+const ORIGIN = 'EX-P05';
+
+/**
+ * Os exercícios prescritos, com vídeo e passo a passo (Figma 37:210). A rota só abre com
+ * prescrição ativa (prescriptionGuard).
+ */
 @Component({
   selector: 'app-program-page',
   imports: [RouterLink, PageHeader, Icon, References, ContentPipe, ExerciseCard],
@@ -16,12 +24,16 @@ import { PROGRAM_CODE, ROCABADO_EXERCISES, SAFETY_CODE } from './rocabado';
     <div class="page">
       <section class="hero">
         <img class="ellipse" src="images/destaque-elipse.svg" width="170" height="170" alt="" />
-        <span class="tag">Protocolo domiciliar</span>
-        <h1>{{ programCode | content: 'title' }}</h1>
+        <span class="tag">Indicação do dentista</span>
+        <h1>{{ origin() }}</h1>
         <ul class="posology" aria-label="Posologia">
-          <li><strong>6</strong> <span>exercícios</span></li>
-          <li><strong>6</strong> <span>repetições</span></li>
-          <li><strong>6×</strong> <span>ao dia</span></li>
+          <li>
+            <strong>{{ exercises().length }}</strong>
+            <span>{{ exercises().length === 1 ? 'exercício' : 'exercícios' }}</span>
+          </li>
+          <li>
+            <strong>{{ perDay() }}×</strong> <span>ao dia</span>
+          </li>
         </ul>
       </section>
 
@@ -33,13 +45,18 @@ import { PROGRAM_CODE, ROCABADO_EXERCISES, SAFETY_CODE } from './rocabado';
         </div>
       </aside>
 
-      @for (exercise of exercises; track exercise.n) {
-        <app-exercise-card [id]="'exercicio-' + exercise.n" [exercise]="exercise" />
+      @for (exercise of exercises(); track exercise.code; let i = $index) {
+        <app-exercise-card
+          [id]="'exercicio-' + (i + 1)"
+          [exercise]="exercise"
+          [position]="i + 1"
+          [total]="exercises().length"
+        />
       }
 
-      <app-references class="references" [codes]="referenceCodes" />
+      <app-references class="references" [codes]="referenceCodes()" />
 
-      <a class="btn-primary start" routerLink="/exercicios/6x6/sessao">
+      <a class="btn-primary start" routerLink="/exercicios/sessao">
         <app-icon name="play" />
         Começar sessão
       </a>
@@ -48,8 +65,18 @@ import { PROGRAM_CODE, ROCABADO_EXERCISES, SAFETY_CODE } from './rocabado';
   styleUrl: './program-page.scss',
 })
 export class ProgramPage {
-  protected readonly programCode = PROGRAM_CODE;
+  private readonly content = inject(ContentService);
+  private readonly prescription = inject(PrescriptionStore);
+
   protected readonly safetyCode = SAFETY_CODE;
-  protected readonly exercises = ROCABADO_EXERCISES;
-  protected readonly referenceCodes = [PROGRAM_CODE, ...ROCABADO_EXERCISES.map((e) => e.code)];
+  protected readonly exercises = computed(() =>
+    prescribedExercises(this.content, this.prescription.allowed()),
+  );
+  protected readonly referenceCodes = computed(() => this.exercises().map((e) => e.code));
+  protected readonly perDay = computed(() => this.prescription.current()?.sessionsPerDay ?? 0);
+  protected readonly origin = computed(() =>
+    this.content.get(ORIGIN, 'text', {
+      nome: this.prescription.current()?.dentistName || 'seu dentista',
+    }),
+  );
 }

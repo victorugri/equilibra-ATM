@@ -6,16 +6,19 @@
 // Erros:
 // - código usado no app que não existe no banco;
 // - código usado no app que está bloqueado (Lacuna);
-// - texto proibido no banco ou no código-fonte (ver FORBIDDEN).
+// - texto proibido no banco ou no código-fonte (ver FORBIDDEN);
+// - rótulo interno da pesquisa no banco ou no código-fonte (ver internal-labels.mjs).
 // Avisos (erros com --strict):
 // - código usado no app com status "revisar com orientador" ou sem status;
 // - código usado no app ainda não aprovado pelo orientador.
 //
 // Não precisa da planilha: lê só src/content/pt-BR.json e src/app.
 
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { FUNCTION_CODES, FUNCTION_TEXTS_FILE, renderFunctionTexts } from './function-texts.mjs';
+import { internalLabel } from './internal-labels.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const BANK = resolve(ROOT, 'src/content/pt-BR.json');
@@ -45,6 +48,14 @@ for (const entry of Object.values(bank.entries)) {
   for (const { pattern, reason } of FORBIDDEN) {
     if (pattern.test(entry.text)) errors.push(`${entry.code} no banco: ${reason}`);
   }
+  for (const value of [entry.text, ...entry.references]) {
+    const label = internalLabel(value);
+    if (label) errors.push(`${entry.code} no banco: rótulo interno ${label} ("${value.slice(0, 60)}")`);
+  }
+}
+for (const [code, reason] of Object.entries(bank.blocked)) {
+  const label = internalLabel(reason);
+  if (label) errors.push(`motivo do bloqueio de ${code}: rótulo interno ${label}`);
 }
 
 const usage = new Map();
@@ -55,10 +66,28 @@ for (const file of listSourceFiles(SOURCE_DIR)) {
   for (const { pattern, reason } of FORBIDDEN) {
     if (pattern.test(source)) errors.push(`${where}: ${reason}`);
   }
+  const label = internalLabel(source);
+  if (label) errors.push(`${where}: rótulo interno ${label}`);
   for (const [, code] of source.matchAll(codePattern)) {
     if (!usage.has(code)) usage.set(code, new Set());
     usage.get(code).add(where);
   }
+}
+
+// Textos copiados para as Edge Functions (notificação do lembrete).
+for (const code of Object.values(FUNCTION_CODES)) {
+  if (!usage.has(code)) usage.set(code, new Set());
+  usage.get(code).add(FUNCTION_TEXTS_FILE);
+}
+const functionTexts = resolve(ROOT, FUNCTION_TEXTS_FILE);
+try {
+  const expected = renderFunctionTexts(bank);
+  if (!existsSync(functionTexts) || readFileSync(functionTexts, 'utf8') !== expected)
+    errors.push(
+      `${FUNCTION_TEXTS_FILE} está diferente do banco: rode "node scripts/content/function-texts.mjs"`,
+    );
+} catch (error) {
+  errors.push(`${FUNCTION_TEXTS_FILE}: ${error.message}`);
 }
 
 for (const [code, files] of usage) {

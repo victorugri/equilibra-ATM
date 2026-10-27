@@ -33,6 +33,11 @@ export class ContentService {
     return this.bank.source.dissertationVersion;
   }
 
+  /** O código existe e está liberado? Não acusa erro (para listas que dependem da planilha). */
+  has(code: string): boolean {
+    return Object.hasOwn(this.bank.entries, code);
+  }
+
   /** Retorna a linha completa do banco, ou undefined se o código não puder ser usado. */
   entry(code: string): ContentEntry | undefined {
     const entry = this.bank.entries[code];

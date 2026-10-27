@@ -45,7 +45,7 @@ import { LEARN_MODULES } from './learn-modules';
 
       <p class="footnote">
         <app-icon name="check-rodape" />
-        <span>Conteúdo baseado na revisão da literatura científica do projeto</span>
+        <span>Conteúdo baseado em revisão da literatura científica.</span>
       </p>
     </div>
   `,

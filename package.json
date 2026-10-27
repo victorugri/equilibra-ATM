@@ -14,12 +14,15 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:functions": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"supabase/functions/**/*.test.ts\"",
     "content:build": "node scripts/content/build-content.mjs",
     "content:check": "node scripts/content/check-content.mjs",
     "content:check:strict": "node scripts/content/check-content.mjs --strict",
     "icons:build": "node scripts/design/build-icons.mjs && prettier --write src/app/shared/ui/icon/icons.ts --log-level warn",
     "db:push": "supabase db push",
-    "db:config": "supabase config push"
+    "db:config": "supabase config push",
+    "push:keys": "node scripts/push/setup-vapid.mjs",
+    "functions:deploy": "supabase functions deploy send-reminders --use-api --no-verify-jwt"
   },
   "packageManager": "npm@11.19.0",
   "dependencies": {
@@ -33,6 +36,7 @@
     "@fontsource-variable/nunito-sans": "^5.3.0",
     "@supabase/supabase-js": "^2.118.0",
     "dexie": "^4.4.6",
+    "qrcode": "^1.5.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -40,11 +44,12 @@
     "@angular/build": "^22.2.3",
     "@angular/cli": "^22.2.3",
     "@angular/compiler-cli": "^22.2.0",
+    "@types/qrcode": "^1.5.5",
     "exceljs": "^4.4.0",
     "fake-indexeddb": "^6.2.6",
     "jsdom": "^30.0.0",
     "prettier": "^3.8.1",
-    "supabase": "^2.121.0",
+    "supabase": "^2.122.0",
     "typescript": "~6.0.2",
     "vitest": "^5.0.0"
   }

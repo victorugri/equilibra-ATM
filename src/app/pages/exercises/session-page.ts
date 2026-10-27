@@ -10,34 +10,38 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentPipe } from '../../core/content/content.pipe';
+import { ContentService } from '../../core/content/content.service';
 import { ExerciseSessions } from '../../core/data/exercise-sessions.service';
+import { PrescriptionStore } from '../../core/prescription/prescription.service';
 import { Icon } from '../../shared/ui/icon/icon';
 import { PageHeader } from '../../shared/ui/page-header/page-header';
 import { ExerciseCard } from './exercise-card';
-import { ROCABADO_EXERCISES, SAFETY_CODE } from './rocabado';
+import { prescribedExercises } from './exercise-catalog';
+import { SAFETY_CODE } from './rocabado';
 
 /**
- * Player da sessão do 6x6: um exercício por vez e, no fim, o registro da sessão (EX-13).
+ * Player da sessão: os exercícios prescritos, um por vez, e no fim o registro da sessão (EX-13).
  * A tela 7:1742 do contexto não está na página do Figma; segue o estilo dos cartões do 6x6.
+ * A rota só abre com prescrição ativa (prescriptionGuard).
  */
 @Component({
   selector: 'app-session-page',
   imports: [RouterLink, PageHeader, Icon, ContentPipe, ExerciseCard],
   template: `
-    <app-page-header title="Sessão do 6x6" variant="internal" backTo="/exercicios/6x6" />
+    <app-page-header title="Sessão de exercícios" variant="internal" backTo="/exercicios/meus" />
     @if (sessionsToday() === null) {
       <div class="page">
         <div class="progress">
-          <p class="progress-text">Exercício {{ index() + 1 }} de {{ total }}</p>
+          <p class="progress-text">Exercício {{ index() + 1 }} de {{ total() }}</p>
           <div
             class="bar"
             role="progressbar"
             [attr.aria-valuenow]="index() + 1"
             aria-valuemin="1"
-            [attr.aria-valuemax]="total"
+            [attr.aria-valuemax]="total()"
             aria-label="Progresso da sessão"
           >
-            <span [style.width.%]="((index() + 1) / total) * 100"></span>
+            <span [style.width.%]="((index() + 1) / total()) * 100"></span>
           </div>
         </div>
 
@@ -48,7 +52,13 @@ import { ROCABADO_EXERCISES, SAFETY_CODE } from './rocabado';
           </p>
         }
 
-        <app-exercise-card #card [exercise]="current()" [headingLevel]="1" />
+        <app-exercise-card
+          #card
+          [exercise]="current()"
+          [position]="index() + 1"
+          [total]="total()"
+          [headingLevel]="1"
+        />
 
         <div class="actions">
           @if (index() > 0) {
@@ -65,7 +75,7 @@ import { ROCABADO_EXERCISES, SAFETY_CODE } from './rocabado';
       <div class="page done">
         <span class="done-icon"><app-icon name="check-sessao" [size]="40" /></span>
         <p class="done-text" role="status">
-          {{ 'EX-13' | content: 'text' : { n: sessionsToday()! } }}
+          {{ 'EX-13' | content: 'text' : { n: sessionsToday()!, meta: perDay() } }}
         </p>
         <a class="btn-primary" routerLink="/exercicios">Voltar aos exercícios</a>
       </div>
@@ -78,11 +88,17 @@ export class SessionPage {
   private readonly injector = inject(Injector);
   private readonly card = viewChild('card', { read: ElementRef });
 
-  protected readonly total = ROCABADO_EXERCISES.length;
+  private readonly content = inject(ContentService);
+  private readonly prescription = inject(PrescriptionStore);
+  private readonly exercises = computed(() =>
+    prescribedExercises(this.content, this.prescription.allowed()),
+  );
+  protected readonly total = computed(() => this.exercises().length);
+  protected readonly perDay = computed(() => this.prescription.current()?.sessionsPerDay ?? 0);
   protected readonly safetyCode = SAFETY_CODE;
   protected readonly index = signal(0);
-  protected readonly current = computed(() => ROCABADO_EXERCISES[this.index()]);
-  protected readonly isLast = computed(() => this.index() === this.total - 1);
+  protected readonly current = computed(() => this.exercises()[this.index()]);
+  protected readonly isLast = computed(() => this.index() === this.total() - 1);
   /** Preenchido ao concluir: quantas sessões a pessoa fez hoje. */
   protected readonly sessionsToday = signal<number | null>(null);
 

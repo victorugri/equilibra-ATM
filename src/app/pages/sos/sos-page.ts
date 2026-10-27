@@ -6,11 +6,13 @@ import {
   afterNextRender,
   computed,
   inject,
-  signal,
+  input,
+  linkedSignal,
   viewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentPipe } from '../../core/content/content.pipe';
+import { CareLog } from '../../core/data/care-log.service';
 import { ProfileStore } from '../../core/data/profile.service';
 import { Icon } from '../../shared/ui/icon/icon';
 import { IconName } from '../../shared/ui/icon/icons';
@@ -79,16 +81,23 @@ export class SosPage {
   /** Botão "Ligar para meu dentista" (Figma 7:969), se o telefone foi cadastrado no Perfil. */
   private readonly profile = inject(ProfileStore).profile;
   protected readonly dentistCall = computed(() => telLink(this.profile().dentistPhone));
-  protected readonly index = signal(0);
+  /** `?passo=3` abre direto na compressa (item do Plano de hoje). */
+  readonly passo = input<string>();
+  protected readonly index = linkedSignal(() => {
+    const n = Number(this.passo());
+    return Number.isInteger(n) && n >= 1 && n <= SOS_STEPS.length ? n - 1 : 0;
+  });
   protected readonly current = computed(() => SOS_STEPS[this.index()]);
   protected readonly following = computed(() => SOS_STEPS.slice(this.index() + 1));
   protected readonly isLast = computed(() => this.index() === SOS_STEPS.length - 1);
   protected readonly progress = computed(() => ((this.index() + 1) / SOS_STEPS.length) * 100);
 
   /** O timer continua contando enquanto a pessoa segue para os outros passos. */
-  protected readonly timer = new CompressTimer(() =>
-    globalThis.navigator?.vibrate?.([300, 150, 300]),
-  );
+  private readonly careLog = inject(CareLog);
+  protected readonly timer = new CompressTimer(() => {
+    globalThis.navigator?.vibrate?.([300, 150, 300]);
+    void this.careLog.markCompress();
+  });
   protected readonly timerStep = SOS_STEPS.find((step) => step.timer)!;
 
   constructor() {

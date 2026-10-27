@@ -6,15 +6,20 @@ import { APP_DATABASE } from '../data/app-database';
 import { ExerciseSessions } from '../data/exercise-sessions.service';
 import { PainDiary } from '../data/pain-diary.service';
 import { ProfileStore } from '../data/profile.service';
+import { ReminderSettingsStore } from '../reminders/reminder-settings.service';
 import {
   PainRow,
   ProfileRow,
+  ReminderSettingsRow,
   SessionRow,
+  checkinToRow,
   consentToRow,
   painFromRow,
   painToRow,
   profileFromRow,
   profileToRow,
+  remindersFromRow,
+  remindersToRow,
   sessionFromRow,
   sessionToRow,
 } from './sync-mapping';
@@ -53,10 +58,11 @@ export class SyncService {
   private readonly diary = inject(PainDiary);
   private readonly sessions = inject(ExerciseSessions);
   private readonly profile = inject(ProfileStore);
+  private readonly reminders = inject(ReminderSettingsStore);
 
   readonly status = signal<SyncStatus>('idle');
   readonly lastSyncedAt = signal<Date | null>(null);
-  /** Registros do diário e sessões ainda não enviados. */
+  /** Registros do diário, sessões e respostas a lembretes ainda não enviados. */
   readonly pending = signal(0);
 
   private running: Promise<void> | null = null;
@@ -70,11 +76,12 @@ export class SyncService {
     });
 
     const pending = liveQuery(async () => {
-      const [pain, sessions] = await Promise.all([
+      const counts = await Promise.all([
         this.db.pain.where('dirty').equals(1).count(),
         this.db.sessions.where('dirty').equals(1).count(),
+        this.db.checkins.where('dirty').equals(1).count(),
       ]);
-      return pain + sessions;
+      return counts.reduce((total, count) => total + count, 0);
     }).subscribe((count) => {
       this.pending.set(count);
       if (count > 0) this.schedule();
@@ -126,18 +133,36 @@ export class SyncService {
     const user = this.auth.user();
     if (!user) return;
     this.status.set('syncing');
+    let failure: unknown = null;
     try {
       const client = await this.auth.client();
-      await this.syncProfile(client, user.id);
-      await this.pushConsent(client);
-      await this.pushPain(client);
-      await this.pushSessions(client);
-      await this.pull(client);
+      // Cada parte é independente: uma falha (ex.: tabela ainda não criada no servidor)
+      // não impede as outras de enviar e trazer dados.
+      const steps = [
+        () => this.syncProfile(client, user.id),
+        () => this.pushConsent(client),
+        () => this.pushPain(client),
+        () => this.pushSessions(client),
+        () => this.syncReminders(client, user.id),
+        () => this.pushCheckins(client),
+        () => this.pull(client),
+      ];
+      for (const step of steps) {
+        try {
+          await step();
+        } catch (error) {
+          failure ??= error;
+        }
+      }
+    } catch (error) {
+      failure = error;
+    }
+    if (failure) {
+      console.error('Falha na sincronização', failure);
+      this.status.set('error');
+    } else {
       this.status.set('idle');
       this.lastSyncedAt.set(new Date());
-    } catch (error) {
-      console.error('Falha na sincronização', error);
-      this.status.set('error');
     }
   }
 
@@ -195,6 +220,49 @@ export class SyncService {
       .modify({ dirty: 0 });
   }
 
+  /** Preferências de lembrete: como o perfil, vale a do aparelho se foi mudada. */
+  private async syncReminders(client: SupabaseClient, userId: string): Promise<void> {
+    await this.reminders.ready;
+    const local = this.reminders.settings();
+    if (local.dirty) {
+      const { error } = await client
+        .from('reminder_settings')
+        .upsert(remindersToRow(userId, local, deviceTimezone()));
+      if (error) throw error;
+      await this.reminders.markSynced(local);
+      return;
+    }
+    const { data, error } = await client
+      .from('reminder_settings')
+      .select('mode, times, quiet_start, quiet_end, paused_on, exercise_reminders')
+      .maybeSingle();
+    if (error) throw error;
+    if (data) await this.reminders.applyRemote(remindersFromRow(data as ReminderSettingsRow));
+  }
+
+  /** Respostas aos lembretes (abertura, resposta ou "Pular"). */
+  private async pushCheckins(client: SupabaseClient): Promise<void> {
+    const checkins = await this.db.checkins.where('dirty').equals(1).toArray();
+    for (const checkin of checkins) {
+      const { error } = await client
+        .from('reminder_events')
+        .update(checkinToRow(checkin))
+        .eq('id', checkin.eventId);
+      if (error) throw error;
+      // Se a pessoa respondeu enquanto o envio acontecia, fica pendente para a próxima vez.
+      await this.db.checkins
+        .where('eventId')
+        .equals(checkin.eventId)
+        .modify((saved) => {
+          if (
+            saved.answer === checkin.answer &&
+            saved.skippedAt?.getTime() === checkin.skippedAt?.getTime()
+          )
+            saved.dirty = 0;
+        });
+    }
+  }
+
   /** Traz os registros da conta que ainda não estão neste aparelho. */
   private async pull(client: SupabaseClient): Promise<void> {
     const [pain, sessions] = await Promise.all([
@@ -224,4 +292,9 @@ export class SyncService {
       await this.sessions.reload();
     }
   }
+}
+
+/** Fuso do aparelho, para o servidor enviar os lembretes no horário local. */
+function deviceTimezone(): string {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Sao_Paulo';
 }

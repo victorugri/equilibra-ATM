@@ -1,42 +1,80 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ContentPipe } from '../../core/content/content.pipe';
 import { ContentService } from '../../core/content/content.service';
 import { ExerciseSessions } from '../../core/data/exercise-sessions.service';
+import { PrescriptionStore } from '../../core/prescription/prescription.service';
 import { Icon } from '../../shared/ui/icon/icon';
 import { ListItem } from '../../shared/ui/list-item/list-item';
 import { PageHeader } from '../../shared/ui/page-header/page-header';
 import { References } from '../../shared/ui/references/references';
-import { PROGRAM_CODE, ROCABADO_EXERCISES, SAFETY_CODE, SESSIONS_PER_DAY } from './rocabado';
+import { exerciseName, prescribedExercises } from './exercise-catalog';
+import { PrescriptionInvite } from './prescription-invite';
+import { ReminderSuggestion } from './reminder-suggestion';
+import { SAFETY_CODE } from './rocabado';
 
-/** Exercícios — cartão do 6x6 com o progresso do dia e a lista dos exercícios (Figma 7:1454). */
+const ORIGIN = 'EX-P05';
+const NOTE_TITLE = 'EX-P06';
+
+/**
+ * Exercícios (Figma 7:1454). Só os que o dentista prescreveu (design/ajustes-tayna.md, seção 4);
+ * sem prescrição, o convite para digitar o código.
+ */
 @Component({
   selector: 'app-exercises-page',
-  imports: [RouterLink, DatePipe, PageHeader, Icon, ListItem, References, ContentPipe],
+  imports: [
+    RouterLink,
+    DatePipe,
+    PageHeader,
+    Icon,
+    ListItem,
+    References,
+    ContentPipe,
+    PrescriptionInvite,
+    ReminderSuggestion,
+  ],
   templateUrl: './exercises-page.html',
   styleUrl: './exercises-page.scss',
 })
 export class ExercisesPage {
   private readonly sessions = inject(ExerciseSessions);
   private readonly content = inject(ContentService);
+  protected readonly prescription = inject(PrescriptionStore);
 
-  protected readonly programCode = PROGRAM_CODE;
+  /** `?codigo=ABC234`, vindo do QR Code do dentista. */
+  readonly codigo = input<string>();
+
   protected readonly safetyCode = SAFETY_CODE;
-  protected readonly perDay = SESSIONS_PER_DAY;
-  protected readonly exercises = ROCABADO_EXERCISES.map((exercise) => ({
-    ...exercise,
-    name: this.content.get(exercise.code, 'title'),
-  }));
-  protected readonly referenceCodes = [PROGRAM_CODE, ...ROCABADO_EXERCISES.map((e) => e.code)];
+  protected readonly noteTitleCode = NOTE_TITLE;
+
+  protected readonly current = computed(() =>
+    this.prescription.active() ? this.prescription.current() : null,
+  );
+  protected readonly origin = computed(() =>
+    this.content.get(ORIGIN, 'text', {
+      nome: this.current()?.dentistName || 'seu dentista',
+    }),
+  );
+  protected readonly exercises = computed(() =>
+    prescribedExercises(this.content, this.prescription.allowed()).map((exercise, i) => ({
+      ...exercise,
+      n: i + 1,
+      name: exerciseName(this.content, exercise.code),
+    })),
+  );
+  protected readonly referenceCodes = computed(() => this.exercises().map((e) => e.code));
+  protected readonly perDay = computed(() => this.current()?.sessionsPerDay ?? 0);
 
   protected readonly done = computed(() => this.sessions.today());
   protected readonly percent = computed(() =>
-    Math.round((Math.min(this.done().length, SESSIONS_PER_DAY) / SESSIONS_PER_DAY) * 100),
+    this.perDay()
+      ? Math.round((Math.min(this.done().length, this.perDay()) / this.perDay()) * 100)
+      : 0,
   );
-  /** Os 6 círculos do dia: feita (com a hora), próxima ou pendente. */
+  /** Os círculos do dia (um por sessão prescrita): feita (com a hora), próxima ou pendente. */
   protected readonly slots = computed(() =>
-    Array.from({ length: SESSIONS_PER_DAY }, (_, i) => ({
+    Array.from({ length: this.perDay() }, (_, i) => ({
       n: i + 1,
       doneAt: this.done()[i]?.at ?? null,
       isNext: i === this.done().length,

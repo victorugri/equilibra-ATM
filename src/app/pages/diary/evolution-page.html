@@ -23,12 +23,7 @@
     <div>
       <h2 id="summary-title">Últimos 7 dias</h2>
       @if (summary(); as summary) {
-        <p>
-          @if (summary.title) {
-            <strong>{{ summary.title }}:</strong>
-          }
-          {{ summary.text }}
-        </p>
+        <p>{{ summary }}</p>
       } @else {
         <p>Ainda não há registros de dor nos últimos 7 dias.</p>
         <a class="btn-link register" routerLink="/diario">Registrar minha dor</a>
@@ -40,7 +35,7 @@
     <div class="card-header">
       <div>
         <h2 id="chart-title">Histórico de dor</h2>
-        <p class="subtitle">Relação diária com sessões de exercício</p>
+        <p class="subtitle">{{ chartSubtitle | content }}</p>
       </div>
       <span class="round-icon"><app-icon name="grafico" /></span>
     </div>
@@ -91,6 +86,7 @@
       </div>
     </div>
     <p class="report-text">{{ reportText | content }}</p>
+    <p class="report-text">{{ reportNote | content }}</p>
     <a class="btn-primary report-button" routerLink="/diario/relatorio">
       <app-icon name="pdf" />
       Gerar relatório para meu dentista

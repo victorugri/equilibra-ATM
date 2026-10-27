@@ -4,6 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { AppUsage } from './core/data/app-usage.service';
+import { PushService } from './core/reminders/push.service';
 import { SyncService } from './core/sync/sync.service';
 import { ScreenData, deepestScreenData } from './layout/screen';
 import { SosButton } from './layout/sos-button/sos-button';
@@ -41,5 +42,7 @@ export class App {
     inject(AppUsage);
     // Com conta, envia os registros pendentes e traz os de outros aparelhos.
     inject(SyncService);
+    // Com lembretes ligados, mantém este aparelho inscrito nas notificações.
+    inject(PushService);
   }
 }

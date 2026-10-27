@@ -2,18 +2,18 @@ import { Component, computed, inject, input } from '@angular/core';
 import { ContentService } from '../../core/content/content.service';
 import { StepList } from '../../shared/ui/step-list/step-list';
 import { VideoSlot } from '../../shared/ui/video-slot/video-slot';
+import { exerciseName, exerciseText } from './exercise-catalog';
 import { splitSteps } from './exercise-steps';
-import { RocabadoExercise, ROCABADO_EXERCISES } from './rocabado';
 
-/** Cartão de um exercício do 6x6: vídeo, "Como fazer" e repetições (Figma 37:210). */
+/** Cartão de um exercício: vídeo, "Como fazer" e repetições (Figma 37:210). */
 @Component({
   selector: 'app-exercise-card',
   imports: [VideoSlot, StepList],
   template: `
     <div class="title-row">
-      <span class="number" aria-hidden="true">{{ exercise().n }}</span>
+      <span class="number" aria-hidden="true">{{ position() }}</span>
       <div class="titles">
-        <p class="label">Exercício {{ exercise().n }} de {{ total }}</p>
+        <p class="label">Exercício {{ position() }} de {{ total() }}</p>
         @if (headingLevel() === 1) {
           <h1 class="name" tabindex="-1">{{ name() }}</h1>
         } @else {
@@ -31,15 +31,17 @@ import { RocabadoExercise, ROCABADO_EXERCISES } from './rocabado';
   styleUrl: './exercise-card.scss',
 })
 export class ExerciseCard {
-  readonly exercise = input.required<RocabadoExercise>();
-  /** 1 no player (o exercício é o assunto da tela); 2 na lista do programa. */
+  readonly exercise = input.required<{ code: string; video: string | null }>();
+  /** Posição na lista do paciente (1 = primeiro). */
+  readonly position = input.required<number>();
+  readonly total = input.required<number>();
+  /** 1 no player (o exercício é o assunto da tela); 2 na lista. */
   readonly headingLevel = input<1 | 2>(2);
 
   private readonly content = inject(ContentService);
-  protected readonly total = ROCABADO_EXERCISES.length;
-  protected readonly name = computed(() => this.content.get(this.exercise().code, 'title'));
+  protected readonly name = computed(() => exerciseName(this.content, this.exercise().code));
   protected readonly steps = computed(() =>
-    splitSteps(this.content.get(this.exercise().code, 'body')),
+    splitSteps(exerciseText(this.content, this.exercise().code)),
   );
-  protected readonly caption = computed(() => `Exercício ${this.exercise().n} · ${this.name()}`);
+  protected readonly caption = computed(() => `Exercício ${this.position()} · ${this.name()}`);
 }

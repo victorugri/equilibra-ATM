@@ -6,11 +6,13 @@ import { AuthService } from '../../core/auth/auth.service';
 import { ContentPipe } from '../../core/content/content.pipe';
 import { DataRights, PendingDataError } from '../../core/data/data-rights.service';
 import { ProfileStore } from '../../core/data/profile.service';
+import { ReminderSettingsStore } from '../../core/reminders/reminder-settings.service';
 import { SyncService } from '../../core/sync/sync.service';
 import { ConfirmDialog } from '../../shared/ui/confirm-dialog/confirm-dialog';
 import { Icon } from '../../shared/ui/icon/icon';
 import { PageHeader } from '../../shared/ui/page-header/page-header';
 import { REPORT_TEXT } from '../diary/evolution-page';
+import { reminderSummary } from '../reminders/reminder-labels';
 import { telLink, whatsappLink } from './contact-links';
 import { downloadBlob } from './download';
 
@@ -47,6 +49,10 @@ export class ProfilePage {
       .map((word) => word[0]?.toUpperCase())
       .join('');
   });
+  private readonly reminders = inject(ReminderSettingsStore).settings;
+  protected readonly remindersSummary = computed(() =>
+    reminderSummary(this.reminders(), this.auth.signedIn(), new Date()),
+  );
   protected readonly dentistCall = computed(() => telLink(this.profile().dentistPhone));
   protected readonly dentistWhatsapp = computed(() => whatsappLink(this.profile().dentistPhone));
 

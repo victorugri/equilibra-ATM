@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import Dexie, { EntityTable, Table } from 'dexie';
+import type { JawState } from '../reminders/jaw-states';
 
 /** Resposta rápida sim/não do diário; null = não respondeu. */
 export type YesNo = 'yes' | 'no' | null;
@@ -32,6 +33,21 @@ export interface ExerciseSession {
   dirty: Dirty;
 }
 
+/**
+ * Resposta a um lembrete (check-in rápido, Figma 7:2020). O lembrete é criado no servidor;
+ * aqui fica o que a pessoa fez com ele, até ser enviado.
+ */
+export interface Checkin {
+  id?: number;
+  /** Id do lembrete no servidor (reminder_events.id). */
+  eventId: string;
+  openedAt: Date | null;
+  answer: JawState | null;
+  answeredAt: Date | null;
+  skippedAt: Date | null;
+  dirty: Dirty;
+}
+
 export interface MetaEntry {
   key: string;
   value: unknown;
@@ -44,6 +60,7 @@ export interface MetaEntry {
 export class AppDatabase extends Dexie {
   pain!: EntityTable<PainEntry, 'id'>;
   sessions!: EntityTable<ExerciseSession, 'id'>;
+  checkins!: EntityTable<Checkin, 'id'>;
   meta!: Table<MetaEntry, string>;
 
   constructor(name = 'equilibra-atm') {
@@ -68,6 +85,8 @@ export class AppDatabase extends Dexie {
         await tx.table('pain').toCollection().modify(addSyncFields);
         await tx.table('sessions').toCollection().modify(addSyncFields);
       });
+    // Fase 5: respostas aos lembretes.
+    this.version(3).stores({ checkins: '++id, &eventId, dirty' });
   }
 
   /**
@@ -75,16 +94,17 @@ export class AppDatabase extends Dexie {
    * consentimento, a entrada no app e a data do primeiro acesso (o app volta ao início).
    */
   async clearPersonalData({ everything = false } = {}): Promise<void> {
-    await this.transaction('rw', this.pain, this.sessions, this.meta, async () => {
+    await this.transaction('rw', this.pain, this.sessions, this.checkins, this.meta, async () => {
       await this.pain.clear();
       await this.sessions.clear();
+      await this.checkins.clear();
       await this.meta.bulkDelete(everything ? [...PROFILE_KEYS, ...DEVICE_KEYS] : PROFILE_KEYS);
     });
   }
 }
 
 /** Dados da pessoa no meta: apagados ao sair da conta (continuam guardados nela). */
-const PROFILE_KEYS = ['profile'];
+const PROFILE_KEYS = ['profile', 'reminders', 'care', 'prescription', 'prescription-reminders'];
 /** Dados do uso do app neste aparelho: apagados só quando a pessoa apaga tudo. */
 const DEVICE_KEYS = ['consent', 'onboarding', 'firstUse'];
 

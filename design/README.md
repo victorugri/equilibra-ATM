@@ -24,6 +24,7 @@ buscar uma tela de novo, veja se ela já está aqui.
 | 7:2310 | [Diário · Registro](7-2310-diario-registro.md) (versão antiga; vale a especificação enxuta) | 3 |
 | 7:2851 | [Diário · Evolução e relatório](7-2851-diario-evolucao.md) | 3 |
 | 7:300, 7:409, 23:2, 24:2, 7:3685 | [Entrada, conta e perfil](fase-4-conta.md) | 4 |
+| 7:483, 7:2142, 7:2020 | [Lembretes e check-in rápido](fase-5-lembretes.md) | 5 |
 
 Os módulos 2 a 6 (34:160, 34:191, 34:225, 34:256, 34:284) seguem o mesmo modelo do módulo 1; a
 lista de blocos de cada um está no XML de metadados.

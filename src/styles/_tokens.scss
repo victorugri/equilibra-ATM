@@ -50,6 +50,11 @@
   --color-tip-icon-bg: #ffe7a3;
   --color-tip-text: #4a3a1a;
 
+  // Lembretes e check-in (Figma 7:2142 e 7:2020). Texto da dica sobre #147A82: 4,8:1.
+  --color-selected-bg: #cefaff; // opção escolhida no check-in
+  --color-on-tip-card: #cefaff;
+  --color-on-tip-card-muted: #c9ffe1;
+
   // Indicadores do Início (cor do texto/ícone · fundo)
   --color-indicator-days: #0c6344;
   --color-indicator-days-bg: #ddf4ea;

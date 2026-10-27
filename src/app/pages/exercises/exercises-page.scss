@@ -265,3 +265,27 @@ h1 {
   background: var(--color-success-light);
   color: var(--color-success-strong);
 }
+
+// Recado do dentista (EX-P06): texto livre da prescrição.
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  border-radius: var(--radius-xs);
+  background: var(--color-tip-bg);
+
+  h3 {
+    color: var(--color-tip-title);
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.02em;
+  }
+
+  p {
+    color: var(--color-tip-text);
+    font-size: var(--text-body);
+    line-height: var(--line-height-body);
+    overflow-wrap: anywhere;
+  }
+}

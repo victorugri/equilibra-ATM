@@ -1,0 +1,163 @@
+<app-page-header class="no-print" title="Área do dentista" variant="internal" backTo="/inicio" />
+<div class="page">
+  <section class="intro no-print">
+    <h1>Prescrição de exercícios</h1>
+    <p>
+      Marque os exercícios do seu paciente e entregue o código. Você não vê dor, diário nem uso do
+      app: a prescrição vai só do dentista para o paciente.
+    </p>
+  </section>
+
+  @switch (stage()) {
+    @case ('loading') {
+      <p class="muted" role="status">Carregando…</p>
+    }
+    @case ('unavailable') {
+      <p class="card">A área do dentista não está disponível nesta versão do app.</p>
+    }
+    @case ('error') {
+      <p class="card form-error" role="alert">
+        Não deu para carregar agora. Confira a internet e recarregue a página.
+      </p>
+    }
+    @case ('signed-out') {
+      <section class="card" aria-labelledby="account-title">
+        <h2 id="account-title">Entre com a sua conta</h2>
+        <p>Para prescrever, use uma conta do Equilibra ATM. O CRO é conferido antes do uso.</p>
+        <a class="btn-primary" routerLink="/conta/entrar">Entrar</a>
+        <a class="btn-outline" routerLink="/conta/criar">Criar conta</a>
+      </section>
+    }
+    @case ('profile') {
+      <form class="card" (submit)="$event.preventDefault(); saveProfile()">
+        <h2>Seus dados profissionais</h2>
+        <p>O paciente vê o seu nome. O CRO é conferido no conselho antes de liberar.</p>
+        <div class="field">
+          <label class="field-label" for="dentist-name">Nome que o paciente vê</label>
+          <div class="input-box">
+            <input
+              id="dentist-name"
+              autocomplete="name"
+              maxlength="80"
+              placeholder="Ex.: Dra. Ana Souza"
+              [value]="name()"
+              (input)="name.set($any($event.target).value)"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="dentist-cro">CRO (com a UF)</label>
+          <div class="input-box">
+            <input
+              id="dentist-cro"
+              maxlength="20"
+              placeholder="Ex.: CRO-SP 12345"
+              [value]="cro()"
+              (input)="cro.set($any($event.target).value)"
+            />
+          </div>
+        </div>
+        @if (error()) {
+          <p class="form-error" role="alert">{{ error() }}</p>
+        }
+        <button type="submit" class="btn-primary" [disabled]="busy()">
+          {{ busy() ? 'Aguarde…' : 'Enviar para conferência' }}
+        </button>
+      </form>
+    }
+    @case ('pending') {
+      <section class="card" aria-labelledby="pending-title">
+        <h2 id="pending-title">CRO em conferência</h2>
+        <p>
+          Recebemos {{ profile()?.cro }} ({{ profile()?.professionalName }}). Assim que ele for
+          conferido, você poderá criar prescrições nesta página.
+        </p>
+        <button type="button" class="btn-outline" (click)="editProfile()">Corrigir dados</button>
+      </section>
+    }
+    @case ('ready') {
+      <div class="workspace">
+        @if (shown(); as shown) {
+          <app-prescription-code [code]="shown.code" />
+        }
+        <section class="no-print" aria-labelledby="editor-title">
+          <h2 id="editor-title" class="section-title">
+            @if (editing(); as editing) {
+              Editar a prescrição {{ editing.code }}
+            } @else {
+              Nova prescrição
+            }
+          </h2>
+          <app-prescription-editor
+            [initial]="editing()"
+            [busy]="busy()"
+            [error]="error()"
+            (saved)="save($event)"
+            (cancelled)="editing.set(null)"
+          />
+        </section>
+      </div>
+
+      <section class="list no-print" aria-labelledby="list-title">
+        <h2 id="list-title" class="section-title">Suas prescrições</h2>
+        @if (prescriptions().length) {
+          <ul>
+            @for (prescription of prescriptions(); track prescription.id) {
+              <li class="item">
+                <div class="item-head">
+                  <strong class="item-code">{{ prescription.code }}</strong>
+                  <span class="badge" [class.off]="status(prescription) !== 'Ativa'">
+                    {{ status(prescription) }}
+                  </span>
+                </div>
+                <p>{{ exerciseNames(prescription.exercises) }}</p>
+                <p class="muted">
+                  {{ prescription.sessionsPerDay }} sessões por dia ·
+                  {{ prescription.remindersPerDay }} lembretes · criada em
+                  {{ prescription.createdAt | date: 'dd/MM/yyyy' }}
+                  @if (prescription.validUntil) {
+                    · válida até {{ prescription.validUntil | date: 'dd/MM/yyyy' }}
+                  }
+                  @if (prescription.redeemed) {
+                    · resgatada
+                  }
+                </p>
+                @if (prescription.active) {
+                  <div class="item-actions">
+                    <button type="button" class="link-button" (click)="showCode(prescription)">
+                      Ver código<span class="visually-hidden"> {{ prescription.code }}</span>
+                    </button>
+                    <button type="button" class="link-button" (click)="edit(prescription)">
+                      Editar<span class="visually-hidden"> {{ prescription.code }}</span>
+                    </button>
+                    <button type="button" class="link-button danger" (click)="askEnd(prescription)">
+                      Encerrar<span class="visually-hidden"> {{ prescription.code }}</span>
+                    </button>
+                  </div>
+                }
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="muted">Nenhuma prescrição ainda.</p>
+        }
+        <p class="muted account">Conta: {{ email() }}</p>
+      </section>
+
+      <app-confirm-dialog
+        #endDialog
+        title="Encerrar a prescrição?"
+        [message]="
+          'Os exercícios do código ' +
+          (ending()?.code ?? '') +
+          ' saem do app do paciente quando ele abrir on-line. Não dá para desfazer.'
+        "
+        confirmLabel="Encerrar"
+        [danger]="true"
+        [busy]="busy()"
+        [error]="error()"
+        (confirm)="confirmEnd()"
+      />
+    }
+  }
+</div>

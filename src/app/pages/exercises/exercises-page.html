@@ -2,93 +2,108 @@
 <div class="page">
   <h1>Exercícios de Alívio</h1>
 
-  <section class="program" aria-labelledby="program-title">
-    <div class="photo">
-      <img src="images/exercicios-destaque.jpg" alt="" width="512" height="286" />
-      <span class="seal"><app-icon name="selo-protocolo" />Protocolo domiciliar</span>
-    </div>
-    <div class="program-body">
-      <h2 id="program-title">{{ programCode | content: 'title' }}</h2>
-      <p class="posology">
-        <app-icon name="posologia" />
-        <span>6 exercícios • 6 repetições • 6 vezes ao dia</span>
-      </p>
-
-      <div class="progress">
-        <div class="progress-header">
-          <h3>Progresso de hoje</h3>
-          <p class="progress-count">
-            {{ done().length }} de {{ perDay }} sessões ({{ percent() }}%)
-          </p>
-        </div>
-        <ol class="slots">
-          @for (slot of slots(); track slot.n) {
-            <li [class.done]="slot.doneAt" [class.next]="slot.isNext">
-              <span class="circle" aria-hidden="true">
-                @if (slot.doneAt) {
-                  <app-icon name="check-sessao" />
-                } @else {
-                  {{ slot.n }}ª
-                }
-              </span>
-              <span class="slot-label" aria-hidden="true">
-                @if (slot.doneAt; as doneAt) {
-                  {{ doneAt | date: 'HH:mm' }}
-                } @else if (slot.isNext) {
-                  Próxima
-                }
-              </span>
-              <span class="visually-hidden">
-                Sessão {{ slot.n }}:
-                @if (slot.doneAt; as doneAt) {
-                  feita às {{ doneAt | date: 'HH:mm' }}
-                } @else if (slot.isNext) {
-                  a próxima
-                } @else {
-                  ainda não feita
-                }
-              </span>
-            </li>
-          }
-        </ol>
+  @if (current(); as current) {
+    <section class="program" aria-labelledby="program-title">
+      <div class="photo">
+        <img src="images/exercicios-destaque.jpg" alt="" width="512" height="286" />
+        <span class="seal"><app-icon name="dentista" />Indicação do dentista</span>
       </div>
+      <div class="program-body">
+        <h2 id="program-title">{{ origin() }}</h2>
+        <p class="posology">
+          <app-icon name="posologia" />
+          <span>
+            {{ exercises().length }} {{ exercises().length === 1 ? 'exercício' : 'exercícios' }} •
+            {{ perDay() }} {{ perDay() === 1 ? 'vez' : 'vezes' }} ao dia
+          </span>
+        </p>
 
-      <a class="btn-primary start" routerLink="/exercicios/6x6/sessao">
-        Fazer a sessão agora
-        <app-icon name="seta-botao" />
-      </a>
-    </div>
-  </section>
+        @if (current.note) {
+          <aside class="note" aria-labelledby="note-title">
+            <h3 id="note-title">{{ noteTitleCode | content }}</h3>
+            <p>{{ current.note }}</p>
+          </aside>
+        }
 
-  <section class="exercises" aria-labelledby="exercises-title">
-    <div class="section-header">
-      <h2 id="exercises-title">Os 6 exercícios</h2>
-      <span class="chip">6 repetições cada</span>
-    </div>
-    <p class="section-text">
-      Faça na ordem. Toque em um exercício para ver o vídeo e o passo a passo.
-    </p>
-    <ol class="list">
-      @for (exercise of exercises; track exercise.n) {
-        <li>
-          <app-list-item
-            variant="exercise"
-            [number]="exercise.n"
-            [title]="exercise.name"
-            link="/exercicios/6x6"
-            [fragment]="'exercicio-' + exercise.n"
-          />
-        </li>
-      }
-    </ol>
-    <app-references [codes]="referenceCodes" />
-  </section>
+        <div class="progress">
+          <div class="progress-header">
+            <h3>Progresso de hoje</h3>
+            <p class="progress-count">
+              {{ done().length }} de {{ perDay() }} sessões ({{ percent() }}%)
+            </p>
+          </div>
+          <ol class="slots">
+            @for (slot of slots(); track slot.n) {
+              <li [class.done]="slot.doneAt" [class.next]="slot.isNext">
+                <span class="circle" aria-hidden="true">
+                  @if (slot.doneAt) {
+                    <app-icon name="check-sessao" />
+                  } @else {
+                    {{ slot.n }}ª
+                  }
+                </span>
+                <span class="slot-label" aria-hidden="true">
+                  @if (slot.doneAt; as doneAt) {
+                    {{ doneAt | date: 'HH:mm' }}
+                  } @else if (slot.isNext) {
+                    Próxima
+                  }
+                </span>
+                <span class="visually-hidden">
+                  Sessão {{ slot.n }}:
+                  @if (slot.doneAt; as doneAt) {
+                    feita às {{ doneAt | date: 'HH:mm' }}
+                  } @else if (slot.isNext) {
+                    a próxima
+                  } @else {
+                    ainda não feita
+                  }
+                </span>
+              </li>
+            }
+          </ol>
+        </div>
 
-  <aside class="remember" aria-labelledby="remember-title">
-    <span class="remember-icon"><app-icon name="escudo" /></span>
-    <div>
-      <h2 id="remember-title">Lembre-se:</h2>
-      <p>{{ safetyCode | content }}</p>
-    </div>
-  </aside>
+        <a class="btn-primary start" routerLink="/exercicios/sessao">
+          Fazer a sessão agora
+          <app-icon name="seta-botao" />
+        </a>
+      </div>
+    </section>
+
+    <app-reminder-suggestion />
+
+    <section class="exercises" aria-labelledby="exercises-title">
+      <div class="section-header">
+        <h2 id="exercises-title">Seus exercícios</h2>
+      </div>
+      <p class="section-text">
+        Faça na ordem. Toque em um exercício para ver o vídeo e o passo a passo.
+      </p>
+      <ol class="list">
+        @for (exercise of exercises(); track exercise.code) {
+          <li>
+            <app-list-item
+              variant="exercise"
+              [number]="exercise.n"
+              [title]="exercise.name"
+              link="/exercicios/meus"
+              [fragment]="'exercicio-' + exercise.n"
+            />
+          </li>
+        }
+      </ol>
+      <app-references [codes]="referenceCodes()" />
+    </section>
+
+    <aside class="remember" aria-labelledby="remember-title">
+      <span class="remember-icon"><app-icon name="escudo" /></span>
+      <div>
+        <h2 id="remember-title">Lembre-se:</h2>
+        <p>{{ safetyCode | content }}</p>
+      </div>
+    </aside>
+  } @else {
+    <app-prescription-invite [initialCode]="codigo()" />
+  }
 </div>

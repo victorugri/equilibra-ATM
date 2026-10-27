@@ -2,7 +2,7 @@ import { Component, computed, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { PainEntry } from '../../core/data/app-database';
 import { addDays, dayKey, startOfDay } from '../../core/data/day';
-import { averageOnExerciseDays, averagePain, dailySeries } from '../../core/data/diary-stats';
+import { averagePain, dailySeries } from '../../core/data/diary-stats';
 import { ExerciseSessions } from '../../core/data/exercise-sessions.service';
 import { PainDiary } from '../../core/data/pain-diary.service';
 import { Disclaimer } from '../../shared/ui/disclaimer/disclaimer';
@@ -49,10 +49,6 @@ export class ReportPage {
     return [
       { label: 'Dor média nos últimos 30 dias', value: format(averagePain(this.series())) },
       { label: 'Dor média nos últimos 7 dias', value: format(averagePain(this.week())) },
-      {
-        label: 'Dor média nos dias com exercício (30 dias)',
-        value: format(averageOnExerciseDays(this.series())),
-      },
       {
         label: 'Dias com registro de dor',
         value: `${this.series().filter((d) => d.pain !== null).length} de ${PERIOD_DAYS}`,

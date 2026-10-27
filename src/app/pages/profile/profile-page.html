@@ -74,6 +74,26 @@
     <p class="hint">Você escolhe o que compartilhar e quando.</p>
   </section>
 
+  <!-- Lembretes (Figma 7:2142) -->
+  <section class="card" aria-labelledby="reminders-title">
+    <div class="section-head">
+      <span class="section-icon"><app-icon name="lembrete" /></span>
+      <div>
+        <h2 id="reminders-title">Meus lembretes</h2>
+        <p>{{ remindersSummary() }}</p>
+      </div>
+    </div>
+    <ul class="rows">
+      <li>
+        <a class="row" routerLink="/perfil/lembretes">
+          <app-icon name="relogio" />
+          <span>Ajustar lembretes</span>
+          <app-icon name="chevron" class="chevron" />
+        </a>
+      </li>
+    </ul>
+  </section>
+
   <!-- 3. Privacidade e meus dados (LGPD) -->
   <section class="card" aria-labelledby="privacy-title">
     <div class="section-head">

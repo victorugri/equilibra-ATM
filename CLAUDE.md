@@ -80,6 +80,15 @@ não versionado). Princípio que guia tudo: simplicidade — menos telas, campos
   demanda; `SyncService` envia o que tem `dirty = 1` e traz o que falta. Esquema e RLS em
   `supabase/migrations`; quem aplica no projeto é o usuário (`npm run db:push`). Não criar contas
   nem fazer login no Supabase real durante testes — isso é com o usuário.
+- **Lembretes (fase 5):** exigem conta. Preferências e respostas ficam no aparelho e sobem pela
+  sincronização (`src/app/core/reminders`). O servidor envia: pg_cron → Edge Function
+  `send-reminders` → Web Push (`supabase/functions/_shared/web-push.ts`, só WebCrypto, testado com
+  `npm run test:functions`). Os textos da notificação vêm do banco (gerados por
+  `scripts/content/function-texts.mjs`). Chaves VAPID: `npm run push:keys` (a privada nunca no código).
+- **Prescrição do dentista:** exercícios só com prescrição (`src/app/core/prescription`, guardada
+  no aparelho e atualizada pela função `redeem_prescription`). Catálogo em
+  `pages/exercises/exercise-catalog.ts`; área `/dentista`. O CRO é conferido à mão
+  (`supabase/queries/dentistas.sql`); `cro_verified` nunca muda pelo app (gatilho no banco).
 - **Gráficos:** SVG próprio, uma cor; leitura do dia abaixo do gráfico e tabela com os valores.
 - **Convenções:** identificadores em inglês; textos de interface e comentários em português (pt-BR).
 - **Commits:** o usuário faz os commits; não commitar.

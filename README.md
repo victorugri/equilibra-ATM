@@ -7,7 +7,7 @@ diário da dor.
 > Este aplicativo ajuda você a cuidar da DTM no dia a dia, mas não substitui a consulta.
 > O diagnóstico e o plano de tratamento são feitos pelo seu dentista.
 
-**Situação:** em desenvolvimento (fase 4 — conta opcional e LGPD). Ainda não usar com pacientes.
+**Situação:** em desenvolvimento (fase 5 — lembretes). Ainda não usar com pacientes.
 
 ## Sobre a pesquisa
 
@@ -36,6 +36,7 @@ Requisitos: Node.js 24.15 ou mais novo (ou 22.22.3+).
 npm ci
 npm start          # servidor de desenvolvimento em http://localhost:4200
 npm test           # testes unitários (Vitest)
+npm run test:functions  # testes das Edge Functions (Web Push), no Node
 npm run build      # build de produção em dist/ (com service worker)
 ```
 
@@ -78,7 +79,9 @@ src/app/shared/ui/      componentes reutilizáveis (ícone, cabeçalho, aviso fi
 src/app/core/data/      banco local (IndexedDB): diário, sessões do 6x6, perfil, LGPD
 src/app/core/auth/      conta opcional (Supabase Auth)
 src/app/core/sync/      sincronização aparelho ↔ conta
+src/app/core/reminders/ lembretes: horários, notificações (Web Push) e check-in
 supabase/               migrações, configuração e consultas do backend
+supabase/functions/     Edge Function que envia os lembretes
 src/app/pages/          telas
 ```
 
@@ -103,6 +106,13 @@ precisar consultar o Figma de novo.
 - **Com conta (opcional):** o aparelho continua sendo a fonte; os registros novos são enviados
   para o [Supabase](https://supabase.com) (servidor em São Paulo) e voltam se a pessoa entrar em
   outro aparelho. Cada pessoa só acessa os próprios dados (RLS).
+- **Lembretes (exigem conta):** a pessoa escolhe a frequência e o horário de silêncio. Cada
+  lembrete enviado e a resposta do check-in ficam registrados — é a medida de adesão aos
+  lembretes da pesquisa.
+- **Exercícios com prescrição do dentista:** a aba Exercícios só mostra o que o dentista
+  liberou. Ele prescreve em `/dentista` (conta com CRO conferido) e entrega um código de 6
+  caracteres, com QR Code; o paciente digita o código, com ou sem conta. A prescrição vai só do
+  dentista para o paciente: o dentista não vê nenhum dado do paciente.
 - **Direitos do titular (LGPD):** no Perfil a pessoa vê, baixa (JSON) e apaga os dados — e a
   conta inteira, se tiver uma. O relatório para o dentista é montado no aparelho.
 
@@ -111,12 +121,14 @@ precisar consultar o Figma de novo.
 O esquema do banco está em `supabase/migrations` e a configuração de autenticação em
 `supabase/config.toml`. Os modelos de e-mail em português (`supabase/templates`) estão
 desativados ali: no plano gratuito, só dá para usá-los com um servidor de e-mail (SMTP) próprio.
-Consultas para a equipe de pesquisa: `supabase/queries/pesquisa.sql`.
+Consultas para a equipe de pesquisa: `supabase/queries/pesquisa.sql`. Conferência do CRO dos
+dentistas (libera a criação de prescrições): `supabase/queries/dentistas.sql`.
 
 Para usar um projeto Supabase seu:
 
 1. Crie o projeto e troque a URL e a chave publicável em `src/environments/environment.ts`.
-2. Rode, na raiz do repositório:
+2. Troque o endereço do app (`site_url` e `additional_redirect_urls`) em `supabase/config.toml`.
+3. Rode, na raiz do repositório:
 
 ```bash
 npx supabase login
@@ -124,6 +136,27 @@ npx supabase link --project-ref SEU_PROJECT_REF
 npm run db:push
 npm run db:config
 ```
+
+### Lembretes (notificações)
+
+O agendador do próprio Supabase (pg_cron) chama a cada minuto a Edge Function
+`send-reminders`, que separa os lembretes vencidos e envia as notificações (Web Push,
+criptografadas e assinadas com chaves VAPID, sem bibliotecas de terceiros). Ao tocar na
+notificação, o app abre o check-in rápido daquele lembrete. Com prescrição do dentista, a
+sessão de exercício vai junto com o lembrete mais próximo, sem notificação a mais.
+
+Para ativar, nesta ordem (depois do `link` acima):
+
+```bash
+npm run db:push           # tabelas dos lembretes e o agendador
+npm run push:keys         # gera as chaves: a privada vai direto para os segredos do Supabase
+npm run functions:deploy  # publica a função que envia os lembretes
+```
+
+O `push:keys` grava a chave pública em `src/environments/environment.ts`; ela vai para o
+app no próximo build. Num fork, troque também o endereço do projeto na migração
+`supabase/migrations/20261017120000_lembretes.sql` (agendador). No iPhone, as notificações
+só funcionam com o app instalado na Tela de Início (iOS 16.4 ou mais novo).
 
 A chave publicável é pública por natureza. **Nunca** coloque no código a secret key /
 service_role nem a senha do banco.

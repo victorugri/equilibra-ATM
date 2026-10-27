@@ -11,4 +11,9 @@ export const environment = {
     url: 'https://qzbbdtsinhdhguwczdtv.supabase.co',
     publishableKey: 'sb_publishable_6VOrZ92ijwyWvI2FZlwhBQ_5c4eAb7_',
   },
+  push: {
+    /** Chave pública VAPID das notificações, gerada por "npm run push:keys" (a privada fica
+     * só nos segredos do Supabase). Vazia = lembretes ainda não configurados. */
+    vapidPublicKey: 'BN_U23QOJnx2xWjPguoNyHYyFQZLz2FBYaijL0nqdlFblg-R6JxXNAOK03OuqZAoW26jGDvytPLTk1I5-KYCTAE',
+  },
 };
