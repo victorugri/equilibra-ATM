@@ -38,6 +38,22 @@ describe('PainDiary', () => {
     expect(reopened.entries()).toHaveLength(1);
   });
 
+  it('um registro por dia: salvar de novo substitui, e o histórico fica guardado', async () => {
+    setup();
+    const diary = TestBed.inject(PainDiary);
+    await diary.ready;
+    const input = { exercises: null, splint: null, sleptWell: null, note: '' } as const;
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    await diary.add({ ...input, pain: 2 }, yesterday);
+    await diary.add({ ...input, pain: 7 });
+    await diary.add({ ...input, pain: 5, note: 'melhorou' });
+
+    expect(diary.entries().map((e) => e.pain)).toEqual([2, 5]);
+    expect(diary.today()?.note).toBe('melhorou');
+    expect(diary.history()).toHaveLength(3);
+  });
+
   it('recusa nota fora de 0 a 10', async () => {
     setup();
     const diary = TestBed.inject(PainDiary);

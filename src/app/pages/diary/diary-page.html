@@ -57,7 +57,7 @@
     }
     <button type="submit" class="btn-primary save" [disabled]="saving()">
       <app-icon name="salvar" />
-      Salvar registro
+      {{ registeredToday() ? 'Atualizar registro' : 'Salvar registro' }}
     </button>
     <p class="privacy">
       <app-icon name="cadeado" />
@@ -67,7 +67,7 @@
 
   <p class="saved" role="status">
     @if (savedAt(); as savedAt) {
-      Registro salvo às {{ savedAt | date: 'HH:mm' }}.
+      Registro {{ updated() ? 'atualizado' : 'salvo' }} às {{ savedAt | date: 'HH:mm' }}.
     }
   </p>
 

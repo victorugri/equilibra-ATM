@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../../core/content/content.service';
@@ -51,15 +51,20 @@ export class DiaryPage {
   /** "Quanto está doendo agora? (0 = nenhuma dor; 10 = …)" → pergunta e explicação. */
   protected readonly question = splitQuestion(this.content.get(PAIN_QUESTION));
 
-  // Formulário
-  protected readonly pain = signal<number | null>(null);
-  protected readonly exercises = signal<YesNo>(null);
-  protected readonly splint = signal<YesNo | 'not-used'>(null);
-  protected readonly sleptWell = signal<YesNo>(null);
-  protected readonly note = signal('');
+  // Formulário: um registro por dia. Se hoje já tem, vem preenchido e salvar o atualiza.
+  private readonly todayEntry = this.diary.today;
+  protected readonly pain = linkedSignal<number | null>(() => this.todayEntry()?.pain ?? null);
+  protected readonly exercises = linkedSignal<YesNo>(() => this.todayEntry()?.exercises ?? null);
+  protected readonly splint = linkedSignal<YesNo | 'not-used'>(
+    () => this.todayEntry()?.splint ?? null,
+  );
+  protected readonly sleptWell = linkedSignal<YesNo>(() => this.todayEntry()?.sleptWell ?? null);
+  protected readonly note = linkedSignal(() => this.todayEntry()?.note ?? '');
   protected readonly error = signal('');
   protected readonly saving = signal(false);
   protected readonly savedAt = signal<Date | null>(null);
+  /** O último envio substituiu um registro do dia. */
+  protected readonly updated = signal(false);
 
   protected readonly registeredToday = this.diary.hasEntryToday;
   protected readonly week = computed(() =>
@@ -85,7 +90,9 @@ export class DiaryPage {
     }
     this.error.set('');
     this.saving.set(true);
+    const replacing = this.registeredToday();
     try {
+      // O formulário continua mostrando o que foi salvo (linkedSignal segue o registro do dia).
       const entry = await this.diary.add({
         pain,
         exercises: this.exercises(),
@@ -93,20 +100,12 @@ export class DiaryPage {
         sleptWell: this.sleptWell(),
         note: this.note(),
       });
+      this.updated.set(replacing);
       this.savedAt.set(entry.at);
-      this.reset();
     } catch {
       this.error.set('Não foi possível salvar. Tente de novo.');
     } finally {
       this.saving.set(false);
     }
-  }
-
-  private reset(): void {
-    this.pain.set(null);
-    this.exercises.set(null);
-    this.splint.set(null);
-    this.sleptWell.set(null);
-    this.note.set('');
   }
 }

@@ -31,9 +31,13 @@ join auth.users u on u.id = s.user_id
 group by u.email, dia
 order by u.email, dia;
 
--- 3. Diário da dor: todos os registros ---------------------------------------------------
-select
+-- 3. Diário da dor: um registro por dia ---------------------------------------------------
+-- O app guarda um registro por dia. Quem atualiza o dia grava um registro novo (o anterior
+-- fica no banco como histórico); vale o mais recente de cada dia, como no app.
+-- Para ver também as versões substituídas, troque "select distinct on (...)" por "select".
+select distinct on (u.email, (e.recorded_at at time zone 'America/Sao_Paulo')::date)
   u.email,
+  (e.recorded_at at time zone 'America/Sao_Paulo')::date as dia,
   e.recorded_at at time zone 'America/Sao_Paulo' as registrado_em,
   e.pain as dor_0_a_10,
   e.exercises as fez_exercicios,
@@ -42,13 +46,21 @@ select
   e.note as observacao
 from public.pain_entries e
 join auth.users u on u.id = e.user_id
-order by u.email, e.recorded_at;
+order by u.email, (e.recorded_at at time zone 'America/Sao_Paulo')::date, e.recorded_at desc;
 
 -- 4. Resumo por participante -------------------------------------------------------------
+-- Dor: só o registro que vale de cada dia (o mais recente), como no item 3.
+with dor_do_dia as (
+  select distinct on (e.user_id, (e.recorded_at at time zone 'America/Sao_Paulo')::date)
+    e.user_id,
+    e.pain
+  from public.pain_entries e
+  order by e.user_id, (e.recorded_at at time zone 'America/Sao_Paulo')::date, e.recorded_at desc
+)
 select
   u.email,
-  (select count(*) from public.pain_entries e where e.user_id = u.id) as registros_de_dor,
-  (select round(avg(e.pain), 1) from public.pain_entries e where e.user_id = u.id) as dor_media,
+  (select count(*) from dor_do_dia d where d.user_id = u.id) as dias_com_registro_de_dor,
+  (select round(avg(d.pain), 1) from dor_do_dia d where d.user_id = u.id) as dor_media,
   (select count(*) from public.exercise_sessions s where s.user_id = u.id) as sessoes_6x6,
   (
     select count(distinct (s.completed_at at time zone 'America/Sao_Paulo')::date)

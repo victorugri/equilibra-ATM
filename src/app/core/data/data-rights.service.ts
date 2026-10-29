@@ -62,7 +62,7 @@ export class DataRights {
         acceptedAt: consent.acceptedAt,
       },
       painEntries: this.diary
-        .entries()
+        .history()
         .map(({ uid, at, pain, exercises, splint, sleptWell, note }) => ({
           id: uid,
           at,
